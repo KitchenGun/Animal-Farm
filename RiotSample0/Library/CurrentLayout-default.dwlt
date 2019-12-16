@@ -92,10 +92,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 917, y: 444}
-  m_MaxSize: {x: 22012, y: 10022}
+  m_MinSize: {x: 915, y: 444}
+  m_MaxSize: {x: 22010, y: 10022}
   vertical: 0
-  controlID: 124
+  controlID: 125
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 444}
   m_MaxSize: {x: 4002, y: 8044}
   vertical: 1
-  controlID: 31
+  controlID: 54
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -213,8 +213,8 @@ MonoBehaviour:
     y: 0
     width: 564
     height: 947
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -327,9 +327,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ce2d0000
+      m_SelectedIDs: fe260000
       m_LastClickedID: 0
-      m_ExpandedIDs: 6afbffffaa2f0000b42f0000
+      m_ExpandedIDs: 4efbffffcc2f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -433,17 +433,16 @@ MonoBehaviour:
     - Assets/Scripts/GameManager
   m_ViewMode: 0
   m_StartGridSize: 64
-  m_LastFolders:
-  - Assets
+  m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\work\RiotSample0
+  m_LastProjectPath: D:\work\RiotSample\RiotSample0
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 182d0000
     m_LastClickedID: 11544
-    m_ExpandedIDs: 000000009c2c0000922d0000ce2d0000
+    m_ExpandedIDs: 00000000a02c0000962d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -471,18 +470,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000009c2c0000922d0000
+    m_ExpandedIDs: ffffffff00000000a02c0000962d0000d22d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PlayerInfo
-      m_OriginalName: PlayerInfo
+      m_Name: GameCombatManager
+      m_OriginalName: GameCombatManager
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 11180
+      m_UserData: 9982
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -677,11 +676,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.34963885, y: -0.31783944, z: 0.12743999, w: 0.8720751}
     speed: 2
-    m_Value: {x: 0.3500152, y: -0.31521785, z: 0.12638892, w: 0.87301373}
+    m_Value: {x: 0.34963447, y: -0.31783548, z: 0.1274384, w: 0.8720642}
   m_Size:
     m_Target: 5.7157674
     speed: 2
-    m_Value: 5.7157683
+    m_Value: 5.7157674
   m_Ortho:
     m_Target: 0
     speed: 2
