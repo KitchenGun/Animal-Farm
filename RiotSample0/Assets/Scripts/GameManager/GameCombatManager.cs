@@ -12,11 +12,12 @@ public class GameCombatManager : MonoBehaviour
     private Collider CurrentClickTrans;
     //움직일수 있는지 확인용
     private bool isMove;
-
+    private bool reverse;
     private void Start()
     {
         //초기화
         isMove = false;
+        reverse = false;
     }
     private void Update()
     {
@@ -27,7 +28,13 @@ public class GameCombatManager : MonoBehaviour
         }
         if (isMove)
         {
-            MoveChar(CurrentClickTrans, PreviousClickTrans.transform.GetChild(0).gameObject);
+            if (CurrentClickTrans.gameObject.transform.childCount > 0)
+            {//이동할 곳에 오브젝트가 있으면
+                reverse = true;
+                MoveChar(PreviousClickTrans, CurrentClickTrans.transform.GetChild(0).gameObject,reverse);
+            }
+            reverse = false;
+            MoveChar(CurrentClickTrans, PreviousClickTrans.transform.GetChild(0).gameObject,reverse);
         }
     }
     public void CombatClickInput()
@@ -58,14 +65,25 @@ public class GameCombatManager : MonoBehaviour
 
         }
     }
-    public void MoveChar(Collider afterTrans,GameObject riot)
+    public void ResetClickTrans()
+    {//콜라이더 초기화
+        PreviousClickTrans = null;
+        CurrentClickTrans = null;
+    }
+
+    public void MoveChar(Collider afterTrans,GameObject riot,bool reverse)
     {//캐릭터 이동
         Debug.Log("움직이는중");
         riot.transform.position = Vector3.MoveTowards(riot.transform.position, afterTrans.transform.position, 20*Time.deltaTime);
         //이동속도 조절을 timedeltatime에서 조절
         if(riot.transform.position==afterTrans.transform.position)
         {
-            isMove = false;
+            if(!reverse)
+            {//반대로 움직이는 것이 아닐경우 이동하는 위치 초기화
+                isMove = false;
+                ResetClickTrans();
+            }
+            //부모변경
             riot.transform.parent = afterTrans.transform;
         }
     }
