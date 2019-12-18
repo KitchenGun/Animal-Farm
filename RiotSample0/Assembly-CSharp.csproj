@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameManager\GameCombatManager.cs" />
+    <Compile Include="Assets\Scripts\GameObjMoveTestStartSetting.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
+    <Compile Include="Assets\Scripts\SlotImageSetting.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/work/RiotSample/RiotSample0/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
