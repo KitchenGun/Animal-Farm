@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\EnemyMoveManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameCombatManager.cs" />
     <Compile Include="Assets\Scripts\GameObjMoveTestStartSetting.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
