@@ -61,7 +61,7 @@ public class EnemyMoveManager : MonoBehaviour
             {//공격범위 안에 있을 경우 정지
                 if (rayHit.transform.GetChild(0))
                 {
-                    enemyState = EnemyState.Hold;
+                    enemyState = EnemyState.Attack;
                 }
             }
             else
