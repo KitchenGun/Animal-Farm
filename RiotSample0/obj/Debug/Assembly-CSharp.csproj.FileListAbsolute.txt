@@ -265,3 +265,5 @@ D:\work\RiotSample\RiotSample0\obj\Debug\Assembly-CSharp.csproj.CoreCompileInput
 D:\work\RiotSample\RiotSample0\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\work\RiotSample\RiotSample0\obj\Debug\Assembly-CSharp.dll
 D:\work\RiotSample\RiotSample0\obj\Debug\Assembly-CSharp.pdb
+D:\work\RiotSample\RiotSample0\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
+D:\work\RiotSample\RiotSample0\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb
