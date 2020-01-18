@@ -5,11 +5,6 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
     
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     //캐릭터 관련
     #region CharID
     public void SetCharId(int charID)
@@ -41,14 +36,14 @@ public class PlayerInfo : MonoBehaviour
         return PlayerPrefs.GetInt(charID + "HP");
     }
     #endregion
-    #region CharArm
-    public void SetCharArm(int charID, int charArm)
+    #region AP
+    public void SetCharAP(int charID, int charAP)
     {
-        PlayerPrefs.SetInt(charID + "Arm", charArm);
+        PlayerPrefs.SetInt(charID + "AP", charAP);
     }
-    public int GetCharArm(int charID)
+    public int GetCharAP(int charID)
     {
-        return PlayerPrefs.GetInt(charID + "Arm");
+        return PlayerPrefs.GetInt(charID + "AP");
     }
     #endregion
     //스테이지 관련
