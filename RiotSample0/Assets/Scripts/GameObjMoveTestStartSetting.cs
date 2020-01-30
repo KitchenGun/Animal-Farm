@@ -7,12 +7,17 @@ public class GameObjMoveTestStartSetting : MonoBehaviour
     private PlayerInfo playerInfo;
     void Start()
     {
-        for(int i=0;i<5;i++)
+        List<Dictionary<string, object>> data = CSVReader.Read("TempData");
+        for (var i = 0; i < data.Count; i++)
+        {
+            Debug.Log("index"+i.ToString() + data[i]["name"] + " " + data[i]["ID"]);
+        }
+        for (int i=0;i<5;i++)
         {
             playerInfo.SetCharId(i);
             playerInfo.SetSlotChar(i, i);
             playerInfo.SetCharHP(i, i);
-            playerInfo.SetCharArm(i, i);
+            playerInfo.SetCharAP(i, i);
         }
         
     }
