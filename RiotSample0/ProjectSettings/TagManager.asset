@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - HouseUI
+  - GateUI
+  - BarnUI
+  - ClosePanelButton
+  - ChangePageButton
   layers:
   - Default
   - TransparentFX

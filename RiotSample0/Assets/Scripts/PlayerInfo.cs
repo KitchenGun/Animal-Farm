@@ -19,11 +19,11 @@ public class PlayerInfo : MonoBehaviour
     #region SlotSetting
     public void SetSlotChar(int slotNum,int slotCharID)
     {//슬롯에 캐릭터 넘버 설정
-        PlayerPrefs.SetInt(("Slot" + slotNum + "Char"), slotCharID);
+        PlayerPrefs.SetInt(("Slot" + slotNum), slotCharID);
     }
     public int GetSlotChar(int slotNum)
     {//해당슬롯에 캐릭터 넘버 가져오기
-        return PlayerPrefs.GetInt("Slot" + slotNum + "Char");
+        return PlayerPrefs.GetInt("Slot" + slotNum);
     }
     #endregion
     #region HP
@@ -55,6 +55,28 @@ public class PlayerInfo : MonoBehaviour
     public int GetStage()
     {
         return PlayerPrefs.GetInt("Stage");
+    }
+    #endregion
+
+    #region Achievements
+
+    //죽은 동물의 수
+    public void SetCountDeadAnimal(int DeadAnimal)
+    {
+        if(PlayerPrefs.GetInt("CountDeadAnimal")==0)
+        {
+            PlayerPrefs.SetInt("CountDeadAnimal", DeadAnimal);
+        }
+        else
+        {
+            DeadAnimal = PlayerPrefs.GetInt("CountDeadAnimal") + DeadAnimal;
+            PlayerPrefs.SetInt("CountDeadAnimal",DeadAnimal);
+        }
+        
+    }
+    public int GetCountDeadAnimal()
+    {
+        return PlayerPrefs.GetInt("CountDeadAnimal");
     }
     #endregion
 
