@@ -65,25 +65,37 @@ public class ButtonClick : MonoBehaviour
                 ListGameObjectSort(animalPanel[compareMainNum], animalPanel[compareNum]);
             }
        }
+       for(int panelNum =0;panelNum<animalPanel.Length;panelNum++)
+       {//패널 위치 움직이기
+            if (panelNum != animalPanelPage)
+            {//현재일치하는 패널이 아니라면
+                animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 400, 0);
+            }
+            else if(panelNum==animalPanelPage)
+            {
+                animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
+            }
+       }
+       
     }
-
     public void AnimalPanelNextPage()
     {
         if (animalPanelPage != animalPanel.Length)
-        {
+        { 
             //패널의 위치를 옮겨서 위치를 조정한다
-            animalPanel[animalPanelPage].transform.position = Vector3.up * 400;
-            NextPage(animalPanelPage);
-            animalPanel[animalPanelPage].transform.position = Vector3.up * -400;
+            animalPanel[animalPanelPage].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 400, 0);
+            animalPanelPage=NextPage(animalPanelPage);
+            animalPanel[animalPanelPage].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
+            Debug.Log(animalPanelPage);
         }
     }
     public void AnimalPanelPreviousPage()
     {
         if (animalPanelPage != 0)
         {
-            animalPanel[animalPanelPage].transform.position = Vector3.up * 400;
-            PreviousPage(animalPanelPage);
-            animalPanel[animalPanelPage].transform.position = Vector3.up * -400;
+            animalPanel[animalPanelPage].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 400, 0);
+            animalPanelPage=PreviousPage(animalPanelPage);
+            animalPanel[animalPanelPage].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
         }
     }
     
@@ -91,7 +103,7 @@ public class ButtonClick : MonoBehaviour
     {//id를 받아서 슬롯에 빈공간에 넣는 코드
         //슬롯 빈 공간 확인
         for (int slotNum = 0; slotNum <= 5; slotNum++)
-        {
+        {//슬롯 돌리기 
             if (playerInfo.GetSlotChar(slotNum) == 0)
             {//초기화 된 슬롯의 값은 무조건 0
                 playerInfo.SetSlotChar(slotNum, charID);
@@ -104,14 +116,14 @@ public class ButtonClick : MonoBehaviour
             }
         }
         if(isSlotset==false)
-        {
+        {//슬롯에 값이 들어가지 않을 경우
             Debug.Log("슬롯 초기화가 필요함");
         }
     }
 
     public void AnimalSelect()
     {//이미지 이름을 이용하여 캐릭터 코드를 추출
-        ImageName=EventSystem.current.currentSelectedGameObject.GetComponent<Image>().name ;
+        ImageName=EventSystem.current.currentSelectedGameObject.GetComponent<Image>().name;
         AnimalSlotSetting(int.Parse(ImageName));//int형으로 변경
     }
     #endregion
@@ -124,11 +136,6 @@ public class ButtonClick : MonoBehaviour
     #endregion
 
     #region CommonUIGroup
-    public void NextPageButton()
-    {
-        NextPage(animalPanelPage);
-
-    }
 
     //animalpanel의 변환 방법 버튼문제해결필요
     public int ListGameObjectSort(GameObject compareMainObj, GameObject compareSubObject)
@@ -148,13 +155,13 @@ public class ButtonClick : MonoBehaviour
         barnUI.SetActive(false);
     }
 
-    public void NextPage(int page)
+    public int NextPage(int page)
     {//다음 페이지
-        page++;
+        return ++page;
     }
-    public void PreviousPage(int page)
+    public int PreviousPage(int page)
     {//이전 페이지
-        page--;
+        return --page;
     }
     #endregion
 }
