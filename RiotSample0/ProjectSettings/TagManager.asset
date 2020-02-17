@@ -8,7 +8,7 @@ TagManager:
   - GateUI
   - BarnUI
   - ClosePanelButton
-  - ChangePageButton
+  - AnimalPanel
   layers:
   - Default
   - TransparentFX

@@ -2,20 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Reflection;
 
 public class ButtonClick : MonoBehaviour
 {
+    private PlayerInfo playerInfo;
+
     private static GameObject houseUI;//정적 변수 SetActive때문에
     private static GameObject gateUI;
     private static GameObject barnUI;
     private static GameObject closePanelButton;
     private static GameObject changePageButton;
 
-
-    private int AnimalPanelPage = 0;//동물 선택 페이지
     private string buttonName;//현재 버튼이름 저장 
-    private GameObject[] AnimalPanel;
+    private string ImageName;//현재 이미지 이름
+    private GameObject[] animalPanel;//패널들의 배열
+    private int animalPanelPage = 0;//동물 선택 페이지  
+    bool isSlotset = false;//슬롯에 들어갔는지 확인을 위한 bool값
+
 
 
     private void Awake()
@@ -36,33 +41,104 @@ public class ButtonClick : MonoBehaviour
         //string 문으로 함수 실행 
         SendMessage(buttonName);
     }
+
+    #region HouseUIFuncGroup
     public void HouseButton()
     {//집 버튼을 클릭할 경우 사용할 함수 
         houseUI.SetActive(true);//패널 활성화
         closePanelButton= GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
     }
+    #endregion
 
+    #region GateFuncGroup
     public void GateButton()
     {//게이트 버튼을 클릭할 경우 사용할 함수
         gateUI.SetActive(true);//패널 활성화
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
-        changePageButton = GameObject.FindGameObjectWithTag("ChangePageButton");//패널 생성시 확인
-        
+        //캐릭터 패널 확인하기   
+        animalPanel = GameObject.FindGameObjectsWithTag("AnimalPanel");
+       //캐릭터 패널 배열 정리
+       for(int compareMainNum=0;compareMainNum==animalPanel.Length;compareMainNum++)
+       {//compare(a,b)의 a에 해당
+            for(int compareNum=1;compareNum==animalPanel.Length;compareNum++)
+            {//compare(a,b)의 b에 해당
+                ListGameObjectSort(animalPanel[compareMainNum], animalPanel[compareNum]);
+            }
+       }
     }
-    //animalpanel의 변환 방법 버튼문제해결필요
-    //public int ListGameObjectSort(GameObject a, GameObject b)
-    //{
-    //    string aS;
-    //    string bS;
-    //    //이름 임시변수에넣기
-    //    aS = a.name;
-    //    bS = b.name;
-    //    return aS.CompareTo(bS);
-    //}
 
+    public void AnimalPanelNextPage()
+    {
+        if (animalPanelPage != animalPanel.Length)
+        {
+            //패널의 위치를 옮겨서 위치를 조정한다
+            animalPanel[animalPanelPage].transform.position = Vector3.up * 400;
+            NextPage(animalPanelPage);
+            animalPanel[animalPanelPage].transform.position = Vector3.up * -400;
+        }
+    }
+    public void AnimalPanelPreviousPage()
+    {
+        if (animalPanelPage != 0)
+        {
+            animalPanel[animalPanelPage].transform.position = Vector3.up * 400;
+            PreviousPage(animalPanelPage);
+            animalPanel[animalPanelPage].transform.position = Vector3.up * -400;
+        }
+    }
+    
+    public void AnimalSlotSetting(int charID)
+    {//id를 받아서 슬롯에 빈공간에 넣는 코드
+        //슬롯 빈 공간 확인
+        for (int slotNum = 0; slotNum <= 5; slotNum++)
+        {
+            if (playerInfo.GetSlotChar(slotNum) == 0)
+            {//초기화 된 슬롯의 값은 무조건 0
+                playerInfo.SetSlotChar(slotNum, charID);
+                isSlotset = true;
+                break;
+            }
+            else
+            {
+                Debug.Log(slotNum + "번째 슬롯은 현재 사용중");
+            }
+        }
+        if(isSlotset==false)
+        {
+            Debug.Log("슬롯 초기화가 필요함");
+        }
+    }
+
+    public void AnimalSelect()
+    {//이미지 이름을 이용하여 캐릭터 코드를 추출
+        ImageName=EventSystem.current.currentSelectedGameObject.GetComponent<Image>().name ;
+        AnimalSlotSetting(int.Parse(ImageName));//int형으로 변경
+    }
+    #endregion
+
+    #region BarnUIFuncGroup
     public void BarnButton()
     {//헛간 버튼을 클릭할 경우 사용할 함수
 
+    }
+    #endregion
+
+    #region CommonUIGroup
+    public void NextPageButton()
+    {
+        NextPage(animalPanelPage);
+
+    }
+
+    //animalpanel의 변환 방법 버튼문제해결필요
+    public int ListGameObjectSort(GameObject compareMainObj, GameObject compareSubObject)
+    {
+        string compareMainObjName;
+        string compareSubObjectName;
+        //이름 임시변수에넣기
+        compareMainObjName = compareMainObj.name;
+        compareSubObjectName = compareSubObject.name;
+        return compareMainObjName.CompareTo(compareSubObjectName);
     }
 
     public void ClosePanelButton()
@@ -72,20 +148,13 @@ public class ButtonClick : MonoBehaviour
         barnUI.SetActive(false);
     }
 
-    public void ChangePageButton()
-    {
-        if(AnimalPanelPage==0)
-        {
-            
-        }
-        else if(AnimalPanelPage==1)
-        {
-
-        }
-        else
-        {//페이지 범위를 초과함
-            Debug.Log("bug");
-        }
+    public void NextPage(int page)
+    {//다음 페이지
+        page++;
     }
-
+    public void PreviousPage(int page)
+    {//이전 페이지
+        page--;
+    }
+    #endregion
 }
