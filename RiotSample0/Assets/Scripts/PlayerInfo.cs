@@ -46,6 +46,18 @@ public class PlayerInfo : MonoBehaviour
         return PlayerPrefs.GetInt(charID + "AP");
     }
     #endregion
+
+    #region DPS
+    public void SetCharDps(int charID,int charDPS)
+    {
+        PlayerPrefs.SetInt(charID + "DPS", charDPS);
+    }
+    public int GetCharDps(int charID)
+    {
+        return PlayerPrefs.GetInt(charID + "DPS");
+    }
+    #endregion
+
     //스테이지 관련
     #region Stage
     public void SetStage(int stage)

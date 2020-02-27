@@ -114,6 +114,7 @@ public class ButtonClick : MonoBehaviour
             {
                 Debug.Log(slotNum + "번째 슬롯은 현재 사용중");
             }
+
         }
         if(isSlotset==false)
         {//슬롯에 값이 들어가지 않을 경우
@@ -126,7 +127,40 @@ public class ButtonClick : MonoBehaviour
         ImageName=EventSystem.current.currentSelectedGameObject.GetComponent<Image>().name;
         AnimalSlotSetting(int.Parse(ImageName));//int형으로 변경
     }
+
+    public void Slot()
+    {//슬롯 버튼을 클릭하였을 경우
+        string slotName =EventSystem.current.currentSelectedGameObject.tag;
+        SlotCleanUP(slotName);
+    }
+    public void SlotCleanUP(string SlotName)
+    {//슬롯 초기화
+        switch (SlotName)
+        {//tag를 이용하여서 슬롯찾고 초기화
+            case "Slot0":
+                playerInfo.SetSlotChar(0, 0);
+                break;
+            case "Slot1":
+                playerInfo.SetSlotChar(1, 0);
+                break;
+            case "Slot2":
+                playerInfo.SetSlotChar(2, 0);
+                break;
+            case "Slot3":
+                playerInfo.SetSlotChar(3, 0);
+                break;
+            case "Slot4":
+                playerInfo.SetSlotChar(4, 0);
+                break;
+            case "Slot5":
+                playerInfo.SetSlotChar(5, 0);
+                break;
+        }
+
+    }
+
     #endregion
+
 
     #region BarnUIFuncGroup
     public void BarnButton()
