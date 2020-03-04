@@ -10,12 +10,12 @@ public class GameObjMoveTestStartSetting : MonoBehaviour
     void Start()
     {
         //csv 테스트 
-        List<Dictionary<string, object>> data = CSVReader.Read("character(CSV)");
-        for (var i = 0; i < data.Count; i++)
-        {
-            tempint = (int)data[i]["AP"];
-            Debug.Log(data[i]["ID"] + " " + tempint);
-        }
+      // List<Dictionary<string, object>> data = CSVReader.Read("character(CSV)");
+      // for (var i = 0; i < data.Count; i++)
+      // {
+      //     tempint = (int)data[i]["AP"];
+      //     Debug.Log(data[i]["ID"] + " " + tempint);
+      // }
 
 
         //for (int i=0;i<5;i++)

@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
-    
+    private void Start()
+    {
+        ResetSlotChar();
+    }
+
+
     //캐릭터 관련
     #region CharID
     public void SetCharId(int charID)
@@ -25,9 +30,17 @@ public class PlayerInfo : MonoBehaviour
     {//해당슬롯에 캐릭터 넘버 가져오기
         return PlayerPrefs.GetInt("Slot" + slotNum);
     }
-    #endregion
-    #region HP
-    public void SetCharHP(int charID, int charHp)
+    public void ResetSlotChar()
+    {
+        int resetIDNum = 0;
+        for (int slotResetCount = 0; slotResetCount < 6; slotResetCount++)
+        {//슬롯 정보 초기화
+            PlayerPrefs.SetInt(("Slot" + slotResetCount), resetIDNum);
+        }
+    }
+#endregion
+#region HP
+public void SetCharHP(int charID, int charHp)
     {
         PlayerPrefs.SetInt(charID+ "HP", charHp);
     }
