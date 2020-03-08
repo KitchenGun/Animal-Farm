@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scene/GameObjMoveTest.unity
-    guid: 81039e7dc60ea6940b183b052a7212ae
+    path: Assets/Scene/Farm.unity
+    guid: 8f32ba3d35ea342488cc649f02101475
+  - enabled: 1
+    path: Assets/Scene/BattleField.unity
+    guid: c925549a5db25bb41bf8f809e8a7dd42
   m_configObjects: {}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Reflection;
 
 public class ButtonClick : MonoBehaviour
@@ -77,7 +78,13 @@ public class ButtonClick : MonoBehaviour
                 animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
             }
        }
-       
+       //슬롯 초기화
+       for(int slotNum=0;slotNum<6;slotNum++)
+       {
+            PlayerPrefs.SetInt(("Slot" + slotNum), 0);
+            currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);
+            currentSlotObj.GetComponent<Image>().sprite = null;//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능//초기 이미지로 변경
+       }
     }
     public void AnimalPanelNextPage()
     {
@@ -173,6 +180,10 @@ public class ButtonClick : MonoBehaviour
 
     }
 
+    public void GameStartButton()
+    {//게임 시작 버튼
+        SceneManager.LoadScene("BattleField");
+    }
     #endregion
 
 
@@ -184,7 +195,6 @@ public class ButtonClick : MonoBehaviour
     #endregion
 
     #region CommonUIGroup
-
     //animalpanel의 변환 방법 버튼문제해결필요
     public int ListGameObjectSort(GameObject compareMainObj, GameObject compareSubObject)
     {
