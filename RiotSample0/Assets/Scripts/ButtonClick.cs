@@ -15,20 +15,31 @@ public class ButtonClick : MonoBehaviour
     private static GameObject barnUI;
     private static GameObject closePanelButton;
     private static GameObject changePageButton;
+    private static GameObject animalCountPanel;
 
+    
     private string buttonName;//현재 버튼이름 저장 
+    //gate
     private string imageName;//현재 이미지 이름
     private int imageNum=0;//현재 이미지의 숫자
     private GameObject[] animalPanel;//패널들의 배열
     private int animalPanelPage = 0;//동물 선택 페이지  
+    //gate-slot
     private bool isSlotset = false;//슬롯에 들어갔는지 확인을 위한 bool값
     private GameObject currentSlotObj;//현재 슬롯의 오브젝트
     private int currentSlotID;//현재 슬롯의 id
+    //gate-animalcountpanel
+    public float currentAnimalCount;//현재 동물의 개체수
+    public float combatAnimalCount;//전투에 사용될 개체수
+    
 
     private void Awake()
     {
+
         houseUI = GameObject.FindGameObjectWithTag("HouseUI");
         houseUI.SetActive(false);
+        animalCountPanel = GameObject.Find("AnimalCountPanel");
+        animalCountPanel.SetActive(false);
         gateUI = GameObject.FindGameObjectWithTag("GateUI");
         gateUI.SetActive(false);
         barnUI= GameObject.FindGameObjectWithTag("BarnUI");
@@ -109,12 +120,33 @@ public class ButtonClick : MonoBehaviour
     {//이미지 이름을 이용하여 캐릭터 코드를 추출
         imageName = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite.name;
         if (int.TryParse(imageName, out imageNum))
-        {
+        {//string->int화
             imageNum = imageNum;
         }
-        AnimalSlotSetting(imageNum);//int형으로 변경
-
+        currentAnimalCount=PlayerPrefs.GetInt(imageNum + "Count");//클릭한 동물의 개체수 호출
+        animalCountPanel.SetActive(true);//패널 활성화//animalcount패널로 이동
     }
+    #region AnimalCountFuncGroup
+    public void CombatCountConfirm()
+    {
+        //확인버튼을 눌렀을 경우
+        animalCountPanel.GetComponentInChildren<Scrollbar>().numberOfSteps = (int)currentAnimalCount;
+        float countScrollCount = animalCountPanel.GetComponentInChildren<Scrollbar>().value;
+        combatAnimalCount = currentAnimalCount * countScrollCount;//숫자 확인
+        if(countScrollCount!=0)
+        {// 스크롤바가 0이 아닐 경우 실행되는 코드
+            PlayerPrefs.SetInt(imageNum + "CombatCount", (int)combatAnimalCount);//전투에 사용하는 개체 숫자에 입력
+            AnimalSlotSetting(imageNum);//슬롯에 집어 넣기
+        }
+        animalCountPanel.SetActive(false);
+    }
+    public void CombatCountCancel()
+    {
+        //취소버튼을 눌렀을 경우
+        animalCountPanel.SetActive(false);
+    }
+
+    #endregion
 
     public void AnimalSlotSetting(int charID)
     {//id를 받아서 슬롯에 빈공간에 넣는 코드
@@ -185,7 +217,6 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene("BattleField");
     }
     #endregion
-
 
     #region BarnUIFuncGroup
     public void BarnButton()

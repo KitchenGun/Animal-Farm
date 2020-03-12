@@ -21,6 +21,7 @@ public class PlayerInfo : MonoBehaviour
         return PlayerPrefs.GetInt("CharID" + charID);
     }
     #endregion
+
     #region SlotSetting
     public void SetSlotChar(int slotNum,int slotCharID)
     {//슬롯에 캐릭터 넘버 설정
@@ -39,8 +40,9 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 #endregion
-#region HP
-public void SetCharHP(int charID, int charHp)
+
+    #region HP
+    public void SetCharHP(int charID, int charHp)
     {
         PlayerPrefs.SetInt(charID+ "HP", charHp);
     }
@@ -49,6 +51,7 @@ public void SetCharHP(int charID, int charHp)
         return PlayerPrefs.GetInt(charID + "HP");
     }
     #endregion
+
     #region AP
     public void SetCharAP(int charID, int charAP)
     {
@@ -70,6 +73,42 @@ public void SetCharHP(int charID, int charHp)
         return PlayerPrefs.GetInt(charID + "DPS");
     }
     #endregion
+
+    #region AnimalCount
+
+    public void SetCharCount(int charID, int charCount)
+    {
+        PlayerPrefs.SetInt(charID + "Count", charCount);
+    }
+    public int GetCharCount(int charID)
+    {
+        return PlayerPrefs.GetInt(charID + "Count");
+    }
+    #endregion
+
+    #region InjureCount
+    public void SetInjureCount(int charID, int charInjureCount)
+    {
+        PlayerPrefs.SetInt(charID + "InjureCount", charInjureCount);
+    }
+    public int GetInjureCount(int charID)
+    {
+        return PlayerPrefs.GetInt(charID + "InjureCount");
+    }
+    #endregion
+
+    #region CombatCount
+    public void SetCombatCount(int charID, int combatCount)
+    {
+        PlayerPrefs.SetInt(charID + "CombatCount", combatCount);
+    }
+    public int GetCombatCount(int charID)
+    {
+        return PlayerPrefs.GetInt(charID + "CombatCount");
+    }
+    #endregion
+
+
 
     //스테이지 관련
     #region Stage

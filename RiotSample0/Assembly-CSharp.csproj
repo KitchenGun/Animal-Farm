@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ButtonClick.cs" />
+    <Compile Include="Assets\Scripts\ButtonClickInGame.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\EnemySniper.cs" />
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Assets\Scripts\GameManager\GameLoadManager.cs" />
     <Compile Include="Assets\Scripts\GameObjMoveTestStartSetting.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
+    <Compile Include="Assets\Scripts\ScrollbarCount.cs" />
     <Compile Include="Assets\Scripts\SimpleTextChanger.cs" />
     <Compile Include="Assets\Scripts\SlotSetting\SlotImageSetting.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
