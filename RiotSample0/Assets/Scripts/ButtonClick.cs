@@ -136,6 +136,7 @@ public class ButtonClick : MonoBehaviour
         if(countScrollCount!=0)
         {// 스크롤바가 0이 아닐 경우 실행되는 코드
             PlayerPrefs.SetInt(imageNum + "CombatCount", (int)combatAnimalCount);//전투에 사용하는 개체 숫자에 입력
+            Debug.Log(PlayerPrefs.GetInt(imageName + "CombatCount"));
             AnimalSlotSetting(imageNum);//슬롯에 집어 넣기
         }
         animalCountPanel.SetActive(false);
