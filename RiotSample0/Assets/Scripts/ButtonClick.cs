@@ -5,10 +5,16 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Reflection;
+public enum SceneName
+{
+    Farm,
+    BattleField
+}
 
 public class ButtonClick : MonoBehaviour
 {
     public PlayerInfo playerInfo;
+    public SceneName sceneName;
 
     private static GameObject houseUI;//정적 변수 SetActive때문에
     private static GameObject gateUI;
@@ -31,22 +37,37 @@ public class ButtonClick : MonoBehaviour
     //gate-animalcountpanel
     public float currentAnimalCount;//현재 동물의 개체수
     public float combatAnimalCount;//전투에 사용될 개체수
+
     
 
     private void Awake()
     {
-
-        houseUI = GameObject.FindGameObjectWithTag("HouseUI");
-        houseUI.SetActive(false);
-        animalCountPanel = GameObject.Find("AnimalCountPanel");
-        animalCountPanel.SetActive(false);
-        gateUI = GameObject.FindGameObjectWithTag("GateUI");
-        gateUI.SetActive(false);
-        barnUI= GameObject.FindGameObjectWithTag("BarnUI");
-        barnUI.SetActive(false);
-       
+        SceneCheck();//현재 씬 확인
+        if (sceneName==SceneName.Farm)
+        {//농장씬일 경우
+            houseUI = GameObject.FindGameObjectWithTag("HouseUI");
+            houseUI.SetActive(false);
+            animalCountPanel = GameObject.Find("AnimalCountPanel");
+            animalCountPanel.SetActive(false);
+            gateUI = GameObject.FindGameObjectWithTag("GateUI");
+            gateUI.SetActive(false);
+            barnUI = GameObject.FindGameObjectWithTag("BarnUI");
+            barnUI.SetActive(false);
+        }
     }
 
+    private void SceneCheck()
+    {//switch를 이용하여 씬을 확인
+        switch(SceneManager.GetActiveScene().name)
+        {
+            case "Farm":
+                sceneName = SceneName.Farm;
+                break;
+            case "BattleField":
+                sceneName = SceneName.BattleField;
+                break;
+        }
+    }
 
     public void UIButtonClick()
     {//버튼 클릭시 실행함수
@@ -136,7 +157,6 @@ public class ButtonClick : MonoBehaviour
         if(countScrollCount!=0)
         {// 스크롤바가 0이 아닐 경우 실행되는 코드
             PlayerPrefs.SetInt(imageNum + "CombatCount", (int)combatAnimalCount);//전투에 사용하는 개체 숫자에 입력
-            Debug.Log(PlayerPrefs.GetInt(imageName + "CombatCount"));
             AnimalSlotSetting(imageNum);//슬롯에 집어 넣기
         }
         animalCountPanel.SetActive(false);
