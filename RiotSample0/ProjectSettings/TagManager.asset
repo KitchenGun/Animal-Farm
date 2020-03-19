@@ -15,6 +15,7 @@ TagManager:
   - Slot3
   - Slot4
   - Slot5
+  - Line
   layers:
   - Default
   - TransparentFX
