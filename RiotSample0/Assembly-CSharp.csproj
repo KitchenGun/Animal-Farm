@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\ButtonClickInGame.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\EnemySniper.cs" />
+    <Compile Include="Assets\Scripts\FlagMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameCombatManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameLoadManager.cs" />
