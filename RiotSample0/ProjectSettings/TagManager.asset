@@ -16,6 +16,7 @@ TagManager:
   - Slot4
   - Slot5
   - Line
+  - Pig
   layers:
   - Default
   - TransparentFX
