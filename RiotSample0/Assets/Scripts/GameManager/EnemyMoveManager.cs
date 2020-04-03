@@ -53,7 +53,7 @@ public class EnemyMoveManager : MonoBehaviour
     }
 
     private void rayCheck(float attackRange)
-    {
+    {//적에게 사용할때는 탐지거리 
         if (Physics.Raycast(this.gameObject.transform.position, Vector3.left, out rayHit, 20)) 
         {//레이를 생성
             Debug.Log("rayhit");

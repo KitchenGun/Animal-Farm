@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+
+
 
 public enum PlayerState
 {
@@ -15,12 +18,20 @@ public enum PlayerState
 public class GameCombatManager : MonoBehaviour
 {
     public PlayerInfo playerInfo;//플레이어 정보
+    public GameLoadManager gameLoadManager;
     public PlayerState playerState;//플레이어상태
 
-    public static GameObject[] Line;//라인오브젝트 배열
+    //public static GameObject[] Line;//배치 라인 오브젝트 
+    public static List<GameObject> Line = new List<GameObject>();
+    private GameObject mainLine;
+    private GameObject compareLine;
 
     private string buttonName;//버튼의 이름
     private int charID;//캐릭터 id
+    private string slotNum;//슬롯 숫자
+
+    //outline관련변수
+    private bool outlineSizeUP;
 
     /// <summary>
     /// 이동에 관련된 변수들
@@ -32,24 +43,27 @@ public class GameCombatManager : MonoBehaviour
     private Collider CurrentClickTrans;
     //클릭한 위치의 게임 오브젝트
     private GameObject selectGameObj;
+    //땅에 파붙히지 않기 위한 변수
+    private Vector3 BasicPos = new Vector3(0, 1.2f, 0);
+
     //움직일수 있는지 확인용
     private bool isMove;
     private bool reverse;
-    //outline관련변수
-    private bool outlineSizeUP;
 
-    public void Awake()
+    public void Start()
     {
         playerState = PlayerState.Play;/////////////////////임시 나중에 Hold로 교체가 필요함
         StartCoroutine(GameTimeSet());//게임 타임 설정
-        #region lineCodeFind
-        Line = GameObject.FindGameObjectsWithTag("Line");//라인 찾기
-        for(int lineNum=0;lineNum<2;lineNum++)
-        {//라인 오브젝트 배열 정렬
-            if (lineNum >= 1)
-            {
-                ListGameObjectSort(Line[lineNum - 1], Line[lineNum]);
+        #region lineFindCode
+        Line = new List<GameObject> (GameObject.FindGameObjectsWithTag("Line"));
+        foreach (GameObject LineGameObj in Line)
+        {//순서정리
+            compareLine = LineGameObj;
+            if (mainLine != null)
+            {//정렬실행
+                Line.Sort(ListGameObjectSort);
             }
+            mainLine = LineGameObj;
         }
         foreach (GameObject line in Line)
         {//라인 오브젝트 끄기
@@ -61,26 +75,29 @@ public class GameCombatManager : MonoBehaviour
     private void Update()//플레이어의 입력을 받기위한 업데이트
     {
         Debug.Log(playerState);
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {//마우스 클릭시
-            switch (playerState)
-            {
-                case PlayerState.Hold:
-
-                    break;
-                case PlayerState.Select:
-                    selectColiderFind();
-                    break;
-                case PlayerState.Deploy:
-                    DeploySelect();
-                    break;
-                case PlayerState.Play:
-                    playColiderFind();
-                    break;
+            if (!EventSystem.current.currentSelectedGameObject)
+            {//클릭한 오브젝트가 버튼 같은 이벤트 입력이 아닐 경우 아래 구문 실행
+                switch (playerState)
+                {
+                    case PlayerState.Hold:
+                        break;
+                    case PlayerState.Select://이동
+                        selectColiderFind();
+                        break;
+                    case PlayerState.Deploy://배치
+                        DeploySelect();
+                        break;
+                    case PlayerState.Play://게임 플레이중
+                        playColiderFind();
+                        break;
+                }
             }
         }
         if (isMove)
         {//움직이는 코드
+            selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;//아웃 라인 제거
             if (playerState == PlayerState.Select)
             {//선택 상태에서 움직일 경우 플레이상태로 변경
                 playerState = PlayerState.Play;
@@ -96,7 +113,7 @@ public class GameCombatManager : MonoBehaviour
     }
 
     public int ListGameObjectSort(GameObject a, GameObject b)
-    {//배열 정렬
+    {//정렬함수
         string aS;
         string bS;
         //이름 임시변수에넣기
@@ -108,25 +125,30 @@ public class GameCombatManager : MonoBehaviour
     {//이벤트 버튼 클릭시 실행함수
         switch (playerState)
         {
-            case PlayerState.Hold:
-                //스토리 넘기기
-                break;
-            case PlayerState.Select:
-                buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
-                break;
-            case PlayerState.Deploy:
+            case PlayerState.Hold://정지
                 buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
                 //string 문으로 함수 실행 
                 SendMessage(buttonName);
                 break;
-        }       
+            case PlayerState.Select://이동
+                buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
+                break;
+            case PlayerState.Deploy://배치
+                buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
+                break;
+            case PlayerState.Play://플레이중
+                buttonName = EventSystem.current.currentSelectedGameObject.name;
+                //string 문으로 함수 실행 
+                SendMessage(buttonName);
+                break;
+        }
     }
 
     #region OutlineCtrl
     private IEnumerator OutlineCtrl()
     {
-        while (playerState==PlayerState.Select)
-        {
+        while (playerState == PlayerState.Select)
+        {//사이즈 제어하는 반복문
             if (selectGameObj.GetComponent<SpriteOutline>().outlineSize == 10)
             {
                 outlineSizeUP = false;
@@ -138,12 +160,10 @@ public class GameCombatManager : MonoBehaviour
 
             if (outlineSizeUP)
             {
-                Debug.Log("sizeup");
                 selectGameObj.GetComponent<SpriteOutline>().outlineSize = 10;
             }
             else
             {
-                Debug.Log("sizedown");
                 selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
             }
             yield return new WaitForSeconds(0.3f);
@@ -176,7 +196,7 @@ public class GameCombatManager : MonoBehaviour
         }
     }
     private void selectColiderFind()
-    {
+    {//선택했을 경우 실행하는 함수
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit click;
         if (Physics.Raycast(ray, out click, 100f))
@@ -190,12 +210,6 @@ public class GameCombatManager : MonoBehaviour
                     {
                         case "Pig":
                             pigStop();
-                            break;
-                        case"Line1":
-                            break;
-                        case "Line2":
-                            break;
-                        case "Line3":
                             break;
 
                     }
@@ -243,7 +257,7 @@ public class GameCombatManager : MonoBehaviour
         PreviousClickTrans = null;
         CurrentClickTrans = null;
     }
-   
+
 
     private void pigMove()
     {//애니메이션과 같은 돼지가 움직일 경우 실행할 코드들 
@@ -253,8 +267,8 @@ public class GameCombatManager : MonoBehaviour
     private void pigStop()
     {//애니메이션과 같은 돼지가 멈출 경우 실행할 코드들 
         playerState = PlayerState.Play;//플레이상태로 만듬
-        StopCoroutine(OutlineCtrl());//사이즈 제어 코루틴 정지
         selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
+        StopCoroutine(OutlineCtrl());//사이즈 제어 코루틴 정지
     }
     #endregion
 
@@ -263,8 +277,9 @@ public class GameCombatManager : MonoBehaviour
     public void CombatSlot()
     {//슬롯클릭시 실행
         string imageName = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite.name;
+        slotNum = EventSystem.current.currentSelectedGameObject.tag;
         charID = int.Parse(imageName);
-        playerState = PlayerState.Select;//배치위치 선택하는 상태
+        playerState = PlayerState.Deploy;//배치위치 선택하는 상태
         foreach (GameObject line in Line)
         {//활성화 라인 오브젝트 
             line.SetActive(true);
@@ -274,7 +289,6 @@ public class GameCombatManager : MonoBehaviour
 
     public void AnimalSpawn(int charID, int lineNum)
     {//동물 스폰
-        ///AnimalSpawn(charID);//////소환지점을 클릭했을때 호출이 필요
         int combatCount = playerInfo.GetCombatCount(charID);
         if (combatCount != 0)
         {//개체수가 존재할 경우
@@ -282,13 +296,16 @@ public class GameCombatManager : MonoBehaviour
             //소환하고 적용할 코드
             combatCount--;//한번 클릭마다 개체 하나식 제거
             playerInfo.SetCombatCount(charID, combatCount);//제거한 후 전투가능 개체수를 수정
+            gameLoadManager.CombatCount = combatCount;
+            gameLoadManager.SendMessage("SlotCharCountSet",slotNum);
         }
-        foreach (GameObject line in Line)
-        {//라인 오브젝트 끄기
-            line.SetActive(false);
+        else if (combatCount != 0)
+        {
+            Debug.Log("동물부족함");
         }
-    }
     
+    }
+
     public void DeploySelect()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -297,16 +314,25 @@ public class GameCombatManager : MonoBehaviour
         {//충돌 물체로 부터 콜라이더 추출 하여 현재 콜라이더에 대입
             if (click.transform.GetComponent<BoxCollider>())
             {
-                switch (click.transform.gameObject.tag)
+                switch (click.transform.gameObject.name)
                 {
                     case "Line1":
+                        //소환 끝나고 상태 플레이상태로 변화
+                        playerState = PlayerState.Play;
                         AnimalSpawn(charID, 0);
+                        Debug.Log("1번라인 배치");
                         break;
                     case "Line2":
+                        //소환 끝나고 상태 플레이상태로 변화
+                        playerState = PlayerState.Play;
                         AnimalSpawn(charID, 1);
+                        Debug.Log("2번라인 배치");
                         break;
                     case "Line3":
+                        //소환 끝나고 상태 플레이상태로 변화
+                        playerState = PlayerState.Play;
                         AnimalSpawn(charID, 2);
+                        Debug.Log("3번라인 배치");
                         break;
                 }
 
@@ -314,12 +340,12 @@ public class GameCombatManager : MonoBehaviour
         }
     }
     #endregion
-    
+
     #region Time
     //시간을 조작하는 데 관련된 코드 모음
     private IEnumerator GameTimeSet()
     {
-        
+
         switch (playerState)
         {
             case PlayerState.Hold:
@@ -338,90 +364,4 @@ public class GameCombatManager : MonoBehaviour
         yield return null;
     }
     #endregion
-
-
-    ////이전 클릭 위치
-    //[SerializeField]
-    //private Collider PreviousClickTrans;
-    ////현재 클릭 위치
-    //[SerializeField]
-    //private Collider CurrentClickTrans;
-    ////움직일수 있는지 확인용
-    //private bool isMove;
-    //private bool reverse;
-    //private void Start()
-    //{
-    //    //초기화
-    //    isMove = false;
-    //    reverse = false;
-    //}
-    //private void Update()
-    //{
-    //    if(Input.GetMouseButtonDown(0))
-    //    {
-    //        Debug.Log("클릭됨");
-    //        CombatClickInput();
-    //    }
-    //    if (isMove)
-    //    {
-    //        if (CurrentClickTrans.gameObject.transform.childCount > 0)
-    //        {//이동할 곳에 오브젝트가 있으면
-    //            reverse = true;
-    //            MoveChar(PreviousClickTrans, CurrentClickTrans.transform.GetChild(0).gameObject,reverse);
-    //        }
-    //        reverse = false;
-    //        MoveChar(CurrentClickTrans, PreviousClickTrans.transform.GetChild(0).gameObject,reverse);
-    //    }
-    //}
-    //public void CombatClickInput()
-    //{//전투상황시 클릭 호출 함수
-    //    Ray ray=Camera.main.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit click;
-    //    if(Physics.Raycast(ray,out click,100f))
-    //    {//충돌 물체로 부터 콜라이더 추출 하여 현재 콜라이더에 대입
-    //        if(click.transform.GetComponent<BoxCollider>())
-    //        {
-    //            if (CurrentClickTrans == null)
-    //            {//현재 콜라이더로 선택 된것이 없을 경우
-    //                Debug.Log("현재 콜라이더 비어있음");
-    //                CurrentClickTrans = click.transform.GetComponent<BoxCollider>();
-    //            }
-    //            else if (CurrentClickTrans != null)
-    //            {
-    //                Debug.Log("현재콜라이더 교체");
-    //                if (CurrentClickTrans.transform.childCount!=0)
-    //                {//이전에 선택한 위치가 캐릭터가 존재할 경우
-    //                    Debug.Log("이전에 선택한 위치에 캐릭터 존재 교체 가능");
-    //                    PreviousClickTrans = CurrentClickTrans;
-    //                    isMove = true;
-    //                }
-    //                CurrentClickTrans = click.transform.GetComponent<BoxCollider>();
-    //            }
-    //        }
-    //
-    //    }
-    //}
-    //public void ResetClickTrans()
-    //{//콜라이더 초기화
-    //    PreviousClickTrans = null;
-    //    CurrentClickTrans = null;
-    //}
-    //
-    //public void MoveChar(Collider afterTrans,GameObject riot,bool reverse)
-    //{//캐릭터 이동
-    //    Debug.Log("움직이는중");
-    //    riot.transform.position = Vector3.MoveTowards(riot.transform.position, afterTrans.transform.position, 20*Time.deltaTime);
-    //    //이동속도 조절을 timedeltatime에서 조절
-    //    if(riot.transform.position==afterTrans.transform.position)
-    //    {
-    //        if(!reverse)
-    //        {//반대로 움직이는 것이 아닐경우 이동하는 위치 초기화
-    //            isMove = false;
-    //            ResetClickTrans();
-    //        }
-    //        //부모변경
-    //        riot.transform.parent = afterTrans.transform;
-    //    }
-    //}
-    //
 }

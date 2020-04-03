@@ -15,8 +15,6 @@ public class PlayerInfoSet : MonoBehaviour
 
     }
 
-
-
     private void SetCount()
     {//개체수 세팅
         List<Dictionary<string, object>> data = CSVReader.Read("characterCSV");
