@@ -10,8 +10,9 @@ using UnityEngine.EventSystems;
 public enum PlayerState
 {
     Hold,//아무것도 못하고 대화만 보는 정지 상태 적 또한 정지한다
-    Select,//슬롯의 버튼을 눌렀거나  유닛 선택상태
-    Deploy,//배치를 할 경우에 사용되는 상태이다.
+    Select,//슬롯의 버튼을 눌렀거나  유닛 콜라이더를 선택하는 상황
+    Deploy,//배치를 할 경우에 콜라이더를 선택하는 상황
+    Fire,//발사를 위해서 콜라이더를 선택하는 상황
     Play//정상적인 플레이 상태
 }
 
@@ -25,6 +26,12 @@ public class GameCombatManager : MonoBehaviour
     public static List<GameObject> Line = new List<GameObject>();
     private GameObject mainLine;
     private GameObject compareLine;
+    
+    //포격 관련 변수
+    public static List<GameObject> AtryPos = new List<GameObject>();//포격위치 
+    private GameObject mainAtryPos;
+    private GameObject compareAtryPos;
+
 
     private string buttonName;//버튼의 이름
     private int charID;//캐릭터 id
@@ -42,6 +49,7 @@ public class GameCombatManager : MonoBehaviour
     [SerializeField]
     private Collider CurrentClickTrans;
     //클릭한 위치의 게임 오브젝트
+    private GameObject previousSelectGameObj;
     private GameObject selectGameObj;
     //땅에 파붙히지 않기 위한 변수
     private Vector3 BasicPos = new Vector3(0, 1.2f, 0);
@@ -54,6 +62,7 @@ public class GameCombatManager : MonoBehaviour
     {
         playerState = PlayerState.Play;/////////////////////임시 나중에 Hold로 교체가 필요함
         StartCoroutine(GameTimeSet());//게임 타임 설정
+
         #region lineFindCode
         Line = new List<GameObject> (GameObject.FindGameObjectsWithTag("Line"));
         foreach (GameObject LineGameObj in Line)
@@ -69,6 +78,25 @@ public class GameCombatManager : MonoBehaviour
         {//라인 오브젝트 끄기
             line.SetActive(false);
         }
+        #endregion
+
+        #region AtryPosFindCode
+        AtryPos = new List<GameObject>(GameObject.FindGameObjectsWithTag("AtryPos"));
+        foreach (GameObject AtryPosObj in AtryPos)
+        {//순서정리
+            compareAtryPos = AtryPosObj;
+            if (mainAtryPos != null)
+            {//정렬실행
+                AtryPos.Sort(ListGameObjectSort);
+            }
+            mainAtryPos = AtryPosObj;
+        }
+        foreach (GameObject AtryPosObj in AtryPos)
+        {//라인 오브젝트 끄기
+            AtryPosObj.SetActive(false);
+        }
+
+
         #endregion
     }
 
@@ -87,7 +115,10 @@ public class GameCombatManager : MonoBehaviour
                         selectColiderFind();
                         break;
                     case PlayerState.Deploy://배치
-                        DeploySelect();
+                        DeploySelectColiderFind();
+                        break;
+                    case PlayerState.Fire:
+                        fireSelectColiderFind();//사격 지점 선택
                         break;
                     case PlayerState.Play://게임 플레이중
                         playColiderFind();
@@ -136,13 +167,74 @@ public class GameCombatManager : MonoBehaviour
             case PlayerState.Deploy://배치
                 buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
                 break;
+            case PlayerState.Fire:
+                buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
+                break;
             case PlayerState.Play://플레이중
                 buttonName = EventSystem.current.currentSelectedGameObject.name;
-                //string 문으로 함수 실행 
                 SendMessage(buttonName);
+                //string 문으로 함수 실행 
                 break;
         }
     }
+
+    #region Artillery
+
+    private void Artillery()
+    {//사격상태로 전환하는함수
+       
+        playerState = PlayerState.Fire;//발사위치 선택하는 상태
+        foreach (GameObject AtryPosObj in AtryPos)
+        {//활성화 발사위치 오브젝트 
+            AtryPosObj.SetActive(true);
+        }
+    }
+
+    private void ArtillerySpawn(int charID, int atryPosnum)
+    {
+        GameObject TempAtryPos;
+        //포격 위치 
+        TempAtryPos = Instantiate(Resources.Load<GameObject>("Egg"), AtryPos[atryPosnum].transform.position, Quaternion.identity);// 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
+
+        TempAtryPos.GetComponent<Rigidbody>().AddForce(new Vector3(10,7,0),ForceMode.Impulse);
+
+    }
+
+    private void fireSelectColiderFind()
+    {//사격할 라인 선택
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit click;
+        if (Physics.Raycast(ray, out click, 100f))
+        {//충돌 물체로 부터 콜라이더 추출 하여 현재 콜라이더에 대입
+            if (click.transform.GetComponent<BoxCollider>())
+            {
+                switch (click.transform.gameObject.name)
+                {
+                    case "AtryPos1":
+                        //소환 끝나고 상태 플레이상태로 변화
+                        playerState = PlayerState.Play;
+                        ArtillerySpawn(charID, 0);
+                        Debug.Log("1번라인 포격");
+                        break;
+                    case "AtryPos2":
+                        //소환 끝나고 상태 플레이상태로 변화
+                        playerState = PlayerState.Play;
+                        ArtillerySpawn(charID, 1);
+                        Debug.Log("2번라인 포격");
+                        break;
+                    case "AtryPos3":
+                        //소환 끝나고 상태 플레이상태로 변화
+                        playerState = PlayerState.Play;
+                        ArtillerySpawn(charID, 2);
+                        Debug.Log("3번라인 포격");
+                        break;
+                }
+
+            }
+        }
+    }
+    
+    #endregion
 
     #region OutlineCtrl
     private IEnumerator OutlineCtrl()
@@ -205,6 +297,7 @@ public class GameCombatManager : MonoBehaviour
             {//box콜라이더 확인
                 if (click.transform.GetComponentInChildren<BoxCollider>().gameObject.transform.childCount != 0)
                 {//자식 오브젝트 확인
+                    previousSelectGameObj = selectGameObj;
                     selectGameObj = click.transform.GetComponentInChildren<BoxCollider>().gameObject.transform.GetChild(0).gameObject;//자식으로 되어 있는 오브젝트 연결
                     switch (selectGameObj.tag)
                     {
@@ -267,6 +360,7 @@ public class GameCombatManager : MonoBehaviour
     private void pigStop()
     {//애니메이션과 같은 돼지가 멈출 경우 실행할 코드들 
         playerState = PlayerState.Play;//플레이상태로 만듬
+        previousSelectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
         selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
         StopCoroutine(OutlineCtrl());//사이즈 제어 코루틴 정지
     }
@@ -292,6 +386,7 @@ public class GameCombatManager : MonoBehaviour
         int combatCount = playerInfo.GetCombatCount(charID);
         if (combatCount != 0)
         {//개체수가 존재할 경우
+            Debug.Log("spawn");
             Instantiate(Resources.Load<GameObject>(charID + "GameObj"), Line[lineNum].transform.position, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
             //소환하고 적용할 코드
             combatCount--;//한번 클릭마다 개체 하나식 제거
@@ -306,7 +401,7 @@ public class GameCombatManager : MonoBehaviour
     
     }
 
-    public void DeploySelect()
+    public void DeploySelectColiderFind()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit click;

@@ -17,6 +17,8 @@ TagManager:
   - Slot5
   - Pig
   - Line
+  - AtryPos
+  - Enemy
   layers:
   - Default
   - TransparentFX

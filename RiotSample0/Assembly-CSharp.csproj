@@ -69,7 +69,7 @@
     <Compile Include="Assets\OutlineEffect\LinkedSet.cs" />
     <Compile Include="Assets\OutlineEffect\Outline.cs" />
     <Compile Include="Assets\OutlineEffect\OutlineEffect.cs" />
-    <Compile Include="Assets\Scripts\ButtonClick.cs" />
+    <Compile Include="Assets\Scripts\Animal\Cow.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\EnemySniper.cs" />
     <Compile Include="Assets\Scripts\FlagMovement.cs" />
@@ -80,9 +80,10 @@
     <Compile Include="Assets\Scripts\GameObjMoveTestStartSetting.cs" />
     <Compile Include="Assets\Scripts\Moveright.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
-    <Compile Include="Assets\Scripts\ScrollbarCount.cs" />
-    <Compile Include="Assets\Scripts\SimpleTextChanger.cs" />
-    <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonClick.cs" />
+    <Compile Include="Assets\Scripts\UI\ScrollbarCount.cs" />
+    <Compile Include="Assets\Scripts\UI\SimpleTextChanger.cs" />
+    <Compile Include="Assets\Scripts\UI\SpriteOutline.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\OutlineEffect\Resources\OutlineShader.shader" />
