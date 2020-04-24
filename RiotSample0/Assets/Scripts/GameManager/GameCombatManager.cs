@@ -36,6 +36,11 @@ public class GameCombatManager : MonoBehaviour
     private string buttonName;//버튼의 이름
     private int charID;//캐릭터 id
     private string slotNum;//슬롯 숫자
+    private int selectLine;//돼지가 있는 라인
+
+    //현재 입력된 키
+    private KeyCode inputValue;
+    private bool isCoroutinRunning=false;//입력 중복을 막기 위한 함수
 
     //outline관련변수
     private bool outlineSizeUP;
@@ -45,12 +50,15 @@ public class GameCombatManager : MonoBehaviour
     //과거의 선택 위치
     [SerializeField]
     private Collider PreviousClickTrans;
+    
     //현재 클릭 위치
     [SerializeField]
     private Collider CurrentClickTrans;
+    
     //클릭한 위치의 게임 오브젝트
     private GameObject previousSelectGameObj;
     private GameObject selectGameObj;
+
     //땅에 파붙히지 않기 위한 변수
     private Vector3 BasicPos = new Vector3(0, 1.2f, 0);
 
@@ -102,6 +110,22 @@ public class GameCombatManager : MonoBehaviour
 
     private void Update()//플레이어의 입력을 받기위한 업데이트
     {
+        foreach (KeyCode keyname in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (KeyCode.Alpha0 <= keyname && keyname <= KeyCode.Alpha6)
+            {
+                if (Input.GetKey(keyname))
+                {
+                    inputValue = keyname;
+                    if(inputValue>=KeyCode.Alpha1&&inputValue<=KeyCode.Alpha6)
+                    {//키값이 숫자1~6까지일 경우 실행
+                        StartCoroutine(InputCoolTime());
+                    }
+                }
+            }
+        }//키입력
+
+        selectLineCheck();
         Debug.Log(playerState);
         if (Input.GetMouseButtonDown(0))
         {//마우스 클릭시
@@ -351,6 +375,23 @@ public class GameCombatManager : MonoBehaviour
         CurrentClickTrans = null;
     }
 
+    private void selectLineCheck()
+    {//돼지가 배치된 라인 확인용
+        GameObject PigObj = GameObject.FindGameObjectWithTag("Pig");
+        GameObject selectLineObj = PigObj.transform.parent.gameObject;
+        switch (selectLineObj.name)
+        {
+            case "Pig1*1":
+                selectLine = 1;
+                break;
+            case "Pig2*1":
+                selectLine = 2;
+                break;
+            case "Pig3*1":
+                selectLine = 3;
+                break;
+        }
+    }
 
     private void pigMove()
     {//애니메이션과 같은 돼지가 움직일 경우 실행할 코드들 
@@ -364,6 +405,9 @@ public class GameCombatManager : MonoBehaviour
         selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
         StopCoroutine(OutlineCtrl());//사이즈 제어 코루틴 정지
     }
+
+
+
     #endregion
 
     #region DeployFuncGroup
@@ -381,12 +425,58 @@ public class GameCombatManager : MonoBehaviour
 
     }
 
+    public void InputSlotNum()
+    {//숫자 입력으로 소환
+        switch (inputValue)
+        {//입력값으로 소환객체 정하고 소환 돼지가 있는 위치에 소환
+            case KeyCode.Alpha1:
+                charID = PlayerPrefs.GetInt("Slot" + 0);/////////////////////////////////////////////char id 가 0으로 넘어옴 문제의 확인 필요
+                AnimalSpawn(charID, selectLine);
+                break;
+            case KeyCode.Alpha2:
+                charID = PlayerPrefs.GetInt("Slot" + 1);
+                AnimalSpawn(charID, selectLine);
+                break;
+            case KeyCode.Alpha3:
+                charID = PlayerPrefs.GetInt("Slot" + 2);
+                AnimalSpawn(charID, selectLine);
+                break;
+            case KeyCode.Alpha4:
+                charID = PlayerPrefs.GetInt("Slot" + 3);
+                AnimalSpawn(charID, selectLine);
+                break;
+            case KeyCode.Alpha5:
+                charID = PlayerPrefs.GetInt("Slot" + 4);
+                AnimalSpawn(charID, selectLine);
+                break;
+            case KeyCode.Alpha6:
+                charID = PlayerPrefs.GetInt("Slot" + 5);
+                AnimalSpawn(charID, selectLine);
+                break;
+              default:
+                  break;
+        }
+    }
+
+    private IEnumerator InputCoolTime()
+    {
+        if (isCoroutinRunning == false)
+        {
+            isCoroutinRunning = true;
+            InputSlotNum();
+            yield return new WaitForSeconds(1.5f);
+            isCoroutinRunning = false;
+        }
+        StopCoroutine(InputCoolTime());
+        yield return null;
+    }
+
     public void AnimalSpawn(int charID, int lineNum)
     {//동물 스폰
         int combatCount = playerInfo.GetCombatCount(charID);
         if (combatCount != 0)
         {//개체수가 존재할 경우
-            Debug.Log("spawn");
+            Debug.LogFormat("spawn{0}",charID);
             Instantiate(Resources.Load<GameObject>(charID + "GameObj"), Line[lineNum].transform.position, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
             //소환하고 적용할 코드
             combatCount--;//한번 클릭마다 개체 하나식 제거
@@ -458,5 +548,6 @@ public class GameCombatManager : MonoBehaviour
         }
         yield return null;
     }
+
     #endregion
 }

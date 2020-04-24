@@ -125,7 +125,7 @@ public class Cow : MonoBehaviour
     {
         //임시 변수 추후에 교체해야함
         float MoveSpeed=1f;
-        float DashSpeed=10f;
+        float DashSpeed=20f;
         //
         //돌진 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed * DashSpeed,0,0) * Time.deltaTime;//이동 
