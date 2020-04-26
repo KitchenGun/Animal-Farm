@@ -179,6 +179,7 @@ public class ButtonClick : MonoBehaviour
             {//초기화 된 슬롯의 값은 무조건 0
                 //playerInfo.SetSlotChar(slotNum, charID);                            문제를 모르겠음//
                 PlayerPrefs.SetInt(("Slot" + slotNum), charID);//슬롯에 값을 저장
+                Debug.Log(PlayerPrefs.GetInt("Slot" + slotNum));
                 currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);//여분의 슬롯에 이미지
                 currentSlotObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(imageName);//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능
                 isSlotset = true;

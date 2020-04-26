@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameLoadManager : MonoBehaviour
 {
     private ButtonClick buttonClick;
+    private GameCombatManager gameCombatManager;
 
     private GameObject slot;
     private int slotNum;//슬롯의 숫자
@@ -15,6 +16,7 @@ public class GameLoadManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        gameCombatManager = this.gameObject.GetComponent<GameCombatManager>();
         InGameSlotSetting();//슬롯에 이미지와 전투가능 개체수 띄우기
     }
 
@@ -23,7 +25,7 @@ public class GameLoadManager : MonoBehaviour
     {
         for (slotNum = 0; slotNum < 6; slotNum++) 
         {
-            slotID= PlayerPrefs.GetInt("Slot" + slotNum);//id에 playerinfo에서 가져온 정보 넣기
+            slotID = PlayerPrefs.GetInt("Slot" + slotNum);//id에 playerinfo에서 가져온 정보 넣기
             CombatCount = PlayerPrefs.GetInt(slotID + "CombatCount");//id를 이용하여 전투 가능 개체 정보를 불러오기
             slot = GameObject.FindGameObjectWithTag("Slot"+slotNum);//태그를 이용해서 물건 찾기
             if(slotID==0)
@@ -34,6 +36,7 @@ public class GameLoadManager : MonoBehaviour
             {//슬롯안에 저장된 값이 있을 경우
                 slot.GetComponent<Image>().sprite = Resources.Load<Sprite>(slotID.ToString());//이미지변경
                 slot.GetComponentInChildren<Text>().text = CombatCount.ToString();//전투가능 개체 띄우기
+                gameCombatManager.SendMessage("SetSlotNumID", slotID);
             }
         }
     }
