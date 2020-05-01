@@ -50,6 +50,11 @@ public class GameCombatManager : MonoBehaviour
 
     /// <summary>
     /// 이동에 관련된 변수들
+    /// 
+    //돼지 이동 관련 변수
+
+    private GameObject PigObj;
+    private GameObject selectLineObj;
     //과거의 선택 위치
     [SerializeField]
     private Collider PreviousClickTrans;
@@ -114,6 +119,17 @@ public class GameCombatManager : MonoBehaviour
 
     private void Update()//플레이어의 입력을 받기위한 업데이트
     {
+        #region MoveInput
+        if (Input.GetKeyDown(KeyCode.W)&&isMove==false)
+        {
+            pigMoveUp();
+        }
+        if (Input.GetKeyDown(KeyCode.S)&&isMove==false)
+        {
+            pigMoveDown();
+        }
+        #endregion
+        #region SlotInput
         foreach (KeyCode keyname in Enum.GetValues(typeof(KeyCode)))
         {
             if (KeyCode.Alpha0 <= keyname && keyname <= KeyCode.Alpha6)
@@ -128,8 +144,10 @@ public class GameCombatManager : MonoBehaviour
                 }
             }
         }
+        #endregion
+        #region Artyinput
         //포격 키입력
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ArtyPos[selectLine].SetActive(true);
         }
@@ -144,8 +162,9 @@ public class GameCombatManager : MonoBehaviour
         {
             StartCoroutine(InputFireCoolTime());
         }
-
+        #endregion
         Debug.Log(playerState);
+        #region ClickMove
         if (Input.GetMouseButtonDown(0))
         {//마우스 클릭시
             if (!EventSystem.current.currentSelectedGameObject)
@@ -171,7 +190,10 @@ public class GameCombatManager : MonoBehaviour
         }
         if (isMove)
         {//움직이는 코드
-            selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;//아웃 라인 제거
+            if (selectGameObj != null)
+            {
+                selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;//아웃 라인 제거
+            }
             if (playerState == PlayerState.Select)
             {//선택 상태에서 움직일 경우 플레이상태로 변경
                 playerState = PlayerState.Play;
@@ -184,6 +206,8 @@ public class GameCombatManager : MonoBehaviour
             reverse = false;
             MoveChar(CurrentClickTrans, PreviousClickTrans.transform.GetChild(0).gameObject, reverse);
         }
+        #endregion
+        
     }
 
     public int ListGameObjectSort(GameObject a, GameObject b)
@@ -420,7 +444,8 @@ public class GameCombatManager : MonoBehaviour
 
     public void MoveChar(Collider afterTrans, GameObject Animal, bool reverse)
     {//캐릭터 이동
-        Animal.transform.position = Vector3.MoveTowards(Animal.transform.position, afterTrans.transform.position, 20 * Time.deltaTime);
+        Animal.transform.position = 
+            Vector3.MoveTowards(Animal.transform.position, afterTrans.transform.position, 20 * Time.deltaTime);
         //이동속도 조절을 timedeltatime에서 조절
         if (Animal.transform.position == afterTrans.transform.position)
         {
@@ -442,28 +467,59 @@ public class GameCombatManager : MonoBehaviour
 
     private void selectLineCheck()
     {//돼지가 배치된 라인 확인용
-        GameObject PigObj = GameObject.FindGameObjectWithTag("Pig");
-        GameObject selectLineObj = PigObj.transform.parent.gameObject;
+        PigObj = GameObject.FindGameObjectWithTag("Pig");
+        selectLineObj = PigObj.transform.parent.gameObject;
         switch (selectLineObj.name)
         {
-            case "Pig1*1":
+            case "Pig0*1":
                 selectLine = 0;
                 Line[0].SetActive(true);
                 Line[1].SetActive(false);
                 Line[2].SetActive(false);
                 break;
-            case "Pig2*1":
+            case "Pig1*1":
                 selectLine = 1;
                 Line[0].SetActive(false);
                 Line[1].SetActive(true);
                 Line[2].SetActive(false);
                 break;
-            case "Pig3*1":
+            case "Pig2*1":
                 selectLine = 2;
                 Line[0].SetActive(false);
                 Line[1].SetActive(false);
                 Line[2].SetActive(true);
                 break;
+        }
+    }
+
+    private void pigMoveUp()
+    {
+        if(selectLine<=2&&selectLine>0)//올라가는 함수
+        {
+            selectLineCheck();
+            Debug.Log(selectLine);
+            string currentPosObjName = "Pig"+(selectLine-1)+"*1";
+            string previousPosObjName = "Pig" + (selectLine) + "*1";
+            GameObject currentPosObj = GameObject.Find(currentPosObjName);
+            GameObject previousPosObj= GameObject.Find(previousPosObjName);
+            PreviousClickTrans = previousPosObj.GetComponent<BoxCollider>();
+            CurrentClickTrans = currentPosObj.GetComponent<BoxCollider>();
+            isMove = true;
+        }
+    }
+    private void pigMoveDown()
+    {
+        if(selectLine < 2 && selectLine >= 0)
+        {
+            selectLineCheck();
+            Debug.Log(selectLine);
+            string currentPosObjName = "Pig" + (selectLine+1) + "*1";
+            string previousPosObjName = "Pig" + (selectLine) + "*1";
+            GameObject currentPosObj = GameObject.Find(currentPosObjName);
+            GameObject previousPosObj = GameObject.Find(previousPosObjName);
+            PreviousClickTrans = previousPosObj.GetComponent<BoxCollider>();
+            CurrentClickTrans = currentPosObj.GetComponent<BoxCollider>();
+            isMove = true;
         }
     }
 
@@ -564,12 +620,24 @@ public class GameCombatManager : MonoBehaviour
         if (charID != 0)
         {//캐릭터id가 존재할경우
             int combatCount = playerInfo.GetCombatCount(charID);
+            #region Random
+            //랜덤위치용 숫자 받아오기
+            int randomPosValue = RandomNum()/3;
+            int plusminus = RandomNum() % 2;
+            if(plusminus==0)
+            {
+                plusminus = -1;
+            }
+            //랜덤위치 지정
+            Vector3 randomPos = new Vector3(0, 0, plusminus * randomPosValue * 0.2f);
+            randomPos = Line[lineNum].transform.position + randomPos;
+            #endregion
             if (combatCount != 0)
             {//개체수가 존재할 경우
                 Debug.LogFormat("spawn{0}", charID);
-                Instantiate(Resources.Load<GameObject>(charID + "GameObj"), Line[lineNum].transform.position, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
+
+                Instantiate(Resources.Load<GameObject>(charID + "GameObj"), randomPos, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
                 //소환하고 적용할 코드
-                Debug.Log(Line[lineNum]);
                 combatCount--;//한번 클릭마다 개체 하나식 제거
                 playerInfo.SetCombatCount(charID, combatCount);//제거한 후 전투가능 개체수를 수정
                 gameLoadManager.CombatCount = combatCount;
@@ -618,9 +686,14 @@ public class GameCombatManager : MonoBehaviour
 
     public void SetSlotNumID(int id = 0)
     {//id를 받아서 슬롯에 넣는 역할
-        Debug.Log(id);
         slotNumID[tempSlotNum] = id;
         tempSlotNum++;
+    }
+
+    public int RandomNum()//0부터 10까지 랜덤 수 나옴 
+    {
+        int randomNum = UnityEngine.Random.Range(0, 10);
+        return randomNum;
     }
     #endregion
 
