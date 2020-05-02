@@ -70,6 +70,7 @@
     <Compile Include="Assets\OutlineEffect\Outline.cs" />
     <Compile Include="Assets\OutlineEffect\OutlineEffect.cs" />
     <Compile Include="Assets\Scripts\Animal\Artillery.cs" />
+    <Compile Include="Assets\Scripts\Animal\BirdAirStrike.cs" />
     <Compile Include="Assets\Scripts\Animal\Cow.cs" />
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />

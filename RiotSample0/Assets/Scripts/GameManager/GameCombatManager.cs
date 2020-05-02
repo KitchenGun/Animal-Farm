@@ -34,6 +34,9 @@ public class GameCombatManager : MonoBehaviour
     private bool isArtyCoroutinRunning = false;
     public int pressSpaceBar=0;//스페이스바를 누른시간
 
+    //공습 관련 변수
+    private GameObject airStrikeBird;//폭탄을 떨굴 새 오브젝트 변수
+
     //배치 관련 변수
     private string buttonName;//버튼의 이름
     private int charID;//캐릭터 id
@@ -71,8 +74,8 @@ public class GameCombatManager : MonoBehaviour
     private Vector3 BasicPos = new Vector3(0, 1.2f, 0);
 
     //움직일수 있는지 확인용
-    private bool isMove;
-    private bool reverse;
+    public bool isMove;
+    public bool reverse;
 
     public void Start()
     {
@@ -96,7 +99,9 @@ public class GameCombatManager : MonoBehaviour
         }
         selectLineCheck();//돼지의 시작 위치확인
         #endregion
-
+        #region
+        airStrikeBird = Resources.Load<GameObject>("Bird");
+        #endregion
         #region ArtyPosFindCode
         ArtyPos = new List<GameObject>(GameObject.FindGameObjectsWithTag("ArtyPos"));
         foreach (GameObject ArtyPosObj in ArtyPos)
@@ -345,7 +350,23 @@ public class GameCombatManager : MonoBehaviour
             }
         }
     }
-    
+
+    #endregion
+
+    #region AirStrike
+    public void AirStrike()
+    {
+        if (GameObject.FindGameObjectWithTag("AirStrikeBird")==null)
+        {
+            ////////////코루틴문으로 쿨타임 제작 현재는 쿨타임 없음
+            foreach (GameObject pos in ArtyPos)
+            {
+                Vector3 flyPos = pos.transform.position + new Vector3(-10, 5, 0);
+                Instantiate(airStrikeBird, flyPos, Quaternion.Euler(0, 0, 90));
+            }
+        }
+    }
+
     #endregion
 
     #region OutlineCtrl
@@ -388,12 +409,7 @@ public class GameCombatManager : MonoBehaviour
                 if (click.transform.GetComponentInChildren<BoxCollider>().gameObject.transform.childCount != 0)
                 {//자식 오브젝트 확인
                     selectGameObj = click.transform.GetComponentInChildren<BoxCollider>().gameObject.transform.GetChild(0).gameObject;//자식으로 되어 있는 오브젝트 연결
-                    switch (selectGameObj.tag)
-                    {
-                        case "Pig":
-                            pigMove();
-                            break;
-                    }
+               
                 }
                 ColiderCheck(click.transform.GetComponent<BoxCollider>());//콜라이더 상태 체크
             }
@@ -411,13 +427,7 @@ public class GameCombatManager : MonoBehaviour
                 {//자식 오브젝트 확인
                     previousSelectGameObj = selectGameObj;
                     selectGameObj = click.transform.GetComponentInChildren<BoxCollider>().gameObject.transform.GetChild(0).gameObject;//자식으로 되어 있는 오브젝트 연결
-                    switch (selectGameObj.tag)
-                    {
-                        case "Pig":
-                            pigStop();
-                            break;
-
-                    }
+                    
                 }
                 ColiderCheck(click.transform.GetComponent<BoxCollider>());//콜라이더 상태 체크
             }
@@ -505,6 +515,7 @@ public class GameCombatManager : MonoBehaviour
             PreviousClickTrans = previousPosObj.GetComponent<BoxCollider>();
             CurrentClickTrans = currentPosObj.GetComponent<BoxCollider>();
             isMove = true;
+
         }
     }
     private void pigMoveDown()
@@ -525,12 +536,10 @@ public class GameCombatManager : MonoBehaviour
 
     private void pigMove()
     {//애니메이션과 같은 돼지가 움직일 경우 실행할 코드들 
-        playerState = PlayerState.Select;//선택상태로 만듬
         StartCoroutine(OutlineCtrl());//사이즈 제어 코루틴 실행
     }
     private void pigStop()
     {//애니메이션과 같은 돼지가 멈출 경우 실행할 코드들 
-        playerState = PlayerState.Play;//플레이상태로 만듬
         previousSelectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
         selectGameObj.GetComponent<SpriteOutline>().outlineSize = 0;
         StopCoroutine(OutlineCtrl());//사이즈 제어 코루틴 정지
