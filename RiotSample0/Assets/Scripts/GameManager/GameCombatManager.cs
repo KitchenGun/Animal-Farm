@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+public class RetreatArrayDic
+{
+    string CharID;
+    int ArrayNum=0;
+    int HP;
+}
 
 
 public enum PlayerState
@@ -45,6 +51,11 @@ public class GameCombatManager : MonoBehaviour
     private int[] slotNumID=new int[6];//슬롯에 저장되어있는 id
     private int selectLine;//돼지가 있는 라인
     private bool isDeployCoroutinRunning = false;//입력 중복을 막기 위한 변수
+    
+    //후퇴관련
+    //private Dictionary<string,int> Animal
+    
+        
     //현재 입력된 키
     private KeyCode inputValue;
 
@@ -168,7 +179,6 @@ public class GameCombatManager : MonoBehaviour
             StartCoroutine(InputFireCoolTime());
         }
         #endregion
-        Debug.Log(playerState);
         #region ClickMove
         if (Input.GetMouseButtonDown(0))
         {//마우스 클릭시
@@ -547,6 +557,19 @@ public class GameCombatManager : MonoBehaviour
 
 
 
+    #endregion
+
+    #region AnimalRetreat
+    public void Retreat()
+    {//후퇴 명령버튼 클릭시 실행
+        GameObject[] retreatAnimal = GameObject.FindGameObjectsWithTag("Friendly");
+        foreach(GameObject animal in retreatAnimal)
+        {
+            animal.GetComponent<Animator>().SetBool("",true);//애니메이션 접근 해서 후퇴기능 키기
+            animal.SendMessage("Retreat");
+        }
+    }
+    
     #endregion
 
     #region DeployFuncGroup
