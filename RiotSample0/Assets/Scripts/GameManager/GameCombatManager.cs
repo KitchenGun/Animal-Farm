@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class RetreatArrayDic
-{
+{//후퇴한 동물 정보 저장용 클래스
     string CharID;
     int ArrayNum=0;
     int HP;
@@ -29,6 +29,7 @@ public class GameCombatManager : MonoBehaviour
     public PlayerState playerState;//플레이어상태
 
     //public static GameObject[] Line;//배치 라인 오브젝트 
+    public static GameCombatManager GM;
     public static List<GameObject> Line = new List<GameObject>();
     private GameObject mainLine;
     private GameObject compareLine;
@@ -62,11 +63,8 @@ public class GameCombatManager : MonoBehaviour
     //outline관련변수
     private bool outlineSizeUP;
 
-    /// <summary>
-    /// 이동에 관련된 변수들
-    /// 
+    
     //돼지 이동 관련 변수
-
     private GameObject PigObj;
     private GameObject selectLineObj;
     //과거의 선택 위치
@@ -92,7 +90,7 @@ public class GameCombatManager : MonoBehaviour
     {
         playerState = PlayerState.Play;/////////////////////임시 나중에 Hold로 교체가 필요함
         StartCoroutine(GameTimeSet());//게임 타임 설정
-        
+        GM = this.gameObject.GetComponent<GameCombatManager>();
         #region lineFindCode
         Line = new List<GameObject> (GameObject.FindGameObjectsWithTag("Line"));
         foreach (GameObject LineGameObj in Line)
@@ -569,6 +567,16 @@ public class GameCombatManager : MonoBehaviour
             animal.SendMessage("Retreat");
         }
     }
+    public void AnimalRelocation(int charID)
+    {
+
+        int combatCount = playerInfo.GetCombatCount(charID);
+        combatCount++;
+        playerInfo.SetCombatCount(charID, combatCount);//객체수 수정
+        gameLoadManager.CombatCount = combatCount;
+        gameLoadManager.SendMessage("RelocationCharCountSet", charID);//아이디 보내서 슬롯 메뉴에서 숫자 늘리기
+    }
+    
     
     #endregion
 
@@ -668,7 +676,7 @@ public class GameCombatManager : MonoBehaviour
             {//개체수가 존재할 경우
                 Debug.LogFormat("spawn{0}", charID);
 
-                Instantiate(Resources.Load<GameObject>(charID + "GameObj"), randomPos, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
+                Instantiate(Resources.Load<GameObject>(charID.ToString() + "GameObj"), randomPos, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
                 //소환하고 적용할 코드
                 combatCount--;//한번 클릭마다 개체 하나식 제거
                 playerInfo.SetCombatCount(charID, combatCount);//제거한 후 전투가능 개체수를 수정

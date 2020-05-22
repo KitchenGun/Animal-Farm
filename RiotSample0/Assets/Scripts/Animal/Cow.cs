@@ -8,15 +8,21 @@ using UnityEngine.UI;
 
 public class Cow : Animal
 {
-    
+    private GameCombatManager GM;
+
     private float HP=5f;
     //애니메이션
     [SerializeField]
     private Animator CowAnimator;
     //충돌 관련 변수
     private GameObject EnemyObj;
+
+
     void Start()
     {
+        GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();
+        //현재 스크립트의 이름 설정
+        AnimalID = 3;
         thisAnimalState = AnimalState.Dash;
         StartCoroutine(CowStateCheck());//소의 상태체크 코루틴 실행
     }
@@ -24,59 +30,56 @@ public class Cow : Animal
     private void OnTriggerStay(Collider other)
     {
         HPCheck();//체력체크
-        Debug.Log(other.transform.gameObject.tag);
-        switch (other.transform.gameObject.tag)
+        if (other.transform.gameObject.tag != "Untagged")
         {
-            case"Enemy":
-                Debug.Log("hit");
-                EnemyObj = other.transform.gameObject;
-                switch (thisAnimalState)
-                {
-                    case AnimalState.Idle://대기
-                        break;
-                    case AnimalState.Move://이동
-                        break;
-                    case AnimalState.Dash://돌진
-                        DashHit();
-                        //EnemyObj.sendmessage();
-                        break;
-                    case AnimalState.Attack://공격
-                        break;
-                    case AnimalState.Stun://기절
-                        break;
-                    case AnimalState.Retreat://후퇴
-                        break;
-                    case AnimalState.Die://사망
-                        Die();
-                        break;
-                }
-                break;
-            case"RetreatPoint":
-                Debug.Log("RetreatPoint");
-                switch (thisAnimalState)
-                {
-                    case AnimalState.Idle://대기
-                        break;
-                    case AnimalState.Move://이동
-                        break;
-                    case AnimalState.Dash://돌진
-                        break;
-                    case AnimalState.Attack://공격
-                        break;
-                    case AnimalState.Stun://기절
-                        break;
-                    case AnimalState.Retreat://후퇴
-
-                        Destroy(this.gameObject);
-                        break;
-                    case AnimalState.Die://사망
-                        Die();
-                        break;
-                }
-
-                break;
+            switch (other.transform.gameObject.tag)
+            {
+                case "Enemy":
+                    Debug.Log("hit");
+                    EnemyObj = other.transform.gameObject;
+                    switch (thisAnimalState)
+                    {
+                        case AnimalState.Move://이동
+                            break;
+                        case AnimalState.Dash://돌진
+                            DashHit();
+                            //EnemyObj.sendmessage();
+                            break;
+                        case AnimalState.Attack://공격
+                            break;
+                        case AnimalState.Stun://기절
+                            break;
+                        case AnimalState.Retreat://후퇴
+                            break;
+                        case AnimalState.Die://사망
+                            Destroy(this.gameObject.GetComponent<SphereCollider>());//충돌체 제거
+                            break;
+                    }
+                    break;
+                case "RetreatPoint":
+                    switch (thisAnimalState)
+                    {
+                        case AnimalState.Idle://대기
+                            break;
+                        case AnimalState.Move://이동
+                            break;
+                        case AnimalState.Dash://돌진
+                            break;
+                        case AnimalState.Attack://공격
+                            break;
+                        case AnimalState.Stun://기절
+                            break;
+                        case AnimalState.Retreat://후퇴
+                            GM.AnimalRelocation(AnimalID);
+                            Destroy(this.gameObject);
+                            break;
+                        case AnimalState.Die://사망
+                            Die();/////////////?스크립트 점검필요
+                            break;
+                    }
+                    break;
+            }
         }
-        
     }
 
     private IEnumerator CowStateCheck()
@@ -101,15 +104,15 @@ public class Cow : Animal
                 case AnimalState.Stun://기절
                     break;
                 case AnimalState.Retreat://후퇴
-                    Move(-30);
+                    Move(-5);
                     break;
                 case AnimalState.Die://사망
                     Die();
+                    yield return new WaitForSeconds(2.0f);//중복 실행 방지용
                     break;
 
             }
-
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
     }
 
@@ -139,7 +142,7 @@ public class Cow : Animal
     {
         //임시 변수 추후에 교체해야함
         float MoveSpeed=1f;
-        float DashSpeed=20f;
+        float DashSpeed=10f;
         //
         //돌진 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed * DashSpeed,0,0) * Time.deltaTime;//이동 
@@ -159,7 +162,8 @@ public class Cow : Animal
     public void Retreat()
     {//후퇴버튼 클릭시 실행 함수
         thisAnimalState=AnimalState.Retreat;
-        this.transform.GetComponent<Renderer>().material.mainTextureScale = new Vector2(-1, 1);
+        //스프라이트 뒤집기
+        //this.transform.GetComponent<Renderer>().material.mainTextureScale = new Vector2(-1, 1);
     }
     #endregion
 

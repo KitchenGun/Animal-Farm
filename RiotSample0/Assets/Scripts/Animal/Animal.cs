@@ -18,5 +18,7 @@ public class Animal : MonoBehaviour
     }
     //상태
     protected AnimalState thisAnimalState;
+    //동물이름
+    protected int AnimalID;
 
 }
