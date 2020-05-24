@@ -10,6 +10,10 @@ public class RetreatArrayDic
     string CharID;
     int ArrayNum=0;
     int HP;
+    public RetreatArrayDic(string charID,int arrayNum,int hp)
+    {
+
+    }
 }
 
 
