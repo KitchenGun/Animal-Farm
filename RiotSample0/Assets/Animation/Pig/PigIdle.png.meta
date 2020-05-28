@@ -1,25 +1,43 @@
 fileFormatVersion: 2
-guid: 963385c73e89c7044a97ef465e178312
+guid: d603eb4fc46831e4280d29719485dce1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3743957659742367504
-    second: Move_0
+      213: -3002416176598437159
+    second: "\uB3FC\uC9C0\uB300\uAE30_0"
   - first:
-      213: 8405476814967859603
-    second: Move_1
+      213: 5513654214596249770
+    second: "\uB3FC\uC9C0\uB300\uAE30_1"
   - first:
-      213: -5086530901905536447
-    second: Move_2
+      213: 5955533395234204535
+    second: "\uB3FC\uC9C0\uB300\uAE30_2"
   - first:
-      213: 1521079245874940812
-    second: Move_3
+      213: 8506911759314827570
+    second: "\uB3FC\uC9C0\uB300\uAE30_3"
   - first:
-      213: 4010896587680814743
-    second: Move_4
+      213: 7828971651594739587
+    second: "\uB3FC\uC9C0\uB300\uAE30_4"
   - first:
-      213: 8831429847189535439
-    second: Move_5
+      213: -7951774309957250125
+    second: "\uB3FC\uC9C0\uB300\uAE30_5"
+  - first:
+      213: 5278845714139566686
+    second: PigIdle_0
+  - first:
+      213: 1810952184561776336
+    second: PigIdle_1
+  - first:
+      213: 7054726768176094780
+    second: PigIdle_2
+  - first:
+      213: 1347248059356237574
+    second: PigIdle_3
+  - first:
+      213: 170768838548272067
+    second: PigIdle_4
+  - first:
+      213: 3440795754386849297
+    second: PigIdle_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -63,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -78,7 +96,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -90,7 +108,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -102,7 +120,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -116,54 +134,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Move_0
+      name: PigIdle_0
       rect:
         serializedVersion: 2
         x: 19
         y: 0
         width: 26
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6edf6130b0cd9784385084694df6fe14
-      internalID: 3743957659742367504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Move_1
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 0
-        width: 27
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c1ed156594399074fa3fb945661100f8
-      internalID: 8405476814967859603
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Move_2
-      rect:
-        serializedVersion: 2
-        x: 145
-        y: 0
-        width: 28
         height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -172,20 +148,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64bda8805f5a72a49be27e78a65f9891
-      internalID: -5086530901905536447
+      spriteID: 4babebfbaf285e040afca0a0ff8f5727
+      internalID: 5278845714139566686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Move_3
+      name: PigIdle_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 0
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74d24602d9bdad41b5d9aa41b531d26
+      internalID: 1810952184561776336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PigIdle_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 27
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e09cfb8e8f8727e47b7e6d017a0a4ee9
+      internalID: 7054726768176094780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PigIdle_3
       rect:
         serializedVersion: 2
         x: 211
         y: 0
-        width: 26
-        height: 27
+        width: 27
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +211,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0a0b7347c0814e46ba0b926d3dd8a8f
-      internalID: 1521079245874940812
+      spriteID: 1f2676b6c3a947246b82ee9edf3572c7
+      internalID: 1347248059356237574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Move_4
+      name: PigIdle_4
       rect:
         serializedVersion: 2
         x: 275
         y: 0
-        width: 26
-        height: 27
+        width: 27
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +232,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: baa87d42154e0314c8d737f1d4756904
-      internalID: 4010896587680814743
+      spriteID: bcdb6f69a38d3b64ea57866a05b27115
+      internalID: 170768838548272067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Move_5
+      name: PigIdle_5
       rect:
         serializedVersion: 2
-        x: 338
+        x: 339
         y: 0
         width: 27
-        height: 28
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,8 +253,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cb70cee41c77ad41b4ea9e72627cd5c
-      internalID: 8831429847189535439
+      spriteID: 64f03fcc47d6c2144868673832820534
+      internalID: 3440795754386849297
       vertices: []
       indices: 
       edges: []
@@ -244,7 +262,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c4191bf338f50ca49839792cc3403b4b
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
