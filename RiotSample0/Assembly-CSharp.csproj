@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameCombatManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameLoadManager.cs" />
+    <Compile Include="Assets\Scripts\GameManager\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\GameManager\PlayerInfoSet.cs" />
     <Compile Include="Assets\Scripts\GameObjMoveTestStartSetting.cs" />
     <Compile Include="Assets\Scripts\Moveright.cs" />
