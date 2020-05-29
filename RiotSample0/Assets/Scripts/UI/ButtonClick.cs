@@ -13,7 +13,10 @@ public enum SceneName
 
 public class ButtonClick : MonoBehaviour
 {
-    public PlayerInfo playerInfo;
+    [SerializeField]
+    private PlayerInfo playerInfo;
+    [SerializeField]
+    private PlayerCtrl playerCtrl;
     public SceneName sceneName;
 
     private static GameObject houseUI;//정적 변수 SetActive때문에
@@ -243,7 +246,9 @@ public class ButtonClick : MonoBehaviour
     #region BarnUIFuncGroup
     public void BarnButton()
     {//헛간 버튼을 클릭할 경우 사용할 함수
-
+        barnUI.SetActive(true);//패널 활성화
+        closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
+        //캐릭터 패널 확인하기
     }
     #endregion
 
@@ -261,6 +266,7 @@ public class ButtonClick : MonoBehaviour
 
     public void ClosePanelButton()
     {//모든 패널 비활성화
+        playerCtrl.PanelDown();
         houseUI.SetActive(false);
         gateUI.SetActive(false);
         barnUI.SetActive(false);
