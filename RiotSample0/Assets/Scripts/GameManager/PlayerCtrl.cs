@@ -23,6 +23,8 @@ public class PlayerCtrl : MonoBehaviour
     //패널 확인
     [SerializeField]
     private ButtonClick buttonClick;
+    //플레이어 스프라이트 제어
+    private SpriteRenderer sprite;
     //속도
     [SerializeField]
     private float Speed = 5f;
@@ -34,7 +36,8 @@ public class PlayerCtrl : MonoBehaviour
     private void Start()
     {
         //초기화
-        farmPlayerState = FarmPlayerState.Idle;        
+        farmPlayerState = FarmPlayerState.Idle;
+        sprite = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,14 +48,17 @@ public class PlayerCtrl : MonoBehaviour
             case "HouseCollider":
                 farmPlayerState = FarmPlayerState.PanelUP;
                 buttonClick.HouseButton();
+                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
             case "GateCollider":
                 farmPlayerState = FarmPlayerState.PanelUP;
                 buttonClick.GateButton();
+                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
             case "BarnCollider":
                 farmPlayerState = FarmPlayerState.PanelUP;
                 buttonClick.BarnButton();
+                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
             default:
                 break;
@@ -64,6 +70,7 @@ public class PlayerCtrl : MonoBehaviour
         switch (farmPlayerState)
         {
             case FarmPlayerState.Idle://대기상태
+                //sprite.enabled = true;//스프라이트 켜기
                 vValue = Input.GetAxis("Vertical") * Speed * Time.deltaTime;
                 hValue = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
                 //이동확인
@@ -99,7 +106,10 @@ public class PlayerCtrl : MonoBehaviour
     #region Panel
     public void PanelDown()
     {//패널이 내려갈 경우 실행
+        //상태
         farmPlayerState = FarmPlayerState.Idle;
+        //이미지 투명화
+        sprite.color = new Vector4(255, 255, 255, 255);
     }
     #endregion
 
