@@ -14,8 +14,12 @@ public class Cow : Animal
     //애니메이션
     [SerializeField]
     private Animator CowAnimator;
+    //이동체크
+    private bool isMove;
+    private bool isDash;
     //충돌 관련 변수
     private GameObject EnemyObj;
+    
 
 
     void Start()
@@ -24,6 +28,8 @@ public class Cow : Animal
         //현재 스크립트의 이름 설정
         AnimalID = 3;
         thisAnimalState = AnimalState.Dash;
+        isMove = false;
+        isDash = true;
         StartCoroutine(CowStateCheck());//소의 상태체크 코루틴 실행
     }
 
@@ -34,8 +40,10 @@ public class Cow : Animal
         {
             switch (other.transform.gameObject.tag)
             {
-                case "Enemy":
-                    Debug.Log("hit");
+                case "Enemy"://적과 충돌시
+                    //이동 멈춤
+                    isMove = false;
+                    isDash = false;
                     EnemyObj = other.transform.gameObject;
                     switch (thisAnimalState)
                     {
@@ -52,11 +60,11 @@ public class Cow : Animal
                         case AnimalState.Retreat://후퇴
                             break;
                         case AnimalState.Die://사망
-                            Destroy(this.gameObject.GetComponent<SphereCollider>());//충돌체 제거
+                            //Destroy(this.gameObject.GetComponent<SphereCollider>());//충돌체 제거
                             break;
                     }
                     break;
-                case "RetreatPoint":
+                case "RetreatPoint": //후퇴위치
                     switch (thisAnimalState)
                     {
                         case AnimalState.Idle://대기
@@ -87,7 +95,8 @@ public class Cow : Animal
         while (thisAnimalState != AnimalState.Die)
         {//죽을때 까지 계속 
             HPCheck();//체력체크
-            Debug.Log(thisAnimalState);
+            CowAnimator.SetBool("isMove", isMove);//이동애니메이션 체크
+            CowAnimator.SetBool("isDash", isDash);//이동애니메이션 체크
             switch (thisAnimalState)
             {
                 case AnimalState.Idle://대기
@@ -131,28 +140,32 @@ public class Cow : Animal
     {
         //임시 변수 추후에 교체해야함
         //
+        //이동 
+        isMove = true;
         //이동 스크립트
-        this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;//이동 
-
+        this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
     }
     #endregion
 
     #region Dash
     private void Dash()
     {
+        //이동 
+        isDash = true;
         //임시 변수 추후에 교체해야함
         float MoveSpeed=1f;
         float DashSpeed=10f;
         //
         //돌진 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed * DashSpeed,0,0) * Time.deltaTime;//이동 
-
     }
 
     private void DashHit()
     {
         if (EnemyObj)
         {
+            //이동 
+            isDash = false;
             thisAnimalState = AnimalState.Attack;
         }
     }

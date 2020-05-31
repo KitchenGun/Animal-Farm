@@ -88,7 +88,7 @@ public class GameCombatManager : MonoBehaviour
 
     //움직일수 있는지 확인용
     public bool isMove;
-    public bool reverse;
+    private bool reverse;
 
     public void Start()
     {
@@ -519,7 +519,6 @@ public class GameCombatManager : MonoBehaviour
         if(selectLine<=2&&selectLine>0)//올라가는 함수
         {
             selectLineCheck();
-            Debug.Log(selectLine);
             string currentPosObjName = "Pig"+(selectLine-1)+"*1";
             string previousPosObjName = "Pig" + (selectLine) + "*1";
             GameObject currentPosObj = GameObject.Find(currentPosObjName);
@@ -535,7 +534,6 @@ public class GameCombatManager : MonoBehaviour
         if(selectLine < 2 && selectLine >= 0)
         {
             selectLineCheck();
-            Debug.Log(selectLine);
             string currentPosObjName = "Pig" + (selectLine+1) + "*1";
             string previousPosObjName = "Pig" + (selectLine) + "*1";
             GameObject currentPosObj = GameObject.Find(currentPosObjName);
@@ -567,13 +565,13 @@ public class GameCombatManager : MonoBehaviour
         GameObject[] retreatAnimal = GameObject.FindGameObjectsWithTag("Friendly");
         foreach(GameObject animal in retreatAnimal)
         {
-            animal.GetComponent<Animator>().SetBool("",true);//애니메이션 접근 해서 후퇴기능 키기
+            animal.GetComponent<Animator>().SetBool("",true);//애니메이션 접근 해서 후퇴기능 키기//아직 없음
             animal.SendMessage("Retreat");
         }
     }
     public void AnimalRelocation(int charID)
     {
-
+        //슬롯에 재배치
         int combatCount = playerInfo.GetCombatCount(charID);
         combatCount++;
         playerInfo.SetCombatCount(charID, combatCount);//객체수 수정
@@ -679,7 +677,7 @@ public class GameCombatManager : MonoBehaviour
             if (combatCount != 0)
             {//개체수가 존재할 경우
                 Debug.LogFormat("spawn{0}", charID);
-
+                PigObj.GetComponent<Animator>().SetTrigger("isOrder");
                 Instantiate(Resources.Load<GameObject>(charID.ToString() + "GameObj"), randomPos, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
                 //소환하고 적용할 코드
                 combatCount--;//한번 클릭마다 개체 하나식 제거

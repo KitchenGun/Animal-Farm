@@ -22,7 +22,6 @@ public class Pig : MonoBehaviour
 
     private void Update()
     {
-
         isMove=gameCombatManager.isMove;
         animator.SetBool("isMove",isMove);
     }
