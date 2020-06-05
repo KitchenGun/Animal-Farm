@@ -26,8 +26,7 @@ public class PlayerCtrl : MonoBehaviour
     //플레이어 스프라이트 제어
     private SpriteRenderer sprite;
     //속도
-    [SerializeField]
-    private float Speed = 5f;
+    private float Speed = 12f;
     //이동 값
     private float vValue;
     private float hValue;
@@ -46,19 +45,13 @@ public class PlayerCtrl : MonoBehaviour
         switch (colliderName)
         {//충돌체 이름에 따른 호출
             case "HouseCollider":
-                farmPlayerState = FarmPlayerState.PanelUP;
                 buttonClick.HouseButton();
-                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
             case "GateCollider":
-                farmPlayerState = FarmPlayerState.PanelUP;
                 buttonClick.GateButton();
-                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
             case "BarnCollider":
-                farmPlayerState = FarmPlayerState.PanelUP;
                 buttonClick.BarnButton();
-                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
             default:
                 break;
@@ -71,8 +64,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             case FarmPlayerState.Idle://대기상태
                 //sprite.enabled = true;//스프라이트 켜기
-                vValue = Input.GetAxis("Vertical") * Speed * Time.deltaTime;
-                hValue = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
+                vValue = Input.GetAxis("Vertical") * Time.deltaTime;
+                hValue = Input.GetAxis("Horizontal") * Time.deltaTime;
                 //이동확인
                 isMove = inputCheck(vValue, hValue);
                 //애니메이션
@@ -81,8 +74,8 @@ public class PlayerCtrl : MonoBehaviour
                 PlayerMove(vValue, hValue);
                     break;
             case FarmPlayerState.Move://이동중
-                vValue = Input.GetAxis("Vertical") * Speed * Time.deltaTime;
-                hValue = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
+                vValue = Input.GetAxis("Vertical") * Time.deltaTime;
+                hValue = Input.GetAxis("Horizontal") * Time.deltaTime;
                 //이동확인
                 isMove = inputCheck(vValue, hValue);
                 //애니메이션
@@ -97,6 +90,8 @@ public class PlayerCtrl : MonoBehaviour
                 isMove = inputCheck(vValue, hValue);
                 //애니메이션
                 pigAniCtrl.SetBool("isMove", isMove);
+                //스프라이트 투명화
+                sprite.color = new Vector4(255, 255, 255, 0);
                 break;
         }
 
@@ -104,6 +99,14 @@ public class PlayerCtrl : MonoBehaviour
 
 
     #region Panel
+
+    public void PanelUP()
+    {//패널이 올라갈 경우 실행
+        //상태
+        farmPlayerState = FarmPlayerState.PanelUP;
+        //이미지 투명화
+        sprite.color = new Vector4(255, 255, 255, 0);
+    }
     public void PanelDown()
     {//패널이 내려갈 경우 실행
         //상태
@@ -160,7 +163,7 @@ public class PlayerCtrl : MonoBehaviour
             //화면 밖으로 나가는지 체크
             positionCheck();
             //이동
-            this.gameObject.transform.position += new Vector3(hValue, vValue, 0);
+            this.gameObject.transform.position += new Vector3(hValue * Speed, vValue * Speed, 0);
                 
         }
     }

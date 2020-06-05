@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetCharId(int charID)
     {//플레이어 id설정
         PlayerPrefs.SetInt("CharID" + charID, charID);
+        UnityEngine.Debug.Log(charID + "CharID "+ charID);
     }
     public int GetCharId(int charID)
     {//플레이어 id불러오기
@@ -45,6 +47,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetCharHP(int charID, int charHp)
     {
         PlayerPrefs.SetInt(charID+ "HP", charHp);
+        UnityEngine.Debug.Log(charID + "HP " + charHp);
     }
     public int GetCharHP(int charID)
     {
@@ -56,6 +59,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetCharAP(int charID, int charAP)
     {
         PlayerPrefs.SetInt(charID + "AP", charAP);
+        UnityEngine.Debug.Log(charID + "AP " + charAP);
     }
     public int GetCharAP(int charID)
     {
@@ -67,6 +71,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetCharDps(int charID,int charDPS)
     {
         PlayerPrefs.SetInt(charID + "DPS", charDPS);
+        UnityEngine.Debug.Log(charID + "DPS " + charDPS);
     }
     public int GetCharDps(int charID)
     {
@@ -79,6 +84,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetCharCount(int charID, int charCount)
     {
         PlayerPrefs.SetInt(charID + "Count", charCount);
+        UnityEngine.Debug.Log(charID + "Count " + charCount);
     }
     public int GetCharCount(int charID)
     {
@@ -90,6 +96,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetInjureCount(int charID, int charInjureCount)
     {
         PlayerPrefs.SetInt(charID + "InjureCount", charInjureCount);
+        UnityEngine.Debug.Log(charID + "InjureCount " + charInjureCount);
     }
     public int GetInjureCount(int charID)
     {
@@ -101,6 +108,7 @@ public class PlayerInfo : MonoBehaviour
     public void SetCombatCount(int charID, int combatCount)
     {
         PlayerPrefs.SetInt(charID + "CombatCount", combatCount);
+        UnityEngine.Debug.Log(charID + "CombatCount " + combatCount);
     }
     public int GetCombatCount(int charID)
     {

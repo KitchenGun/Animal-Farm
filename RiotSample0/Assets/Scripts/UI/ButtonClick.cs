@@ -83,7 +83,8 @@ public class ButtonClick : MonoBehaviour
     public void HouseButton()
     {//집 버튼을 클릭할 경우 사용할 함수 
         houseUI.SetActive(true);//패널 활성화
-        closePanelButton= GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
+        playerCtrl.PanelUP();//플레이어 스프라이트 삭제
+        closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
     }
     #endregion
 
@@ -91,6 +92,7 @@ public class ButtonClick : MonoBehaviour
     public void GateButton()
     {//게이트 버튼을 클릭할 경우 사용할 함수
         gateUI.SetActive(true);//패널 활성화
+        playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기   
         animalPanel = GameObject.FindGameObjectsWithTag("AnimalPanel");
@@ -247,6 +249,7 @@ public class ButtonClick : MonoBehaviour
     public void BarnButton()
     {//헛간 버튼을 클릭할 경우 사용할 함수
         barnUI.SetActive(true);//패널 활성화
+        playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기
     }

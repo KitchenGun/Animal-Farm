@@ -74,8 +74,10 @@
     <Compile Include="Assets\Scripts\Animal\Artillery.cs" />
     <Compile Include="Assets\Scripts\Animal\BirdAirStrike.cs" />
     <Compile Include="Assets\Scripts\Animal\Cow.cs" />
+    <Compile Include="Assets\Scripts\Animal\Dog.cs" />
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
-    <Compile Include="Assets\Scripts\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\CSV\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\CSV\CSVSet.cs" />
     <Compile Include="Assets\Scripts\EnemySniper.cs" />
     <Compile Include="Assets\Scripts\FlagMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />

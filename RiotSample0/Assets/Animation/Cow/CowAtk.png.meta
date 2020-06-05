@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: 6fef4e78864ef5f4eb0454785bcb05ed
+guid: 94b9258644e9c4340b43dfa8956efb2f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6661224077255444172
-    second: PigOrder_0
+      213: -3213710744862637638
+    second: CowAtk_0
   - first:
-      213: 5402407411603771093
-    second: PigOrder_1
+      213: -4323760664169230563
+    second: CowAtk_1
   - first:
-      213: -7210727987011491927
-    second: PigOrder_2
+      213: 5005455617150610283
+    second: CowAtk_2
   - first:
-      213: 6777472463545054211
-    second: PigOrder_3
+      213: 7269604137773016636
+    second: CowAtk_3
   - first:
-      213: -506190627495696385
-    second: PigOrder_4
+      213: 332298074758668344
+    second: CowAtk_4
   - first:
-      213: -2525097453971005631
-    second: PigOrder_5
+      213: -3287823425854203908
+    second: CowAtk_5
   - first:
-      213: -7933021843384623548
-    second: PigOrder_6
+      213: -3483072558756190847
+    second: CowAtk_6
   - first:
-      213: -2891337103811167058
-    second: PigOrder_7
+      213: 8779624132103145343
+    second: CowAtk_7
   - first:
-      213: 140090315323149195
-    second: PigOrder_8
+      213: -746548534302243451
+    second: CowAtk_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,190 +125,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PigOrder_0
+      name: CowAtk_0
       rect:
         serializedVersion: 2
-        x: 19
+        x: 8
         y: 0
-        width: 26
+        width: 43
         height: 28
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 546175d476a23164e9768ba7f1487c8c
-      internalID: -6661224077255444172
+      spriteID: 93e158fc9f804204cb7d7d1ec2dc5f3d
+      internalID: -3213710744862637638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_1
+      name: CowAtk_1
       rect:
         serializedVersion: 2
-        x: 83
+        x: 72
         y: 0
-        width: 26
-        height: 27
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 42
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9acd19410d4482b409e215246266a86e
-      internalID: 5402407411603771093
+      spriteID: 1e1e850f732454d4f9ab1aca68861207
+      internalID: -4323760664169230563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_2
+      name: CowAtk_2
       rect:
         serializedVersion: 2
-        x: 147
+        x: 136
         y: 0
-        width: 26
-        height: 28
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 40
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53c509a8b31b5db46a935fa600444437
-      internalID: -7210727987011491927
+      spriteID: a89f6a83ab090f04a9b76b37f89aa1ac
+      internalID: 5005455617150610283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_3
+      name: CowAtk_3
       rect:
         serializedVersion: 2
-        x: 211
+        x: 201
         y: 0
-        width: 26
-        height: 29
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 45
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdf5597fd32c4824c91f0cdcfbb9b9b3
-      internalID: 6777472463545054211
+      spriteID: ca33168da53dfae4eb631dfcc066e371
+      internalID: 7269604137773016636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_4
+      name: CowAtk_4
       rect:
         serializedVersion: 2
-        x: 275
+        x: 266
         y: 0
-        width: 26
-        height: 29
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 44
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90a0e14001ec96246ba88e5a74bdd247
-      internalID: -506190627495696385
+      spriteID: 9c3dd2dc0f3b69c478de7f1257f2c704
+      internalID: 332298074758668344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_5
+      name: CowAtk_5
       rect:
         serializedVersion: 2
-        x: 339
+        x: 330
         y: 0
-        width: 26
-        height: 29
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 43
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7aa713d5fb37c147bc23ec2bb2163f1
-      internalID: -2525097453971005631
+      spriteID: 045fb992391c75040af17d724bf8bcc4
+      internalID: -3287823425854203908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_6
+      name: CowAtk_6
       rect:
         serializedVersion: 2
-        x: 403
+        x: 394
         y: 0
-        width: 26
-        height: 29
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 44
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 691ff97970b492840b0c987603436281
-      internalID: -7933021843384623548
+      spriteID: c2cf225a51fe6ac4ca08f1c553d1969b
+      internalID: -3483072558756190847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_7
+      name: CowAtk_7
       rect:
         serializedVersion: 2
-        x: 467
+        x: 458
         y: 0
-        width: 26
-        height: 29
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 43
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66fc749b63be1e745bba38cb489d781a
-      internalID: -2891337103811167058
+      spriteID: 75a010903f970944dae321c00415bd42
+      internalID: 8779624132103145343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PigOrder_8
+      name: CowAtk_8
       rect:
         serializedVersion: 2
-        x: 531
+        x: 522
         y: 0
-        width: 26
-        height: 28
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 43
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c79efe8a9c823044fa5a560433c39aef
-      internalID: 140090315323149195
+      spriteID: 858e4f0fbef61034f997bdec8cb209ad
+      internalID: -746548534302243451
       vertices: []
       indices: 
       edges: []
@@ -316,7 +316,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9f2fa032894fb264cb3e29fe2d26b813
+    spriteID: 3fc3094244ae95d4590291c19edca6c2
     internalID: 0
     vertices: []
     indices: 
