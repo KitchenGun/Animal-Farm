@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,6 @@ public class Dog : Animal
         isDie = false;
         //추후에 csv 파일 편집 완료시 사용
         //HP = playerInfo.GetCharHP(AnimalID);
-        Debug.Log(HP);
         StartCoroutine(DogStateCheck());//개의 상태체크 코루틴 실행
     }
 
@@ -46,12 +46,14 @@ public class Dog : Animal
                     switch (thisAnimalState)
                     {
                         case AnimalState.Move://이동
-                            MoveHit();
+                            MoveContact();
                             break;
                         case AnimalState.Dash://돌진
                             break;
                         case AnimalState.Attack://공격
-                            Attack(EnemyObj);
+                            Attack();
+                            Debug.Log("비활성");
+                            this.GetComponent<SphereCollider>().enabled=false;//충돌체 비활성화
                             break;
                         case AnimalState.Stun://기절
                             break;
@@ -103,6 +105,10 @@ public class Dog : Animal
                 case AnimalState.Dash://돌진
                     break;
                 case AnimalState.Attack://공격
+                    DogAnimator.SetBool("isAtk", false);
+                    yield return new WaitForSeconds(1.0f);
+                    Invoke("Attack",0f);
+                    yield return new WaitForSeconds(0.5f);
                     Debug.Log("atk");
                     break;
                 case AnimalState.Stun://기절
@@ -141,7 +147,7 @@ public class Dog : Animal
         this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
     }
 
-    private void MoveHit()
+    private void MoveContact()
     {//이동중 충돌 경우
         if (EnemyObj)
         {
@@ -153,11 +159,22 @@ public class Dog : Animal
     #endregion
 
     #region Attack
-    private void Attack(GameObject EnemyObj)
+    private void Attack()
     {
-        //적 오브젝트 접근
-        //EnemyObj.
-        DogAnimator.SetBool("isAtk", true);
+        if (EnemyObj == null)
+        {
+            this.GetComponent<SphereCollider>().enabled = true;
+            thisAnimalState = AnimalState.Move;
+            return;
+        }
+        else
+        {
+            //적 오브젝트 접근
+            //EnemyObj.
+            thisAnimalState = AnimalState.Attack;
+            DogAnimator.SetBool("isAtk", true);
+        }
+
     }
 
     #endregion

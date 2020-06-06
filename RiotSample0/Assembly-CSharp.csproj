@@ -70,14 +70,16 @@
     <Compile Include="Assets\OutlineEffect\LinkedSet.cs" />
     <Compile Include="Assets\OutlineEffect\Outline.cs" />
     <Compile Include="Assets\OutlineEffect\OutlineEffect.cs" />
+    <Compile Include="Assets\Scripts\Animal\Alpaca.cs" />
     <Compile Include="Assets\Scripts\Animal\Animal.cs" />
     <Compile Include="Assets\Scripts\Animal\Artillery.cs" />
     <Compile Include="Assets\Scripts\Animal\BirdAirStrike.cs" />
     <Compile Include="Assets\Scripts\Animal\Cow.cs" />
+    <Compile Include="Assets\Scripts\Animal\CSVSet.cs" />
     <Compile Include="Assets\Scripts\Animal\Dog.cs" />
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
+    <Compile Include="Assets\Scripts\Animal\Sheep.cs" />
     <Compile Include="Assets\Scripts\CSV\CSVReader.cs" />
-    <Compile Include="Assets\Scripts\CSV\CSVSet.cs" />
     <Compile Include="Assets\Scripts\EnemySniper.cs" />
     <Compile Include="Assets\Scripts\FlagMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />

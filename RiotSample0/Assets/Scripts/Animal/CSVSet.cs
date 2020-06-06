@@ -11,6 +11,7 @@ public class CSVSet : MonoBehaviour
         public int tempint;
         void Start()
         {
+            playerInfo = GameObject.FindGameObjectWithTag("GameController").GetComponent<PlayerInfo>();
             //csv 테스트 
             Data = CSVReader.Read("character(CSV)");
             for (var i = 0; i < Data.Count; i++)

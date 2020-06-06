@@ -110,8 +110,11 @@ public class Cow : Animal
                     Dash();
                     break;
                 case AnimalState.Attack://공격
+                    CowAnimator.SetBool("isAtk", false);
+                    yield return new WaitForSeconds(1.0f);
+                    Invoke("Attack", 0f);
+                    yield return new WaitForSeconds(0.5f);
                     Debug.Log("atk");
-                    HP = 0;
                     break;
                 case AnimalState.Stun://기절
                     break;
@@ -148,14 +151,33 @@ public class Cow : Animal
         //이동 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
     }
+    private void MoveContact()
+    {//이동중 충돌 경우
+        if (EnemyObj)
+        {
+            //이동 
+            isMove = false;
+            thisAnimalState = AnimalState.Attack;
+        }
+    }
     #endregion
 
     #region Attack
-    private void Attack(GameObject EnemyObj)
+    private void Attack()
     {
-        //적 오브젝트 접근
-        //EnemyObj.
-        CowAnimator.SetBool("isAtk", true);
+        if (EnemyObj == null)
+        {
+            this.GetComponent<SphereCollider>().enabled = true;
+            thisAnimalState = AnimalState.Move;
+            return;
+        }
+        else
+        {
+            //적 오브젝트 접근
+            //EnemyObj.
+            thisAnimalState = AnimalState.Attack;
+            CowAnimator.SetBool("isAtk", true);
+        }
     }
 
 
