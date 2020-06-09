@@ -80,7 +80,9 @@
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
     <Compile Include="Assets\Scripts\Animal\Sheep.cs" />
     <Compile Include="Assets\Scripts\CSV\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySniper.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Spear.cs" />
     <Compile Include="Assets\Scripts\FlagMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameCombatManager.cs" />

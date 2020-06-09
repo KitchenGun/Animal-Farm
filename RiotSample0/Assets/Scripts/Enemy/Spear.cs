@@ -1,0 +1,214 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Spear : Enemy
+{
+    //애니메이션
+    [SerializeField]
+    private Animator SpearAnimator;
+
+    void Start()
+    {
+        GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();
+        playerInfo = GM.playerInfo;
+        //현재 스크립트의 이름 설정
+        EnemyID = 101;
+        thisEnemyState = EnemyState.Move;
+        isMove = false;
+        isDie = false;
+        //추후에 csv 파일 편집 완료시 사용
+        HP = playerInfo.GetCharHP(EnemyID);
+        AP = playerInfo.GetCharAP(EnemyID);
+        ATKSP = playerInfo.GetCharDps(EnemyID);
+        StartCoroutine(DogStateCheck());//개의 상태체크 코루틴 실행
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        HPCheck();//체력체크
+        if (other.transform.gameObject.tag != "Untagged")
+        {
+            switch (other.transform.gameObject.tag)
+            {
+                case "Friendly"://적과 충돌시
+                    //이동 멈춤
+                    isMove = false;
+                    AnimalObj = other.transform.gameObject;
+                    switch (thisEnemyState)
+                    {
+                        case EnemyState.Move://이동
+                            MoveContact();
+                            break;
+                        case EnemyState.Dash://돌진
+                            break;
+                        case EnemyState.Attack://공격
+                            Attack();
+                            Debug.Log("비활성");
+                            this.GetComponent<SphereCollider>().enabled = false;//충돌체 비활성화
+                            break;
+                        case EnemyState.Stun://기절
+                            break;
+                        case EnemyState.Retreat://후퇴
+                            break;
+                        case EnemyState.Die://사망
+                            break;
+                    }
+                    break;
+                case "RetreatPoint": //후퇴위치
+                    switch (thisEnemyState)
+                    {
+                        case EnemyState.Idle://대기
+                            break;
+                        case EnemyState.Move://이동
+                            break;
+                        case EnemyState.Dash://돌진
+                            break;
+                        case EnemyState.Attack://공격
+                            break;
+                        case EnemyState.Stun://기절
+                            break;
+                        case EnemyState.Retreat://후퇴
+                            GM.AnimalRelocation(EnemyID);
+                            Destroy(this.gameObject);
+                            break;
+                        case EnemyState.Die://사망
+                            Die(isDie);
+                            break;
+                    }
+                    break;
+            }
+        }
+    }
+
+    private IEnumerator DogStateCheck()
+    {//소 상태의 코루틴
+        while (thisEnemyState != EnemyState.Die)
+        {//죽을때 까지 계속 
+            HPCheck();//체력체크
+            SpearAnimator.SetBool("isMove", isMove);//이동애니메이션 체크
+            switch (thisEnemyState)
+            {
+                case EnemyState.Idle://대기
+                    break;
+                case EnemyState.Move://이동
+                    Move();
+                    break;
+                case EnemyState.Dash://돌진
+                    break;
+                case EnemyState.Attack://공격
+                    SpearAnimator.SetBool("isAtk", false);
+                    yield return new WaitForSeconds(ATKSP);
+                    Invoke("Attack", 0f);
+                    yield return new WaitForSeconds(0.5f);
+                    Debug.Log("atk");
+                    break;
+                case EnemyState.Stun://기절
+                    break;
+                case EnemyState.Retreat://후퇴
+                    Move(-5);
+                    break;
+                case EnemyState.Die://사망
+                    Die(isDie);
+                    yield return new WaitForSeconds(2.0f);//중복 실행 방지용
+                    break;
+
+            }
+            yield return null;
+        }
+    }
+
+
+    #region Idle
+    private void Idle()
+    {
+        SpearAnimator.Rebind();//모든 애니메이션 다시 시작 내부 변수값 초기화
+
+    }
+
+    #endregion
+
+    #region Move
+    private void Move(float MoveSpeed = 1f)
+    {
+        //임시 변수 추후에 교체해야함
+        //
+        //이동 
+        isMove = true;
+        //이동 스크립트
+        this.gameObject.transform.position -= new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
+    }
+
+    private void MoveContact()
+    {//이동중 충돌 경우
+        if (AnimalObj)
+        {
+            //이동 
+            isMove = false;
+            thisEnemyState = EnemyState.Attack;
+        }
+    }
+    #endregion
+
+    #region Attack
+    private void Attack()
+    {
+        if (AnimalObj == null)
+        {
+            this.GetComponent<SphereCollider>().enabled = true;
+            thisEnemyState = EnemyState.Move;
+            return;
+        }
+        else
+        {
+            //적 오브젝트 접근
+            AnimalObj.SendMessage("Hit", AP);
+            thisEnemyState = EnemyState.Attack;
+            SpearAnimator.SetBool("isAtk", true);
+            return;
+        }
+
+    }
+
+    #endregion
+
+    #region Hit
+    public void Hit(int AnimalAP)
+    {//체력을 깍고 체력을 확인
+        HP -= AnimalAP;
+        HPCheck();
+    }
+    #endregion
+
+    #region Retreat
+    public void Retreat()
+    {//후퇴버튼 클릭시 실행 함수
+        thisEnemyState = EnemyState.Retreat;
+        //스프라이트 뒤집기
+        //this.transform.GetComponent<Renderer>().material.mainTextureScale = new Vector2(-1, 1);
+    }
+    #endregion
+
+    #region Die
+    private void Die(bool isDie)
+    {//사망시 적용
+        if (isDie == false)
+        {
+            Debug.Log("Die");
+            SpearAnimator.SetBool("isDie", true);//애니메이션 제어
+            Destroy(this.gameObject, 2.0f);
+            isDie = true;
+        }
+    }
+
+    private void HPCheck()
+    {
+        if (HP <= 0)
+        {
+            thisEnemyState = EnemyState.Die;
+            
+        }
+    }
+
+    #endregion
+}
