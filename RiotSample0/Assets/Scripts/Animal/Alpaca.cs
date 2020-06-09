@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class Alpaca : Animal
 {
-    private GameCombatManager GM;
-    private PlayerInfo playerInfo;
-    private float HP = 5f;
     //애니메이션
     [SerializeField]
     private Animator AlpacaAnimator;
-    //이동체크
-    private bool isMove;
-    //체력
-    private bool isDie;
-    //충돌 관련 변수
-    private GameObject EnemyObj;
 
     void Start()
     {
@@ -27,8 +18,9 @@ public class Alpaca : Animal
         isMove = false;
         isDie = false;
         //추후에 csv 파일 편집 완료시 사용
-        //HP = playerInfo.GetCharHP(AnimalID);
-        Debug.Log(HP);
+        HP = playerInfo.GetCharHP(AnimalID);
+        AP = playerInfo.GetCharAP(AnimalID);
+        ATKSP = playerInfo.GetCharDps(AnimalID);
         StartCoroutine(AlpacaStateCheck());//개의 상태체크 코루틴 실행
     }
 
@@ -104,7 +96,7 @@ public class Alpaca : Animal
                     break;
                 case AnimalState.Attack://공격
                     AlpacaAnimator.SetBool("isAtk", false);
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(ATKSP);
                     Invoke("Attack", 0f);
                     yield return new WaitForSeconds(0.5f);
                     Debug.Log("atk");
@@ -168,11 +160,19 @@ public class Alpaca : Animal
         else
         {
             //적 오브젝트 접근
-            //EnemyObj.
+            EnemyObj.SendMessage("Hit", AP);
             thisAnimalState = AnimalState.Attack;
             AlpacaAnimator.SetBool("isAtk", true);
         }
 
+    }
+    #endregion
+
+    #region Hit
+    public void Hit(int EnemyAP)
+    {//체력을 깍고 체력을 확인
+        HP -= EnemyAP;
+        HPCheck();
     }
     #endregion
 

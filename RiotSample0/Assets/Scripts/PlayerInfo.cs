@@ -68,14 +68,14 @@ public class PlayerInfo : MonoBehaviour
     #endregion
 
     #region DPS
-    public void SetCharDps(int charID,int charDPS)
+    public void SetCharDps(int charID,float charDPS)
     {
-        PlayerPrefs.SetInt(charID + "DPS", charDPS);
+        PlayerPrefs.SetFloat(charID + "DPS", charDPS);
         UnityEngine.Debug.Log(charID + "DPS " + charDPS);
     }
-    public int GetCharDps(int charID)
+    public float GetCharDps(int charID)
     {
-        return PlayerPrefs.GetInt(charID + "DPS");
+        return PlayerPrefs.GetFloat(charID + "DPS");
     }
     #endregion
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Animal : MonoBehaviour
 {
 
+    protected GameCombatManager GM;
+    protected PlayerInfo playerInfo;
     public enum AnimalState
     {
         Idle,//기본상태
@@ -20,5 +22,14 @@ public class Animal : MonoBehaviour
     protected AnimalState thisAnimalState;
     //동물이름
     protected int AnimalID;
+    protected float HP;
+    protected int AP;
+    protected float ATKSP;
 
+    //이동체크
+    protected bool isMove;
+    //체력
+    protected bool isDie;
+    //충돌 관련 변수
+    protected GameObject EnemyObj;
 }

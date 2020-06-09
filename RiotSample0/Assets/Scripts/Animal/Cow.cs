@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Cow : Animal
 {
     private GameCombatManager GM;
-
+    private PlayerInfo playerInfo;
     private float HP=5f;
     //애니메이션
     [SerializeField]
@@ -27,12 +27,16 @@ public class Cow : Animal
     void Start()
     {
         GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();
+        playerInfo = GM.playerInfo;
         //현재 스크립트의 이름 설정
         AnimalID = 3;
         thisAnimalState = AnimalState.Dash;
         isMove = false;
         isDash = true;
         isDie = false;
+        HP = playerInfo.GetCharHP(AnimalID);
+        AP = playerInfo.GetCharAP(AnimalID);
+        ATKSP = playerInfo.GetCharDps(AnimalID);
         StartCoroutine(CowStateCheck());//소의 상태체크 코루틴 실행
     }
 
@@ -111,7 +115,7 @@ public class Cow : Animal
                     break;
                 case AnimalState.Attack://공격
                     CowAnimator.SetBool("isAtk", false);
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(ATKSP);
                     Invoke("Attack", 0f);
                     yield return new WaitForSeconds(0.5f);
                     Debug.Log("atk");
@@ -174,13 +178,21 @@ public class Cow : Animal
         else
         {
             //적 오브젝트 접근
-            //EnemyObj.
+            EnemyObj.SendMessage("Hit", AP);
             thisAnimalState = AnimalState.Attack;
             CowAnimator.SetBool("isAtk", true);
         }
     }
 
 
+    #endregion
+
+    #region Hit
+    public void Hit(int EnemyAP)
+    {//체력을 깍고 체력을 확인
+        HP -= EnemyAP;
+        HPCheck();
+    }
     #endregion
 
     #region Dash
