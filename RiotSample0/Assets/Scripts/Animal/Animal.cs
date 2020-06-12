@@ -24,12 +24,15 @@ public class Animal : MonoBehaviour
     protected int AnimalID;
     protected float HP;
     protected int AP;
-    protected float ATKSP;
+    protected float MoveSpeed;
+    protected float ATKDelay;
+    protected int ATKRange;
 
     //이동체크
     protected bool isMove;
     //체력
     protected bool isDie;
     //충돌 관련 변수
+    protected RaycastHit ATKRay;
     protected GameObject EnemyObj;
 }

@@ -16,7 +16,9 @@ public class PlayerInfoSet : MonoBehaviour
         Data = CSVReader.Read("characterCSV");
         SetHP();
         SetAP();
-        SetATKSP();
+        SetMoveSpeed();
+        SetATKDelay();
+        SetATKRange();
         SetCount();//개체수 값 불러오기
     }
 
@@ -50,16 +52,33 @@ public class PlayerInfoSet : MonoBehaviour
     }
     #endregion
 
+    #region 이동 속도 가져오기
+    private void SetMoveSpeed()
+    {
+        for (var i = 0; i < Data.Count; i++)
+        {//cout
+            int tempID = (int)Data[i]["ID"];//id  불러오기
+            float tempValue;
+            float.TryParse(Data[i]["MoveSpeed"].ToString(), out tempValue);//개체수 값 불러오기
+            Debug.Log(tempValue);
+            PlayerPrefs.SetFloat(tempID + "MoveSpeed", tempValue);
+            Debug.Log(Data[i]["ID"] + " " + tempValue);
+            Debug.Log(tempID + "MoveSpeed "+ tempValue);
+        }
+    }
+
+    #endregion
+
     #region 공격 속도 가져오기
-    private void SetATKSP()
+    private void SetATKDelay()
     {  //atksp 세팅
         for (var i = 0; i < Data.Count; i++)
         {//cout
             int tempID = (int)Data[i]["ID"];//id  불러오기
             float tempValue;
-            float.TryParse(Data[i]["ATKSP"].ToString(),out tempValue);//개체수 값 불러오기
+            float.TryParse(Data[i]["ATKDelay"].ToString(),out tempValue);//개체수 값 불러오기
             Debug.Log(tempValue);
-            playerInfo.SetCharDps(tempID, tempValue);
+            playerInfo.SetCharATKDelay(tempID, tempValue);
             Debug.Log(Data[i]["ID"] + " " + tempValue);
         }
     }
@@ -78,5 +97,18 @@ public class PlayerInfoSet : MonoBehaviour
     }
     #endregion
 
-   
+    #region 사거리 가져오기
+    private void SetATKRange()
+    {//개체수 세팅
+        for (var i = 0; i < Data.Count; i++)
+        {//cout
+            int tempID = (int)Data[i]["ID"];//id  불러오기
+            int tempValue = (int)Data[i]["ATKRange"];//개체수 값 불러오기
+            PlayerPrefs.SetInt(tempID + "ATKRange", tempValue);
+            Debug.Log(Data[i]["ID"] + " " + tempValue);
+        }
+    }
+    #endregion
+
+
 }

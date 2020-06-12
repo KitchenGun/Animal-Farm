@@ -8,6 +8,7 @@ public class PlayerInfo : MonoBehaviour
     private void Start()
     {
         ResetSlotChar();
+        
     }
 
 
@@ -51,6 +52,7 @@ public class PlayerInfo : MonoBehaviour
     }
     public int GetCharHP(int charID)
     {
+        UnityEngine.Debug.Log(charID + "HP"+ PlayerPrefs.GetInt(charID + "HP"));
         return PlayerPrefs.GetInt(charID + "HP");
     }
     #endregion
@@ -67,15 +69,41 @@ public class PlayerInfo : MonoBehaviour
     }
     #endregion
 
-    #region DPS
-    public void SetCharDps(int charID,float charDPS)
+    #region MoveSpeed
+    public void SetMoveSpeed(int charID, float moveSpeed)
     {
-        PlayerPrefs.SetFloat(charID + "DPS", charDPS);
-        UnityEngine.Debug.Log(charID + "DPS " + charDPS);
+        PlayerPrefs.SetFloat(charID + "MoveSpeed", moveSpeed);
+        UnityEngine.Debug.Log(charID + "MoveSpeed " + moveSpeed);
     }
-    public float GetCharDps(int charID)
+
+    public float GetMoveSpeed(int charID)
     {
-        return PlayerPrefs.GetFloat(charID + "DPS");
+        return PlayerPrefs.GetFloat(charID + "MoveSpeed");
+    }
+
+    #endregion
+
+    #region ATKDelay
+    public void SetCharATKDelay(int charID,float charATKDelay)
+    {
+        PlayerPrefs.SetFloat(charID + "ATKDelay", charATKDelay);
+        UnityEngine.Debug.Log(charID + "ATKDelay " + charATKDelay);
+    }
+    public float GetCharATKDelay(int charID)
+    {
+        return PlayerPrefs.GetFloat(charID + "ATKDelay");
+    }
+    #endregion
+
+    #region ATKRange
+    public void SetCharATKRange(int charID,int charATKRange)
+    {
+        PlayerPrefs.SetFloat(charID + "ATKRange", charATKRange);
+        UnityEngine.Debug.Log(charID + "ATKRange " + charATKRange);
+    }
+    public int GetCharATKRange(int charID)
+    {
+        return PlayerPrefs.GetInt(charID + "ATKRange");
     }
     #endregion
 

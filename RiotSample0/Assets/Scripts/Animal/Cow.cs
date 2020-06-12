@@ -1,26 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
-
-
 
 public class Cow : Animal
 {
-    private GameCombatManager GM;
-    private PlayerInfo playerInfo;
-    private float HP=5f;
     //애니메이션
     [SerializeField]
     private Animator CowAnimator;
     //이동체크
-    private bool isMove;
     private bool isDash;
-    //체력
-    private bool isDie;
-    //충돌 관련 변수
-    private GameObject EnemyObj;
     
 
 
@@ -34,65 +22,28 @@ public class Cow : Animal
         isMove = false;
         isDash = true;
         isDie = false;
-        HP = playerInfo.GetCharHP(AnimalID);
-        AP = playerInfo.GetCharAP(AnimalID);
-        ATKSP = playerInfo.GetCharDps(AnimalID);
+        HP = PlayerPrefs.GetInt(AnimalID + "HP");
+        AP = PlayerPrefs.GetInt(AnimalID + "AP");
+        MoveSpeed = PlayerPrefs.GetFloat(AnimalID + "MoveSpeed");
+        ATKDelay = PlayerPrefs.GetFloat(AnimalID + "ATKDelay");
+        ATKRange = PlayerPrefs.GetInt(AnimalID + "ATKRange");
         StartCoroutine(CowStateCheck());//소의 상태체크 코루틴 실행
     }
-
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        HPCheck();//체력체크
-        if (other.transform.gameObject.tag != "Untagged")
-        {
-            switch (other.transform.gameObject.tag)
+        if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
+        {//레이케스트
+            if (ATKRay.transform.gameObject.tag == "Enemy")
             {
-                case "Enemy"://적과 충돌시
-                    //이동 멈춤
-                    isMove = false;
-                    isDash = false;
-                    EnemyObj = other.transform.gameObject;
-                    switch (thisAnimalState)
-                    {
-                        case AnimalState.Move://이동
-                            break;
-                        case AnimalState.Dash://돌진
-                            DashHit();
-                            //EnemyObj.sendmessage();
-                            break;
-                        case AnimalState.Attack://공격
-                            break;
-                        case AnimalState.Stun://기절
-                            break;
-                        case AnimalState.Retreat://후퇴
-                            break;
-                        case AnimalState.Die://사망
-                            //Destroy(this.gameObject.GetComponent<SphereCollider>());//충돌체 제거
-                            break;
-                    }
-                    break;
-                case "RetreatPoint": //후퇴위치
-                    switch (thisAnimalState)
-                    {
-                        case AnimalState.Idle://대기
-                            break;
-                        case AnimalState.Move://이동
-                            break;
-                        case AnimalState.Dash://돌진
-                            break;
-                        case AnimalState.Attack://공격
-                            break;
-                        case AnimalState.Stun://기절
-                            break;
-                        case AnimalState.Retreat://후퇴
-                            GM.AnimalRelocation(AnimalID);
-                            Destroy(this.gameObject);
-                            break;
-                        case AnimalState.Die://사망
-                            Die(isDie);/////////////?스크립트 점검필요
-                            break;
-                    }
-                    break;
+                if (ATKRay.collider.GetComponent<BoxCollider>())
+                {
+                    EnemyObj = ATKRay.transform.gameObject;
+                    MoveContact();
+                }
+            }
+            else
+            {
+                thisAnimalState = AnimalState.Move;
             }
         }
     }
@@ -102,6 +53,7 @@ public class Cow : Animal
         while (thisAnimalState != AnimalState.Die)
         {//죽을때 까지 계속 
             HPCheck();//체력체크
+            MoveContact();//충돌처리
             CowAnimator.SetBool("isMove", isMove);//이동애니메이션 체크
             CowAnimator.SetBool("isDash", isDash);//이동애니메이션 체크
             switch (thisAnimalState)
@@ -109,21 +61,21 @@ public class Cow : Animal
                 case AnimalState.Idle://대기
                     break;
                 case AnimalState.Move://이동
+                    Move(MoveSpeed);
                     break;
                 case AnimalState.Dash://돌진
                     Dash();
                     break;
                 case AnimalState.Attack://공격
-                    CowAnimator.SetBool("isAtk", false);
-                    yield return new WaitForSeconds(ATKSP);
                     Invoke("Attack", 0f);
                     yield return new WaitForSeconds(0.5f);
-                    Debug.Log("atk");
+                    CowAnimator.SetBool("isAtk", false);
+                    yield return new WaitForSeconds(ATKDelay);
                     break;
                 case AnimalState.Stun://기절
                     break;
                 case AnimalState.Retreat://후퇴
-                    Move(-5);
+                    Move(-MoveSpeed * 2);
                     break;
                 case AnimalState.Die://사망
                     Die(isDie);
@@ -148,13 +100,15 @@ public class Cow : Animal
     #region Move
     private void Move(float MoveSpeed = 1f)
     {
-        //임시 변수 추후에 교체해야함
-        //
         //이동 
         isMove = true;
         //이동 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
     }
+
+    #endregion
+
+    #region Attack
     private void MoveContact()
     {//이동중 충돌 경우
         if (EnemyObj)
@@ -164,14 +118,12 @@ public class Cow : Animal
             thisAnimalState = AnimalState.Attack;
         }
     }
-    #endregion
 
-    #region Attack
     private void Attack()
-    {
+    {//공격
         if (EnemyObj == null)
         {
-            this.GetComponent<SphereCollider>().enabled = true;
+            isMove = true;
             thisAnimalState = AnimalState.Move;
             return;
         }
@@ -183,6 +135,7 @@ public class Cow : Animal
             CowAnimator.SetBool("isAtk", true);
         }
     }
+
 
 
     #endregion
@@ -200,18 +153,16 @@ public class Cow : Animal
     {
         //이동 
         isDash = true;
-        //임시 변수 추후에 교체해야함
-        float MoveSpeed=1f;
-        float DashSpeed=10f;
-        //
         //돌진 스크립트
-        this.gameObject.transform.position += new Vector3(MoveSpeed * DashSpeed,0,0) * Time.deltaTime;//이동 
+        this.gameObject.transform.position += new Vector3(MoveSpeed * 1.8f,0,0) * Time.deltaTime;//이동 
     }
 
     private void DashHit()
     {
         if (EnemyObj)
         {
+            //대쉬치명타 생성
+            //수정필요
             //이동 
             isDash = false;
             thisAnimalState = AnimalState.Attack;
@@ -223,8 +174,7 @@ public class Cow : Animal
     public void Retreat()
     {//후퇴버튼 클릭시 실행 함수
         thisAnimalState=AnimalState.Retreat;
-        //스프라이트 뒤집기
-        //this.transform.GetComponent<Renderer>().material.mainTextureScale = new Vector2(-1, 1);
+        
     }
     #endregion
 
@@ -235,19 +185,21 @@ public class Cow : Animal
         {
             Debug.Log("Die");
             CowAnimator.SetBool("isDie", true);//애니메이션 제어
-            Instantiate(Resources.Load<GameObject>("8" + "GameObj"), this.gameObject.transform.position - Vector3.right, Quaternion.identity);
-            Destroy(this.gameObject, 2.0f);
+            Destroy(this.gameObject);
             isDie = true;
         }
     }
 
     private void HPCheck()
     {
-        if(HP<=0)
+        Debug.Log(HP);
+        if (HP <= 0)
         {
             thisAnimalState = AnimalState.Die;
+            Die(isDie);
         }
     }
+
 
     #endregion
 }

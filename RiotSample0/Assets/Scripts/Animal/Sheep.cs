@@ -20,7 +20,8 @@ public class Sheep : Animal
         //추후에 csv 파일 편집 완료시 사용
         HP = playerInfo.GetCharHP(AnimalID);
         AP = playerInfo.GetCharAP(AnimalID);
-        ATKSP = playerInfo.GetCharDps(AnimalID);
+        ATKDelay = playerInfo.GetCharATKDelay(AnimalID);
+        this.GetComponent<SphereCollider>().radius = ATKRange;
         StartCoroutine(SheepStateCheck());//개의 상태체크 코루틴 실행
     }
 
@@ -96,7 +97,7 @@ public class Sheep : Animal
                     break;
                 case AnimalState.Attack://공격
                     SheepAnimator.SetBool("isAtk", false);
-                    yield return new WaitForSeconds(ATKSP);
+                    yield return new WaitForSeconds(ATKDelay);
                     Invoke("Attack", 0f);
                     yield return new WaitForSeconds(0.5f);
                     Debug.Log("atk");

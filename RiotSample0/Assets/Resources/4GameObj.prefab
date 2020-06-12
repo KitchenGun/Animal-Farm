@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4060214195566459763}
   - component: {fileID: 2698515576721311782}
   - component: {fileID: 7424900629008843258}
+  - component: {fileID: 8336745717144558185}
   m_Layer: 0
   m_Name: 4GameObj
   m_TagString: Friendly
@@ -46,7 +47,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.875
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &4060214195566459760
 SpriteRenderer:
@@ -146,3 +147,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SheepAnimator: {fileID: 4060214195566459763}
+--- !u!65 &8336745717144558185
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060214195566459762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.75, y: 3, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
