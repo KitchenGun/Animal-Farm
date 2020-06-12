@@ -31,19 +31,20 @@ public class Cow : Animal
     }
     private void Update()
     {
+        Debug.Log(isDash);
         if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
         {//레이케스트
             if (ATKRay.transform.gameObject.tag == "Enemy")
             {
                 if (ATKRay.collider.GetComponent<BoxCollider>())
                 {
+                    if(thisAnimalState==AnimalState.Dash)
+                    {//대쉬 충돌시
+                        DashHit();
+                    }
                     EnemyObj = ATKRay.transform.gameObject;
                     MoveContact();
                 }
-            }
-            else
-            {
-                thisAnimalState = AnimalState.Move;
             }
         }
     }
@@ -55,7 +56,6 @@ public class Cow : Animal
             HPCheck();//체력체크
             MoveContact();//충돌처리
             CowAnimator.SetBool("isMove", isMove);//이동애니메이션 체크
-            CowAnimator.SetBool("isDash", isDash);//이동애니메이션 체크
             switch (thisAnimalState)
             {
                 case AnimalState.Idle://대기
@@ -115,6 +115,9 @@ public class Cow : Animal
         {
             //이동 
             isMove = false;
+            isDash = false;
+            CowAnimator.SetBool("isMove", isMove);
+            CowAnimator.SetBool("isDash", isDash);
             thisAnimalState = AnimalState.Attack;
         }
     }
@@ -129,6 +132,7 @@ public class Cow : Animal
         }
         else
         {
+            isMove = false;
             //적 오브젝트 접근
             EnemyObj.SendMessage("Hit", AP);
             thisAnimalState = AnimalState.Attack;
@@ -151,8 +155,9 @@ public class Cow : Animal
     #region Dash
     private void Dash()
     {
-        //이동 
+        //돌진 
         isDash = true;
+        CowAnimator.SetBool("isDash", isDash);
         //돌진 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed * 1.8f,0,0) * Time.deltaTime;//이동 
     }
@@ -165,6 +170,7 @@ public class Cow : Animal
             //수정필요
             //이동 
             isDash = false;
+            CowAnimator.SetBool("isDash", isDash);
             thisAnimalState = AnimalState.Attack;
         }
     }
@@ -185,7 +191,7 @@ public class Cow : Animal
         {
             Debug.Log("Die");
             CowAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 1f);
             isDie = true;
         }
     }

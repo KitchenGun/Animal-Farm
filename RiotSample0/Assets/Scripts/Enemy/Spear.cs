@@ -144,7 +144,7 @@ public class Spear : Enemy
         {
             Debug.Log("Die");
             SpearAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 1f);
             isDie = true;
         }
     }

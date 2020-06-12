@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 427189963}
+  tempint: 0
 --- !u!114 &427189963
 MonoBehaviour:
   m_ObjectHideFlags: 0

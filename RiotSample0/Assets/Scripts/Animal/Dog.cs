@@ -147,7 +147,6 @@ public class Dog : Animal
     private void Idle()
     {
         DogAnimator.Rebind();//모든 애니메이션 다시 시작 내부 변수값 초기화
-
     }
 
     #endregion
@@ -214,7 +213,7 @@ public class Dog : Animal
         {
             Debug.Log("Die");
             DogAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject);
+            Destroy(this.gameObject,1f);
             isDie = true;
         }
     }
