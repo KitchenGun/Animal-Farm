@@ -66,7 +66,9 @@ public class Horse : Animal
                     Invoke("Attack", 0f);
                     yield return new WaitForSeconds(0.5f);
                     HorseAnimator.SetBool("isAtk", false);
+                    this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180f, 0));
                     yield return new WaitForSeconds(ATKDelay);
+                    this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     break;
                 case AnimalState.Stun://기절
                     break;
