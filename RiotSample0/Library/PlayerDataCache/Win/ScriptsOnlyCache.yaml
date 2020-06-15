@@ -1,19 +1,29 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Alpaca
     - Artillery
     - BirdAirStrike
     - ButtonClick
+    - CameraMove
     - Cow
+    - Dog
+    - FlagMovement
     - GameCombatManager
     - GameLoadManager
-    - GameObjMoveTestStartSetting
     - Moveright
     - Pig
+    - PlayerCtrl
     - PlayerInfo
+    - PlayerInfoSet
     - ScrollbarCount
+    - Sheep
     - SimpleTextChanger
+    - Sniper
+    - Spear
     - SpriteOutline
+    - Torch
+    - Whip
     Unity.CollabProxy.Editor.dll:
     - UnityEditor.CollabHistoryWindow
     Unity.TextMeshPro.dll:
@@ -25,8 +35,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -81,29 +93,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9704}
     - Class: 114
-      Script: {instanceID: 9870}
+      Script: {instanceID: 9868}
     - Class: 114
-      Script: {instanceID: 9910}
+      Script: {instanceID: 9912}
     - Class: 114
-      Script: {instanceID: 9966}
+      Script: {instanceID: 9934}
     - Class: 114
-      Script: {instanceID: 10036}
+      Script: {instanceID: 9972}
     - Class: 114
-      Script: {instanceID: 10302}
+      Script: {instanceID: 10042}
     - Class: 114
-      Script: {instanceID: 10654}
+      Script: {instanceID: 10044}
     - Class: 114
-      Script: {instanceID: 11118}
+      Script: {instanceID: 10310}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 10666}
     - Class: 114
-      Script: {instanceID: 11320}
+      Script: {instanceID: 10668}
     - Class: 114
-      Script: {instanceID: 11406}
+      Script: {instanceID: 11132}
     - Class: 114
-      Script: {instanceID: 11482}
+      Script: {instanceID: 11246}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11328}
+    - Class: 114
+      Script: {instanceID: 11340}
+    - Class: 114
+      Script: {instanceID: 11426}
+    - Class: 114
+      Script: {instanceID: 11502}
+    - Class: 114
+      Script: {instanceID: 11538}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -123,6 +143,89 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     Assets/Scene/Farm.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9704}
+    - Class: 114
+      Script: {instanceID: 9794}
+    - Class: 114
+      Script: {instanceID: 9868}
+    - Class: 114
+      Script: {instanceID: 9870}
+    - Class: 114
+      Script: {instanceID: 9912}
+    - Class: 114
+      Script: {instanceID: 9942}
+    - Class: 114
+      Script: {instanceID: 10310}
+    - Class: 114
+      Script: {instanceID: 10454}
+    - Class: 114
+      Script: {instanceID: 10666}
+    - Class: 114
+      Script: {instanceID: 10882}
+    - Class: 114
+      Script: {instanceID: 11042}
+    - Class: 114
+      Script: {instanceID: 11072}
+    - Class: 114
+      Script: {instanceID: 11132}
+    - Class: 114
+      Script: {instanceID: 11328}
+    - Class: 114
+      Script: {instanceID: 11502}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scene/Intro.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -164,66 +267,58 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9704}
-    - Class: 114
-      Script: {instanceID: 9752}
+      Script: {instanceID: 9754}
     - Class: 114
       Script: {instanceID: 9796}
     - Class: 114
-      Script: {instanceID: 9870}
+      Script: {instanceID: 9900}
     - Class: 114
-      Script: {instanceID: 9872}
+      Script: {instanceID: 9972}
     - Class: 114
-      Script: {instanceID: 9910}
+      Script: {instanceID: 10042}
     - Class: 114
-      Script: {instanceID: 10130}
+      Script: {instanceID: 10138}
     - Class: 114
-      Script: {instanceID: 10302}
+      Script: {instanceID: 10320}
     - Class: 114
-      Script: {instanceID: 10322}
+      Script: {instanceID: 10332}
     - Class: 114
-      Script: {instanceID: 10444}
+      Script: {instanceID: 10646}
     - Class: 114
-      Script: {instanceID: 10634}
-    - Class: 114
-      Script: {instanceID: 10654}
-    - Class: 114
-      Script: {instanceID: 10868}
+      Script: {instanceID: 10668}
     - Class: 114
       Script: {instanceID: 10882}
     - Class: 114
-      Script: {instanceID: 11028}
+      Script: {instanceID: 10896}
     - Class: 114
-      Script: {instanceID: 11058}
+      Script: {instanceID: 11156}
     - Class: 114
-      Script: {instanceID: 11118}
+      Script: {instanceID: 11246}
     - Class: 114
-      Script: {instanceID: 11280}
+      Script: {instanceID: 11298}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11406}
+      Script: {instanceID: 11336}
     - Class: 114
-      Script: {instanceID: 11474}
+      Script: {instanceID: 11426}
     - Class: 114
-      Script: {instanceID: 11482}
+      Script: {instanceID: 11494}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
-    - Class: 135
+    - Class: 136
+      Script: {instanceID: 0}
+    - Class: 137
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 183
       Script: {instanceID: 0}
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -252,13 +347,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 3da2a6728805660ec1e96d96126e04b7
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameObjMoveTestStartSetting
-  - hash:
-      serializedVersion: 2
-      Hash: 7b151d2df567bb315f858644eb9eb206
+      Hash: b3e2875f282993ca0702f91b21e9fa6c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerInfoSet
@@ -324,6 +413,18 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
+      Hash: a1fadb3d2fb8c10e1c92c9712e20bf16
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Alpaca
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CSVSet
+  - hash:
+      serializedVersion: 2
       Hash: 8e0313c6f5e2ce35991fec2d64f8eaab
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -336,10 +437,22 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CameraMove
+  - hash:
+      serializedVersion: 2
       Hash: 234235b9fb07320d11497e08a726cc56
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 508ccec27bdb01ec50d0f0d128cba19f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerCtrl
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -384,7 +497,13 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: a10c1d48f01ce11d4c3c6e19f9693e8c
+      Hash: a436ad3cb0bce6f610e6612c1903696b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Sniper
+  - hash:
+      serializedVersion: 2
+      Hash: cbd3e23e32b663c04f7242630fe4057d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameCombatManager
@@ -468,6 +587,12 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
+      Hash: 60d165db4973b2b4a5332592e65955db
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Torch
+  - hash:
+      serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -528,6 +653,12 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Enemy
+  - hash:
+      serializedVersion: 2
       Hash: afc5b93a7b192de2dcb3832fe35a5c7e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -544,6 +675,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: fa67a7b014f34cd0581a65c3730c2916
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Whip
   - hash:
       serializedVersion: 2
       Hash: feb9a5a121d15fa3654d4e50a5233045
@@ -612,7 +749,7 @@ ScriptsOnlyBuild:
     className: MaterialSwitcher
   - hash:
       serializedVersion: 2
-      Hash: 8868f50664153ebb711d658b87c436ca
+      Hash: e428cb6924ab3141860cbf168513afff
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ButtonClick
@@ -654,6 +791,18 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
+      Hash: c5ed575fdca9d3a182f32a6ffef0bff7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Sheep
+  - hash:
+      serializedVersion: 2
+      Hash: d6409a264f8cad863b6bbc4f19668a94
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Spear
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -670,6 +819,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerInfo
+  - hash:
+      serializedVersion: 2
+      Hash: 5dbee4db492f4fec11512f2598084161
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Dog
   - hash:
       serializedVersion: 2
       Hash: af1a34372fdbde3a6854cd06c78c6a18
@@ -786,6 +941,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 5
   scenePathNames:
+  - Assets/Scene/Intro.unity
   - Assets/Scene/Farm.unity
   - Assets/Scene/BattleField.unity
-  playerPath: D:/work/RiotSample/RiotSample0/Client/Animal_Farm.exe
+  playerPath: D:/work/Client/Animal_Farm.exe

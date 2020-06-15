@@ -23,11 +23,13 @@ public class Alpaca : Animal
         MoveSpeed = PlayerPrefs.GetFloat(AnimalID + "MoveSpeed");
         ATKDelay = PlayerPrefs.GetFloat(AnimalID + "ATKDelay");
         ATKRange = PlayerPrefs.GetInt(AnimalID + "ATKRange");
+        Debug.Log(ATKRange);
         StartCoroutine(AlpacaStateCheck());//개의 상태체크 코루틴 실행
     }
 
     private void Update()
     {
+        Debug.Log(thisAnimalState);
         if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
         {//레이케스트
             if (ATKRay.transform.gameObject.tag == "Enemy")
@@ -151,10 +153,11 @@ public class Alpaca : Animal
     {//사망시 적용
         if (isDie == false)
         {
+            isDie = true;
             Debug.Log("Die");
+            AlpacaAnimator.SetBool("isAtk", false);
             AlpacaAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1f);
-            isDie = true;
         }
     }
 

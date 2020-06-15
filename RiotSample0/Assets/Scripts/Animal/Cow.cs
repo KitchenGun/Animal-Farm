@@ -189,10 +189,10 @@ public class Cow : Animal
     {//사망시 적용
         if (isDie == false)
         {
-            Debug.Log("Die");
-            CowAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject, 1f);
             isDie = true;
+            CowAnimator.SetBool("isAtk", true);
+            CowAnimator.SetBool("isDie", true);//애니메이션 제어
+            Destroy(this.gameObject, 1.2f);
         }
     }
 

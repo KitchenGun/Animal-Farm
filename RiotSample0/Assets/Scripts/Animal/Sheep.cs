@@ -151,9 +151,10 @@ public class Sheep : Animal
     {//사망시 적용
         if (isDie == false)
         {
-            SheepAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject, 1f);
             isDie = true;
+            SheepAnimator.SetBool("isAtk", true);//애니메이션 제어
+            SheepAnimator.SetBool("isDie", true);
+            Destroy(this.gameObject, 1f);
         }
     }
 

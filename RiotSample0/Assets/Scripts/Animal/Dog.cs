@@ -211,10 +211,11 @@ public class Dog : Animal
     {//사망시 적용
         if (isDie == false)
         {
-            Debug.Log("Die");
-            DogAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject,1f);
             isDie = true;
+            Debug.Log("Die");
+            DogAnimator.SetBool("isAtk", false);
+            DogAnimator.SetBool("isDie", true);//애니메이션 제어
+            Destroy(this.gameObject, 1.2f);
         }
     }
 

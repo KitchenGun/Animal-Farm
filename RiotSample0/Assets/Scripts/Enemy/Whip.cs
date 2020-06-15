@@ -142,10 +142,10 @@ public class Whip : Enemy
     {//사망시 적용
         if (isDie == false)
         {
-            Debug.Log("Die");
+            isDie = true;
+            WhipAnimator.SetBool("isAtk", true);
             WhipAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1f);
-            isDie = true;
         }
     }
 
