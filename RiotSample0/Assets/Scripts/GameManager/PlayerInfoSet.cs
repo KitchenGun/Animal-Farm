@@ -22,6 +22,8 @@ public class PlayerInfoSet : MonoBehaviour
         SetCount();//개체수 값 불러오기
     }
 
+   
+
     #region 체력 가져오기
     private void SetHP()
     {

@@ -5,16 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class RetreatArrayDic
-{//후퇴한 동물 정보 저장용 클래스
-    string CharID;
-    int ArrayNum=0;
-    int HP;
-    public RetreatArrayDic(string charID,int arrayNum,int hp)
-    {
-
-    }
-}
+//public class RetreatArrayDic
+//{//후퇴한 동물 정보 저장용 클래스
+//    string CharID;
+//    int ArrayNum=0;
+//    int HP;
+//    public RetreatArrayDic(string charID,int arrayNum,int hp)
+//    {
+//
+//    }
+//}
 
 
 public enum PlayerState
