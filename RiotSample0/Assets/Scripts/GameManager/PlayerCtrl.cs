@@ -44,13 +44,13 @@ public class PlayerCtrl : MonoBehaviour
         string colliderName = other.gameObject.name;
         switch (colliderName)
         {//충돌체 이름에 따른 호출
-            case "HouseCollider":
+            case "House":
                 buttonClick.HouseButton();
                 break;
-            case "GateCollider":
+            case "Gate":
                 buttonClick.GateButton();
                 break;
-            case "BarnCollider":
+            case "Barn":
                 buttonClick.BarnButton();
                 break;
             default:
@@ -180,7 +180,7 @@ public class PlayerCtrl : MonoBehaviour
 
         if (pos.y < 0.05f) pos.y = 0.05f;
 
-        if (pos.y > 0.95f) pos.y = 0.95f;
+        if (pos.y > 0.60f) pos.y = 0.60f;
 
         this.transform.position = Camera.main.ViewportToWorldPoint(pos);
     }

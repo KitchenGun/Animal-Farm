@@ -11,7 +11,7 @@ public class Artillery : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameCombatManager = GameObject.FindGameObjectWithTag("MainCamera").transform.Find("Canvas").GetComponent<GameCombatManager>();
+        gameCombatManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();
         artyGage =this.gameObject.GetComponent<Image>();
         artyGage.fillAmount = 0;
     }

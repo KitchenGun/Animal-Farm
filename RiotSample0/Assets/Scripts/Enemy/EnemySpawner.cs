@@ -57,26 +57,26 @@ public class EnemySpawner : EnemySpawnControl
         switch (Stage)
         {
             case 1:
-                for(int i = 1;i<=4;i++)
-                {
-                    EnemyCount[i] = 1;
-                }
+                EnemyCount[101] = 4;
+                EnemyCount[102] = 3;
+                EnemyCount[103] = 2;
+                EnemyCount[104] = 0;
                 DeployTime = 3f;
                 DeployChance = 1f;
                 break;
             case 2:
-                EnemyCount[101] = 5;
+                EnemyCount[101] = 7;
                 EnemyCount[102] = 5;
-                EnemyCount[103] = 5;
-                EnemyCount[104] = 5;
+                EnemyCount[103] = 4;
+                EnemyCount[104] = 2;
                 DeployTime = 3f;
                 DeployChance = 1.5f;
                 break;
             case 3:
                 EnemyCount[101] = 7;
-                EnemyCount[102] = 7;
-                EnemyCount[103] = 7;
-                EnemyCount[104] = 7;
+                EnemyCount[102] = 5;
+                EnemyCount[103] = 4;
+                EnemyCount[104] = 4;
                 DeployTime = 3f;
                 DeployChance = 2.0f;
                 break;
