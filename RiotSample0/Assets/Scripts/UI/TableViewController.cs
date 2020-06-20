@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 public class TableViewController<T> : ViewController
@@ -7,7 +8,7 @@ public class TableViewController<T> : ViewController
     [SerializeField]
     private RectOffset padding;//스크롤할 내용의 패딩
     [SerializeField]
-    private float spacingHeight = 4.0f;//각셀의 간격
+    private float spacingWidth = 50f;//각셀의 간격
     //scroll rect 컴포넌 캐시
     private ScrollRect cachedScrollRect;
     public ScrollRect CachedScrollRect
@@ -38,26 +39,26 @@ public class TableViewController<T> : ViewController
     {
 
     }
-    //리스트 항목에 대응하는 셀의 높이 반환하는 메서드
-    protected virtual float CellheightAtIndex(int index)
+    //리스트 항목에 대응하는 셀의 넓이 반환하는 메서드
+    protected virtual float CellWidthIndex(int index)
     {
         //실제 값을 반환하는 처리는 상속한 클래스에서 구현
         return 0f;
     }
-    //스크롤할 내용전체의 높이를 갱신하는 메서드
+    //스크롤할 내용전체의 넓이를 갱신하는 메서드
     protected void UpdateContentSize()
     {
-        //스크롤할 내용 전체의 높이를 계산
-        float contentHeight = 0f;
+        //스크롤할 내용 전체의 넓이를 계산
+        float contentWidth = 350f;
         for(int i=0;i<tableData.Count;i++)
         {
-            contentHeight += CellheightAtIndex(i);
-            if (i > 0) { contentHeight += spacingHeight; }
+            contentWidth += CellWidthIndex(i);
+            if (i > 0) { contentWidth += spacingWidth; }
         }
 
-        //스크롤할 내용의 높이를 설정
+        //스크롤할 내용의 넓이를 설정
         Vector2 sizeDelta = CachedScrollRect.content.sizeDelta;
-        sizeDelta.y = padding.top + contentHeight + padding.bottom;
+        sizeDelta.x = padding.left + contentWidth + padding.right;
         CachedScrollRect.content.sizeDelta = sizeDelta;
     }
 
@@ -67,11 +68,11 @@ public class TableViewController<T> : ViewController
         //scroll rect 컴포넌트에 속한 OnValueChanged 이벤트 리스너 설정
         CachedScrollRect.onValueChanged.AddListener(OnScrollPosChanged);
     }
-
     private TableViewCell<T> CreateCellForIndex(int index)
     {
         //복사 원본 셀을 이용해 새로운 셀 생성
         GameObject obj = Instantiate(cellBase) as GameObject;
+        
         TableViewCell<T> cell = obj.GetComponent<TableViewCell<T>>();
 
         //보모 요소를 바꾸면 스케일이나 크기를 잃어버리므로 변수에 저장
@@ -81,9 +82,8 @@ public class TableViewController<T> : ViewController
         Vector2 offsetMax = cell.CachedRectTransform.offsetMin;
 
         cell.transform.SetParent(cellBase.transform.parent);
-
         //셀의 스케일과 크기를 설정
-        cell.transform.localScale = scale;
+        cell.transform.localScale = new Vector3(scale.x,scale.y,0f);
         cell.CachedRectTransform.sizeDelta = sizeDelta;
         cell.CachedRectTransform.offsetMin = offsetMin;
         cell.CachedRectTransform.offsetMax = offsetMax;
@@ -101,10 +101,10 @@ public class TableViewController<T> : ViewController
 
         if (0 <= cell.DataIndex && cell.DataIndex <= tableData.Count - 1) 
         {
-            //셀에 대응하는 리스트 항목이 있다면 셀을 활성화 해서 내용을 갱신하고 높이를 설정
+            //셀에 대응하는 리스트 항목이 있다면 셀을 활성화 해서 내용을 갱신하고 넓이를 설정
             cell.gameObject.SetActive(true);
             cell.UpdateContent(tableData[cell.DataIndex]);
-            cell.Height = CellheightAtIndex(cell.DataIndex);
+            cell.Width = CellWidthIndex(cell.DataIndex);
         }
         else
         {
@@ -117,7 +117,7 @@ public class TableViewController<T> : ViewController
     {
         //visibleRect의 위치는 스크롤 할 내용의 기준으로 부터 상대적인 위치다
         visibleRect.x = cachedScrollRect.content.anchoredPosition.x + visibleRectPadding.left;
-        visibleRect.y = cachedScrollRect.content.anchoredPosition.y + visibleRectPadding.top;
+        visibleRect.y = -cachedScrollRect.content.anchoredPosition.y + visibleRectPadding.top;
         //visibleRect의 크기는 스크롤 뷰의 크기 + 패딩
         visibleRect.width = CachedRectTransform.rect.width + visibleRectPadding.left + visibleRectPadding.right;
         visibleRect.height = CachedRectTransform.rect.height + visibleRectPadding.top + visibleRectPadding.bottom;
@@ -131,19 +131,19 @@ public class TableViewController<T> : ViewController
         {
             //셀이 하나도 없을 때는 visibleRect의 범위에 들어가는 첫번째 리스트항목을 찾아서
             //그에 대응하는 셀을 작성한다.
-            Vector2 cellTop = new Vector2(0f, -padding.top);
+            Vector2 cellLeft = new Vector2(padding.left, 0f);
             for (int i = 0; i < tableData.Count; i++)
             {
-                float cellHeight = CellheightAtIndex(i);
-                Vector2 cellBottom = cellTop + new Vector2(0f, -cellHeight);
-                if ((cellTop.y <= visibleRect.y && cellTop.y >= visibleRect.y - visibleRect.height) ||
-                    (cellBottom.y <= visibleRect.y && cellBottom.y >= visibleRect.y - visibleRect.height)) 
+                float cellWidth = CellWidthIndex(i);
+                Vector2 cellRight = cellLeft + new Vector2(cellWidth,0f);
+                if ((cellLeft.x >= visibleRect.x && cellLeft.x <= visibleRect.x - visibleRect.width) ||
+                    (cellRight.x >= visibleRect.x && cellRight.x >= visibleRect.x - visibleRect.width)) 
                 {
                 TableViewCell<T> cell = CreateCellForIndex(i);
-                cell.Top = cellTop;
+                cell.Left = cellLeft;
                 break;
-                }
-                cellTop = cellBottom + new Vector2(0f, spacingHeight);
+                }///////////여기 수정함
+                cellLeft = cellRight + new Vector2(spacingWidth, 0f);
             }
             //visible의 범위에 빈곳이 있으면 셀을 작성한다
             FillVisibleRectWithCell();
@@ -160,8 +160,8 @@ public class TableViewController<T> : ViewController
             while (node != null) 
             {
                 UpdateCellForIndex(node.Value, node.Previous.Value.DataIndex + 1);
-                node.Value.Top =
-                    node.Previous.Value.Bottom + new Vector2(0f, -spacingHeight);
+                node.Value.Left =
+                    node.Previous.Value.Right + new Vector2(spacingWidth, 0f);
                 node = node.Next;
             }
             //visibleRect의 범위에 빈곳이 있으면 셀을 작성
@@ -180,16 +180,16 @@ public class TableViewController<T> : ViewController
         //또한 그셀이 visibleRect의 범위 에 들어온다면 대응한느 셀을 작성
         TableViewCell<T> lastCell = cells.Last.Value;
         int nextCellDataIndex = lastCell.DataIndex + 1;
-        Vector2 nextCellTop = lastCell.Bottom + new Vector2(0f, -spacingHeight);
+        Vector2 nextCellLeft = lastCell.Right + new Vector2(spacingWidth, 0f);
 
-        while(nextCellDataIndex<tableData.Count&&nextCellTop.y>=visibleRect.y-visibleRect.height)
+        while (nextCellDataIndex<tableData.Count&&nextCellLeft.x>=visibleRect.x-visibleRect.width)
         {
             TableViewCell<T> cell = CreateCellForIndex(nextCellDataIndex);
-            cell.Top = nextCellTop;
+            cell.Left = nextCellLeft;
 
             lastCell = cell;
             nextCellDataIndex = lastCell.DataIndex + 1;
-            nextCellTop = lastCell.Bottom + new Vector2(0f, -spacingHeight);
+            nextCellLeft = lastCell.Right + new Vector2(spacingWidth, 0f);
         }
     }
 
@@ -198,7 +198,7 @@ public class TableViewController<T> : ViewController
         //visibleReck
         UpdateVisibleRect();
         //스크롤 방향에 따라 셀을 다시 이용해 표시를 갱신
-        ReuseCells((scrollPos.y < prevScrollPos.y) ? 1 : -1);
+        ReuseCells((scrollPos.x > prevScrollPos.x) ? 1 : -1);
         prevScrollPos = scrollPos;
     }
 
@@ -213,11 +213,11 @@ public class TableViewController<T> : ViewController
             //위로 스크롤 하고 있을때는 visibleRect에 지정된 범위 보다 위에 있는 셀을
             //아래를 향해 순서대로 이동 시켜 내용을 갱신한다
             TableViewCell<T> firstCell = cells.First.Value;
-            while (firstCell.Bottom.y > visibleRect.y)
+            while (firstCell.Right.x < visibleRect.x)
             {
                 TableViewCell<T> lastCell = cells.Last.Value;
                 UpdateCellForIndex(firstCell, lastCell.DataIndex + 1);
-                firstCell.Top = lastCell.Bottom + new Vector2(0f, -spacingHeight);
+                firstCell.Left = lastCell.Right + new Vector2(spacingWidth, 0f);
 
                 cells.AddLast(firstCell);
                 cells.RemoveFirst();
@@ -231,11 +231,11 @@ public class TableViewController<T> : ViewController
             //아래로 스크롤 하고 있을 때는 visibleRect에 지정된 범위 보다 아래에 있는 셀을
             //위를 향해 순서대로 이동시켜 내용을 갱신한다.
             TableViewCell<T> lastCell = cells.Last.Value;
-            while(lastCell.Top.y<visibleRect.y - visibleRect.height)
+            while(lastCell.Left.x<visibleRect.x - visibleRect.width)
             {
                 TableViewCell<T> firstCell = cells.First.Value;
                 UpdateCellForIndex(lastCell, firstCell.DataIndex - 1);
-                lastCell.Bottom = firstCell.Top + new Vector2(0f, spacingHeight);
+                lastCell.Right = firstCell.Left + new Vector2(spacingWidth, 0f);
 
                 cells.AddFirst(lastCell);
                 cells.RemoveLast();

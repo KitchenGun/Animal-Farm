@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ShopItemData 
 {
-    public string iconName;//아이콘이름
-    public string name;//아이템이름
-    public int price;//가격
-    public string description;//설명
-
+    public string iconName;//이미지 이름
+    public string AnimalAni;//동물 애니메이터
+    
 
 }

@@ -56,6 +56,8 @@ public class ButtonClick : MonoBehaviour
             gateUI.SetActive(false);
             barnUI = GameObject.FindGameObjectWithTag("BarnUI");
             barnUI.SetActive(false);
+
+            SpriteSheetManager.Load("SlotImage");
         }
     }
 
@@ -96,33 +98,38 @@ public class ButtonClick : MonoBehaviour
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기   
         animalPanel = GameObject.FindGameObjectsWithTag("AnimalPanel");
-       //캐릭터 패널 배열 정리
-       for(int compareMainNum=0;compareMainNum==animalPanel.Length;compareMainNum++)
-       {//compare(a,b)의 a에 해당
-            for(int compareNum=1;compareNum==animalPanel.Length;compareNum++)
-            {//compare(a,b)의 b에 해당
-                ListGameObjectSort(animalPanel[compareMainNum], animalPanel[compareNum]);
-            }
-       }
-       for(int panelNum =0;panelNum<animalPanel.Length;panelNum++)
-       {//패널 위치 움직이기
-            if (panelNum != animalPanelPage)
-            {//현재일치하는 패널이 아니라면
-                animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 400, 0);
-            }
-            else if(panelNum==animalPanelPage)
-            {
-                animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
-            }
-       }
-       //슬롯 초기화
-       for(int slotNum=0;slotNum<6;slotNum++)
-       {
+
+        /*
+        //캐릭터 패널 배열 정리
+        for(int compareMainNum=0;compareMainNum==animalPanel.Length;compareMainNum++)
+        {//compare(a,b)의 a에 해당
+             for(int compareNum=1;compareNum==animalPanel.Length;compareNum++)
+             {//compare(a,b)의 b에 해당
+                 ListGameObjectSort(animalPanel[compareMainNum], animalPanel[compareNum]);
+             }
+        }
+        for(int panelNum =0;panelNum<animalPanel.Length;panelNum++)
+        {//패널 위치 움직이기
+             if (panelNum != animalPanelPage)
+             {//현재일치하는 패널이 아니라면
+                 animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 400, 0);
+             }
+             else if(panelNum==animalPanelPage)
+             {
+                 animalPanel[panelNum].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
+             }
+        }
+        */
+
+        //슬롯 초기화
+        for (int slotNum = 0; slotNum < 6; slotNum++) 
+        {
             PlayerPrefs.SetInt(("Slot" + slotNum), 0);
             currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);
             currentSlotObj.GetComponent<Image>().sprite = null;//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능//초기 이미지로 변경
-       }
+        }
     }
+    /*
     public void AnimalPanelNextPage()
     {
         if (animalPanelPage != animalPanel.Length)
@@ -142,9 +149,13 @@ public class ButtonClick : MonoBehaviour
             animalPanel[animalPanelPage].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -400, 0);
         }
     }
+    */
     public void AnimalSelect()
     {//이미지 이름을 이용하여 캐릭터 코드를 추출
-        imageName = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite.name;
+        GameObject ImageObj = EventSystem.current.currentSelectedGameObject;
+        imageName = ImageObj.GetComponent<Image>().sprite.name;
+        imageName.Remove(1,imageName.Length-1);
+        imageName = imageName[0].ToString();
         if (int.TryParse(imageName, out imageNum))
         {//string->int화
             imageNum = imageNum;
@@ -184,7 +195,8 @@ public class ButtonClick : MonoBehaviour
             {//초기화 된 슬롯의 값은 무조건 0
                 PlayerPrefs.SetInt(("Slot" + slotNum), charID);//슬롯에 값을 저장
                 currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);//여분의 슬롯에 이미지
-                currentSlotObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(imageName);//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능
+                currentSlotObj.GetComponent<Image>().sprite = 
+                    SpriteSheetManager.GetSpriteByName("SlotImage", charID.ToString());//리소스의 이미지 가져오기
                 isSlotset = true;
                 break;
             }

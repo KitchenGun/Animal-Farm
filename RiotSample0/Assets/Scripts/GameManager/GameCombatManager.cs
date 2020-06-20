@@ -92,6 +92,7 @@ public class GameCombatManager : MonoBehaviour
 
     public void Start()
     {
+        Cursor.visible = true;
         playerState = PlayerState.Play;/////////////////////임시 나중에 Hold로 교체가 필요함
         StartCoroutine(GameTimeSet());//게임 타임 설정
         GM = this.gameObject.GetComponent<GameCombatManager>();

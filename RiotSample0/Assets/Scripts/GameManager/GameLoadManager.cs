@@ -36,7 +36,7 @@ public class GameLoadManager : MonoBehaviour
             }
             else
             {//슬롯안에 저장된 값이 있을 경우
-                slot.GetComponent<Image>().sprite = Resources.Load<Sprite>(slotID.ToString());//이미지변경
+                slot.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", slotID.ToString());//이미지변경
                 slot.GetComponentInChildren<Text>().text = CombatCount.ToString();//전투가능 개체 띄우기
                 gameCombatManager.SendMessage("SetSlotNumID", slotID);
             }

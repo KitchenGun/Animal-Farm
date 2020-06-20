@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AnimalIdle
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: c7319571a700be742b0f57d77ba12822, type: 3}
+    - {fileID: 2800000, guid: f32a93c723ba5f143a41267f97c63d8f, type: 3}
+    - {fileID: 2800000, guid: 0edec8f87accee149b79d5d7591f04bf, type: 3}
+    - {fileID: 2800000, guid: 05d299724baac2e428c80fa997e9324f, type: 3}
+    - {fileID: 2800000, guid: 8a988be4c5d6ab0439f7e579723148b0, type: 3}
+    totalSpriteSurfaceArea: 9625600
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: e8a3f4169184b9d9174c67e15dd52a42
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c7319571a700be742b0f57d77ba12822, type: 3}
+  - {fileID: 21300000, guid: 05d299724baac2e428c80fa997e9324f, type: 3}
+  - {fileID: 21300000, guid: 8a988be4c5d6ab0439f7e579723148b0, type: 3}
+  - {fileID: 21300000, guid: f32a93c723ba5f143a41267f97c63d8f, type: 3}
+  - {fileID: 21300000, guid: 0edec8f87accee149b79d5d7591f04bf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 2
+  - 5
+  - 8
+  - 3
+  - 4
+  m_Tag: AnimalIdle
+  m_IsVariant: 0

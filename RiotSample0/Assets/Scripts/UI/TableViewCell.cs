@@ -15,48 +15,48 @@ public class TableViewCell<T> : ViewController
     public int DataIndex { get; set; }
 
     //셀 높이
-    public float Height
+    public float Width
     {
-        get { return CachedRectTransform.sizeDelta.y; }
+        get { return CachedRectTransform.sizeDelta.x; }
         set
         {
             Vector2 sizeDelta = CachedRectTransform.sizeDelta;
-            sizeDelta.y = value;
+            sizeDelta.x = value;
             CachedRectTransform.sizeDelta = sizeDelta;
         }
     }
 
     //셀위쪽 끝의 위치
-    public Vector2 Top
+    public Vector2 Left
     {
         get
         {
             Vector3[] coners = new Vector3[4];
             CachedRectTransform.GetLocalCorners(coners);
-            return CachedRectTransform.anchoredPosition + new Vector2(0f, coners[1].y);
+            return CachedRectTransform.anchoredPosition + new Vector2(coners[1].x, 0f);
         }
         set
         {
             Vector3[] coners = new Vector3[4];
             CachedRectTransform.GetLocalCorners(coners);
-            CachedRectTransform.anchoredPosition=value- new Vector2(0f, coners[1].y);
+            CachedRectTransform.anchoredPosition=value- new Vector2(coners[1].x,0f);
         }
     }
 
     //셀 아래쪽
-    public Vector2 Bottom
+    public Vector2 Right
     {
         get
         {
             Vector3[] coners = new Vector3[4];
             CachedRectTransform.GetLocalCorners(coners);
-            return CachedRectTransform.anchoredPosition + new Vector2(0f, coners[3].y);
+            return CachedRectTransform.anchoredPosition + new Vector2(coners[3].x, 0f);
         }
         set
         {
             Vector3[] coners = new Vector3[4];
             CachedRectTransform.GetLocalCorners(coners);
-            CachedRectTransform.anchoredPosition = value - new Vector2(0f, coners[3].y);
+            CachedRectTransform.anchoredPosition = value - new Vector2(coners[3].x, 0f);
         }
     }
 
