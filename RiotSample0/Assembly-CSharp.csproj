@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Animal\Cow.cs" />
     <Compile Include="Assets\Scripts\Animal\CSVSet.cs" />
     <Compile Include="Assets\Scripts\Animal\Dog.cs" />
+    <Compile Include="Assets\Scripts\Animal\Egg.cs" />
     <Compile Include="Assets\Scripts\Animal\Horse.cs" />
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
     <Compile Include="Assets\Scripts\Animal\Sheep.cs" />

@@ -57,26 +57,26 @@ public class EnemySpawner : EnemySpawnControl
         switch (Stage)
         {
             case 1:
-                EnemyCount[101] = 4;
-                EnemyCount[102] = 3;
-                EnemyCount[103] = 2;
-                EnemyCount[104] = 0;
+                EnemyCount[1] = 4;
+                EnemyCount[2] = 3;
+                EnemyCount[3] = 2;
+                EnemyCount[4] = 0;
                 DeployTime = 3f;
                 DeployChance = 1f;
                 break;
             case 2:
-                EnemyCount[101] = 7;
-                EnemyCount[102] = 5;
-                EnemyCount[103] = 4;
-                EnemyCount[104] = 2;
+                EnemyCount[1] = 7;
+                EnemyCount[2] = 5;
+                EnemyCount[3] = 4;
+                EnemyCount[4] = 2;
                 DeployTime = 3f;
                 DeployChance = 1.5f;
                 break;
             case 3:
-                EnemyCount[101] = 7;
-                EnemyCount[102] = 5;
-                EnemyCount[103] = 4;
-                EnemyCount[104] = 4;
+                EnemyCount[1] = 7;
+                EnemyCount[2] = 5;
+                EnemyCount[3] = 4;
+                EnemyCount[4] = 4;
                 DeployTime = 3f;
                 DeployChance = 2.0f;
                 break;

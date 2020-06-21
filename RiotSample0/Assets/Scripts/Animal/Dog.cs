@@ -45,7 +45,7 @@ public class Dog : Animal
         }
     }
 
-    /*
+    
     private void OnTriggerStay(Collider other)
     {
         HPCheck();//체력체크
@@ -53,31 +53,6 @@ public class Dog : Animal
         {
             switch (other.transform.gameObject.tag)
             {
-                case "Enemy"://적과 충돌시
-                    //이동 멈춤
-                    isMove = false;
-                    if(EnemyObj==null)
-                    {
-                        EnemyObj = other.transform.gameObject;
-                    }
-                    switch (thisAnimalState)
-                    {
-                        case AnimalState.Move://이동
-                            MoveContact();
-                            break;
-                        case AnimalState.Dash://돌진
-                            break;
-                        case AnimalState.Attack://공격
-                            break;
-                        case AnimalState.Stun://기절
-                            break;
-                        case AnimalState.Retreat://후퇴
-                            break;
-                        case AnimalState.Die://사망
-                            Die(isDie);
-                            break;
-                    }
-                    break;
                 case "RetreatPoint": //후퇴위치
                     switch (thisAnimalState)
                     {
@@ -103,7 +78,7 @@ public class Dog : Animal
             }
         }
     }
-    */
+    
 
     private IEnumerator DogStateCheck()
     {//소 상태의 코루틴
@@ -183,7 +158,7 @@ public class Dog : Animal
         else
         {
             //적 오브젝트 접근
-            EnemyObj.SendMessage("Hit", AP);
+            EnemyObj.GetComponent<EnemySpawner>().SendMessage("Hit", AP);
             thisAnimalState = AnimalState.Attack;
             DogAnimator.SetBool("isAtk", true);
         }

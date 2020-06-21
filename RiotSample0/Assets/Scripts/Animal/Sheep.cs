@@ -13,7 +13,7 @@ public class Sheep : Animal
         GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();
         playerInfo = GM.playerInfo;
         //현재 스크립트의 이름 설정
-        AnimalID = 2;
+        AnimalID = 4;
         thisAnimalState = AnimalState.Move;
         isMove = false;
         isDie = false;
@@ -29,6 +29,7 @@ public class Sheep : Animal
     {
         if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
         {//레이케스트
+            Debug.Log(ATKRange);
             if (ATKRay.transform.gameObject.tag == "Enemy")
             {
                 if (ATKRay.collider.GetComponent<BoxCollider>())
