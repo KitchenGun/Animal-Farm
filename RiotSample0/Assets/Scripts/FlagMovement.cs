@@ -8,7 +8,7 @@ public class FlagMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.transform.position.x >= -1)
+        if (this.gameObject.transform.position.x >= -20)
         {//일정 지점까지 깃발이 움직이게 만듬
             this.gameObject.transform.position += (Vector3.left*1.5f) * Time.deltaTime;
         }
