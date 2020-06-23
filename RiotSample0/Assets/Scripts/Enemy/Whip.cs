@@ -130,7 +130,7 @@ public class Whip : Enemy
     #endregion
 
     #region Hit
-    public void Hit(int AnimalAP)
+    public override void Hit(int AnimalAP)
     {//체력을 깍고 체력을 확인
         HP -= AnimalAP;
         HPCheck();

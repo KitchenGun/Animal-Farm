@@ -26,6 +26,38 @@ public class Horse : Animal
         Debug.Log(ATKRange);
         StartCoroutine(HorseStateCheck());//개의 상태체크 코루틴 실행
     }
+    private void OnTriggerStay(Collider other)
+    {
+        HPCheck();//체력체크
+        if (other.transform.gameObject.tag != "Untagged")
+        {
+            switch (other.transform.gameObject.tag)
+            {
+                case "RetreatPoint": //후퇴위치
+                    switch (thisAnimalState)
+                    {
+                        case AnimalState.Idle://대기
+                            break;
+                        case AnimalState.Move://이동
+                            break;
+                        case AnimalState.Dash://돌진
+                            break;
+                        case AnimalState.Attack://공격
+                            break;
+                        case AnimalState.Stun://기절
+                            break;
+                        case AnimalState.Retreat://후퇴
+                            GM.AnimalRelocation(AnimalID);
+                            Destroy(this.gameObject);
+                            break;
+                        case AnimalState.Die://사망
+                            Die(isDie);
+                            break;
+                    }
+                    break;
+            }
+        }
+    }
 
     private void Update()
     {
@@ -66,14 +98,14 @@ public class Horse : Animal
                     Invoke("Attack", 0f);
                     yield return new WaitForSeconds(0.5f);
                     HorseAnimator.SetBool("isAtk", false);
-                    this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180f, 0));
                     yield return new WaitForSeconds(ATKDelay);
-                    this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     break;
                 case AnimalState.Stun://기절
                     break;
                 case AnimalState.Retreat://후퇴
-                    Move(-MoveSpeed * 2);
+                    isMove = false;
+                    //이동 스크립트
+                    this.gameObject.transform.position += new Vector3(-MoveSpeed * 2, 0, 0) * Time.deltaTime;
                     break;
                 case AnimalState.Die://사망
                     Die(isDie);
@@ -144,6 +176,7 @@ public class Horse : Animal
     public void Retreat()
     {//후퇴버튼 클릭시 실행 함수
         thisAnimalState = AnimalState.Retreat;
+        HorseAnimator.SetTrigger("isRetreat");
     }
     #endregion
 

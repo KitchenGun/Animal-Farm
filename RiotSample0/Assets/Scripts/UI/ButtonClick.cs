@@ -126,7 +126,7 @@ public class ButtonClick : MonoBehaviour
         {
             PlayerPrefs.SetInt(("Slot" + slotNum), 0);
             currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);
-            currentSlotObj.GetComponent<Image>().sprite = null;//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능//초기 이미지로 변경
+            currentSlotObj.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot");//리소스의 이미지 가져오기
         }
     }
     /*

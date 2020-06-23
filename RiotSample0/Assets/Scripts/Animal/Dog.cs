@@ -105,7 +105,9 @@ public class Dog : Animal
                 case AnimalState.Stun://기절
                     break;
                 case AnimalState.Retreat://후퇴
-                    Move(-MoveSpeed*2);
+                    isMove = false;
+                    //이동 스크립트
+                    this.gameObject.transform.position += new Vector3(-MoveSpeed * 2, 0, 0) * Time.deltaTime;
                     break;
                 case AnimalState.Die://사망
                     Die(isDie);
@@ -158,7 +160,7 @@ public class Dog : Animal
         else
         {
             //적 오브젝트 접근
-            EnemyObj.GetComponent<EnemySpawner>().SendMessage("Hit", AP);
+            EnemyObj.SendMessage("Hit", AP);
             thisAnimalState = AnimalState.Attack;
             DogAnimator.SetBool("isAtk", true);
         }
@@ -178,6 +180,7 @@ public class Dog : Animal
     public void Retreat()
     {//후퇴버튼 클릭시 실행 함수
         thisAnimalState = AnimalState.Retreat;
+        DogAnimator.SetTrigger("isRetreat");
     }
     #endregion
 

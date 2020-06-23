@@ -27,12 +27,12 @@ public class GameLoadManager : MonoBehaviour
         for (slotNum = 0; slotNum < 6; slotNum++) 
         {
             slotID = PlayerPrefs.GetInt("Slot" + slotNum);//id에 playerinfo에서 가져온 정보 넣기
-            SlotInfo[slotNum] = slotID;//슬롯에 맞는 id 정보를 저장////////////////////////////////////////////////////////////배열을 생성하고 이걸 활용해야함
+            SlotInfo[slotNum] = slotID;//슬롯에 맞는 id 정보를 저장
             CombatCount = PlayerPrefs.GetInt(slotID + "CombatCount");//id를 이용하여 전투 가능 개체 정보를 불러오기
             slot = GameObject.FindGameObjectWithTag("Slot"+slotNum);//태그를 이용해서 물건 찾기
             if(slotID==0)
             {//슬롯이 빈 공간임으로 비어있게 변경
-                slot.GetComponent<Image>().sprite = null;//이미지변경
+                slot.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot");//이미지변경
             }
             else
             {//슬롯안에 저장된 값이 있을 경우

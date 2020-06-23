@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
     protected float ATKDelay;
     protected int ATKRange;
 
+    public virtual void Hit(int AP)
+    {
+        //자식에서 정의
+    }
+
     //이동체크
     protected bool isMove;
     //체력
