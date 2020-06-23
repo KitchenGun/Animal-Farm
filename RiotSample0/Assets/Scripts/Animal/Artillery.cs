@@ -8,6 +8,9 @@ public class Artillery : MonoBehaviour
     private GameCombatManager gameCombatManager;
     private Image artyGage;
     private float pressGage = 0f;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +24,7 @@ public class Artillery : MonoBehaviour
         artyGage.fillAmount = pressGage;//게이지 표시
        
     }
+
+
 
 }

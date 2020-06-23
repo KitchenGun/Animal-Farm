@@ -45,7 +45,7 @@ public class GameCombatManager : MonoBehaviour
     private GameObject mainArtyPos;
     private GameObject compareArtyPos;
     private bool isArtyCoroutinRunning = false;
-    public int pressSpaceBar=0;//스페이스바를 누른시간
+    public int pressSpaceBar=1;//스페이스바를 누른시간
 
     //공습 관련 변수
     private GameObject airStrikeBird;//폭탄을 떨굴 새 오브젝트 변수
@@ -197,9 +197,11 @@ public class GameCombatManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ArtyPos[selectLine].SetActive(true);
+            ArtyPos[selectLine].transform.parent.GetComponent<Animator>().SetTrigger("isPress");
         }
         if (Input.GetKey(KeyCode.Space))
         {
+
             if (pressSpaceBar <= 100 && !isArtyCoroutinRunning)
             {
                 pressSpaceBar++;
@@ -207,6 +209,7 @@ public class GameCombatManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            ArtyPos[selectLine].transform.parent.GetComponent<Animator>().SetTrigger("isFire");
             StartCoroutine(InputFireCoolTime());
         }
         #endregion
@@ -299,7 +302,7 @@ public class GameCombatManager : MonoBehaviour
         {
             isArtyCoroutinRunning = true;
             InputArtilleryButton();
-            yield return new WaitForSeconds(3.5f);
+            yield return new WaitForSeconds(3.0f);
             isArtyCoroutinRunning = false;
         }
         StopCoroutine(this.InputFireCoolTime());
@@ -352,7 +355,7 @@ public class GameCombatManager : MonoBehaviour
     {
         GameObject TempArtyPos;
         //포격 위치 
-        TempArtyPos = Instantiate(Resources.Load<GameObject>("Egg"), ArtyPos[artyPosnum].transform.position, Quaternion.identity);// 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
+        TempArtyPos = Instantiate(Resources.Load<GameObject>("Egg"), ArtyPos[artyPosnum].transform.position+new Vector3(0,3,0), Quaternion.identity);// 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
 
         TempArtyPos.GetComponent<Rigidbody>().AddForce(new Vector3(pressSpaceBar/10.0f,pressSpaceBar/10.0f,0),ForceMode.Impulse);//누른 시간만큼 힘증가
         ArtyPos[artyPosnum].SetActive(false);
@@ -797,6 +800,7 @@ public class GameCombatManager : MonoBehaviour
         Vector4 panelColor = PausePanel.GetComponent<Image>().color;
         panelColor += new Vector4(0, 0, 0, 20);
         PausePanel.GetComponent<Image>().color = panelColor;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
 

@@ -134,7 +134,7 @@ public class EnemySpawner : EnemySpawnControl
         Debug.Log(HP);
         if (HP <= 0)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
     #endregion

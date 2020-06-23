@@ -161,7 +161,15 @@ public class Dog : Animal
         else
         {
             //적 오브젝트 접근
-            EnemyObj.SendMessage("Hit", AP);
+            if (EnemyObj.GetComponent<Enemy>())
+            {
+                EnemyObj.GetComponent<Enemy>().SendMessage("Hit", AP);
+            }
+            else if (EnemyObj.GetComponent<EnemySpawner>())
+            {
+                EnemyObj.GetComponent<EnemySpawner>().SendMessage("Hit", AP);
+            }
+
             thisAnimalState = AnimalState.Attack;
             DogAnimator.SetBool("isAtk", true);
         }
