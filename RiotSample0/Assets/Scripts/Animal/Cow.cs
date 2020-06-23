@@ -226,7 +226,7 @@ public class Cow : Animal
         if (isDie == false)
         {
             isDie = true;
-            CowAnimator.SetBool("isAtk", true);
+            CowAnimator.SetBool("isAtk", false);
             CowAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1.2f);
         }

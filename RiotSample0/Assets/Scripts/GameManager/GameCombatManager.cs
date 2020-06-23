@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 //public class RetreatArrayDic
 //{//후퇴한 동물 정보 저장용 클래스
@@ -37,7 +38,8 @@ public class GameCombatManager : MonoBehaviour
     public static List<GameObject> Line = new List<GameObject>();
     private GameObject mainLine;
     private GameObject compareLine;
-    
+    private float VerticalInput;
+
     //포격 관련 변수
     public static List<GameObject> ArtyPos = new List<GameObject>();//포격위치 
     private GameObject mainArtyPos;
@@ -71,6 +73,7 @@ public class GameCombatManager : MonoBehaviour
     //돼지 이동 관련 변수
     private GameObject PigObj;
     private GameObject selectLineObj;
+
     //과거의 선택 위치
     [SerializeField]
     private Collider PreviousClickTrans;
@@ -90,11 +93,18 @@ public class GameCombatManager : MonoBehaviour
     public bool isMove;
     private bool reverse;
 
+    //일시정지
+    private bool isPause;
+    [SerializeField]
+    private GameObject PausePanel;
+
     public void Start()
     {
+        Cursor.visible = false;
         playerState = PlayerState.Play;/////////////////////임시 나중에 Hold로 교체가 필요함
         StartCoroutine(GameTimeSet());//게임 타임 설정
         GM = this.gameObject.GetComponent<GameCombatManager>();
+        PausePanel.SetActive(false);//게임 정지 패널
         #region lineFindCode
         Line = new List<GameObject> (GameObject.FindGameObjectsWithTag("Line"));
         foreach (GameObject LineGameObj in Line)
@@ -137,12 +147,31 @@ public class GameCombatManager : MonoBehaviour
 
     private void Update()//플레이어의 입력을 받기위한 업데이트
     {
+        #region PauseInput
+        if(Input.GetKeyDown(KeyCode.Escape)&&!isPause)
+        {//정지인지 확인
+            isPause = true;
+            Cursor.visible = true;//커서 
+            Time.timeScale = 0f;//시간
+            //패널
+            PausePanel.SetActive(true);
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape) && isPause)
+        {
+            isPause = false;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
+            PausePanel.SetActive(false);
+        }
+        #endregion
         #region MoveInput
-        if (Input.GetKeyDown(KeyCode.W)&&isMove==false)
+        VerticalInput = Input.GetAxisRaw("Vertical");//위 아래키 입력값
+        Debug.Log(VerticalInput);
+        if (VerticalInput >= 1 && isMove==false)
         {
             pigMoveUp();
         }
-        if (Input.GetKeyDown(KeyCode.S)&&isMove==false)
+        if (VerticalInput <= -1 && isMove==false)
         {
             pigMoveDown();
         }
@@ -760,6 +789,15 @@ public class GameCombatManager : MonoBehaviour
                 break;
         }
         yield return null;
+    }
+
+    private void GameExit()
+    {
+        Destroy(EventSystem.current.currentSelectedGameObject);////검정색으로 변하는화면용 코드
+        Vector4 panelColor = PausePanel.GetComponent<Image>().color;
+        panelColor += new Vector4(0, 0, 0, 20);
+        PausePanel.GetComponent<Image>().color = panelColor;
+        SceneManager.LoadScene(1);
     }
 
     #endregion

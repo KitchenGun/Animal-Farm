@@ -190,9 +190,9 @@ public class Sheep : Animal
         if (isDie == false)
         {
             isDie = true;
-            SheepAnimator.SetBool("isAtk", true);//애니메이션 제어
+            SheepAnimator.SetBool("isAtk", false);//애니메이션 제어
             SheepAnimator.SetBool("isDie", true);
-            Destroy(this.gameObject, 1f);
+            Destroy(this.gameObject, 1.2f);
         }
     }
 

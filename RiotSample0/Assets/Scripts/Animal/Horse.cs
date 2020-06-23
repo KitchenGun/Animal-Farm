@@ -189,7 +189,7 @@ public class Horse : Animal
             Debug.Log("Die");
             HorseAnimator.SetBool("isAtk", false);
             HorseAnimator.SetBool("isDie", true);//애니메이션 제어
-            Destroy(this.gameObject, 1f);
+            Destroy(this.gameObject, 1.2f);
         }
     }
 
