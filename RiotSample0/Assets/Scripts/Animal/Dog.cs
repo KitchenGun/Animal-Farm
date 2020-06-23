@@ -133,6 +133,7 @@ public class Dog : Animal
     {
         //이동 
         isMove = true;
+        Debug.Log(MoveSpeed);
         //이동 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
     }

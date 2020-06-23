@@ -194,6 +194,7 @@ public class Cow : Animal
         //돌진 
         isDash = true;
         CowAnimator.SetBool("isDash", isDash);
+        Debug.Log(MoveSpeed * 1.8f);
         //돌진 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed * 1.8f,0,0) * Time.deltaTime;//이동 
     }

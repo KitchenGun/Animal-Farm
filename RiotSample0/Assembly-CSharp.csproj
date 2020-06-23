@@ -92,14 +92,15 @@
     <Compile Include="Assets\Scripts\Enemy\Torch.cs" />
     <Compile Include="Assets\Scripts\Enemy\Whip.cs" />
     <Compile Include="Assets\Scripts\FlagMovement.cs" />
+    <Compile Include="Assets\Scripts\GameManager\ButtonClick.cs" />
     <Compile Include="Assets\Scripts\GameManager\EnemyMoveManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameCombatManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameLoadManager.cs" />
+    <Compile Include="Assets\Scripts\GameManager\IntroButtonManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\GameManager\PlayerInfoSet.cs" />
     <Compile Include="Assets\Scripts\Moveright.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
-    <Compile Include="Assets\Scripts\UI\ButtonClick.cs" />
     <Compile Include="Assets\Scripts\UI\ScrollbarCount.cs" />
     <Compile Include="Assets\Scripts\UI\ShopItemData.cs" />
     <Compile Include="Assets\Scripts\UI\ShopItemTableViewCell.cs" />
