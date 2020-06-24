@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Animal\Alpaca.cs" />
     <Compile Include="Assets\Scripts\Animal\Animal.cs" />
     <Compile Include="Assets\Scripts\Animal\Artillery.cs" />
+    <Compile Include="Assets\Scripts\Animal\Barn.cs" />
     <Compile Include="Assets\Scripts\Animal\BirdAirStrike.cs" />
     <Compile Include="Assets\Scripts\Animal\Cow.cs" />
     <Compile Include="Assets\Scripts\Animal\CSVSet.cs" />
