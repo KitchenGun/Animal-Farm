@@ -134,6 +134,8 @@ public class EnemySpawner : EnemySpawnControl
         Debug.Log(HP);
         if (HP <= 0)
         {
+            GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();
+            GM.Win();
             Destroy(this.gameObject);
         }
     }

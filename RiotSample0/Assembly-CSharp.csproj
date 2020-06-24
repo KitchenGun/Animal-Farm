@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Animal\Horse.cs" />
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
     <Compile Include="Assets\Scripts\Animal\Sheep.cs" />
+    <Compile Include="Assets\Scripts\BackGroundAudio.cs" />
     <Compile Include="Assets\Scripts\CameraMove.cs" />
     <Compile Include="Assets\Scripts\CSV\CSVReader.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />

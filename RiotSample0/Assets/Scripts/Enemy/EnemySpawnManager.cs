@@ -7,7 +7,8 @@ public class EnemySpawnControl : MonoBehaviour
 {
 
     protected int Stage;//스테이지 확인용
-   
+    protected GameCombatManager GM;//전투 매니져
+
     protected float DeployChance;//배치를 할 확률
     protected float DeployTime;//배치할 시간
 

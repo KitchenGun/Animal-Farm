@@ -41,7 +41,13 @@ public class ButtonClick : MonoBehaviour
     public float currentAnimalCount;//현재 동물의 개체수
     public float combatAnimalCount;//전투에 사용될 개체수
 
-    
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
 
     private void Awake()
     {

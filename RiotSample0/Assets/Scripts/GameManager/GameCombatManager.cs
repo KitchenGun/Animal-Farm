@@ -97,6 +97,8 @@ public class GameCombatManager : MonoBehaviour
     private bool isPause;
     [SerializeField]
     private GameObject PausePanel;
+    [SerializeField]
+    private Text ResultText;
 
     public void Start()
     {
@@ -256,7 +258,12 @@ public class GameCombatManager : MonoBehaviour
             MoveChar(CurrentClickTrans, PreviousClickTrans.transform.GetChild(0).gameObject, reverse);
         }
         #endregion
-        
+        #region Retreat
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Retreat();
+        }
+        #endregion
     }
 
     public int ListGameObjectSort(GameObject a, GameObject b)
@@ -802,6 +809,30 @@ public class GameCombatManager : MonoBehaviour
         PausePanel.GetComponent<Image>().color = panelColor;
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
+    }
+
+    #endregion
+
+    #region ResultFuncGroup
+
+    public void Win()
+    {
+        isPause = true;
+        Cursor.visible = true;//커서 
+        Time.timeScale = 0f;//시간
+                            //패널
+        PausePanel.SetActive(true);
+        ResultText.text = "Win";
+    }
+
+    public void Lose()
+    {
+        isPause = true;
+        Cursor.visible = true;//커서 
+        Time.timeScale = 0f;//시간
+                            //패널
+        PausePanel.SetActive(true);
+        ResultText.text = "Lose";
     }
 
     #endregion

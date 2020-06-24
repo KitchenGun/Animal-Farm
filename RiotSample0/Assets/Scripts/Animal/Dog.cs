@@ -199,7 +199,6 @@ public class Dog : Animal
         if (isDie == false)
         {
             isDie = true;
-            Debug.Log("Die");
             DogAnimator.SetBool("isAtk", false);
             DogAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1.2f);
@@ -208,7 +207,6 @@ public class Dog : Animal
 
     private void HPCheck()
     {
-        Debug.Log(HP);
         if (HP <= 0)
         {
             thisAnimalState = AnimalState.Die;

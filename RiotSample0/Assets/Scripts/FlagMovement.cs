@@ -8,7 +8,7 @@ public class FlagMovement : MonoBehaviour
     void Update()
     {
         //깃발이 움직이게 만듬
-        this.gameObject.transform.position += (Vector3.left*1.5f) * Time.deltaTime;
+        this.gameObject.transform.position += (Vector3.left*0.5f) * Time.deltaTime;
         
     }
 }

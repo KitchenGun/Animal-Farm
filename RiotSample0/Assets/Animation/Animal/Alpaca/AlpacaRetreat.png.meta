@@ -155,27 +155,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlpacaRetreat_1
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 19
-        width: 11
-        height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b78cc2234a350da4b857bf1bc2ec3266
-      internalID: -7143916362693481667
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: AlpacaRetreat_2
       rect:
         serializedVersion: 2
@@ -192,27 +171,6 @@ TextureImporter:
       bones: []
       spriteID: dd68225186ed9ee49a2e9a06c45595e5
       internalID: 6193600129527587445
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlpacaRetreat_3
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 19
-        width: 11
-        height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35259132fae29bb428a2bb588d058794
-      internalID: -3354793378042518071
       vertices: []
       indices: 
       edges: []
@@ -281,27 +239,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlpacaRetreat_7
-      rect:
-        serializedVersion: 2
-        x: 228
-        y: 19
-        width: 11
-        height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 181d5df559ded264391fe3ecd613e1aa
-      internalID: -8821793331243214497
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: AlpacaRetreat_8
       rect:
         serializedVersion: 2
@@ -323,27 +260,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlpacaRetreat_9
-      rect:
-        serializedVersion: 2
-        x: 292
-        y: 19
-        width: 11
-        height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32986d3135b3cc3439074fa0fadda461
-      internalID: 2149213978279398998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: AlpacaRetreat_10
       rect:
         serializedVersion: 2
@@ -360,27 +276,6 @@ TextureImporter:
       bones: []
       spriteID: 89ca0ff7d50c4f047b0d03a9c204021f
       internalID: -960559058545273002
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlpacaRetreat_11
-      rect:
-        serializedVersion: 2
-        x: 356
-        y: 18
-        width: 11
-        height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 75a8992156d32a648b85e9800dca021f
-      internalID: -6765636774666636336
       vertices: []
       indices: 
       edges: []

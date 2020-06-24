@@ -33,7 +33,6 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             int tempValue = (int)Data[i]["HP"];//개체수 값 불러오기
             playerInfo.SetCharHP(tempID, tempValue);
-            Debug.Log(Data[i]["ID"] + " " + tempValue);
         }
     }
 
@@ -48,7 +47,6 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             int tempValue = (int)Data[i]["AP"];//개체수 값 불러오기
             playerInfo.SetCharAP(tempID, tempValue);
-            Debug.Log(Data[i]["ID"] + " " + tempValue);
         }
 
     }
@@ -62,10 +60,7 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             float tempValue;
             float.TryParse(Data[i]["MoveSpeed"].ToString(), out tempValue);//개체수 값 불러오기
-            Debug.Log(tempValue);
             PlayerPrefs.SetFloat(tempID + "MoveSpeed", tempValue);
-            Debug.Log(Data[i]["ID"] + " " + tempValue);
-            Debug.Log(tempID + "MoveSpeed "+ tempValue);
         }
     }
 
@@ -94,7 +89,7 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             int tempValue = (int)Data[i]["Count"];//개체수 값 불러오기
             playerInfo.SetCharCount(tempID, tempValue);
-            Debug.Log(Data[i]["ID"] + " " + tempValue);
+
         }
     }
     #endregion
@@ -107,7 +102,6 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             int tempValue = (int)Data[i]["ATKRange"];//개체수 값 불러오기
             PlayerPrefs.SetInt(tempID + "ATKRange", tempValue);
-            Debug.Log(Data[i]["ID"] + " " + tempValue);
         }
     }
     #endregion

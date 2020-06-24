@@ -14,10 +14,7 @@ public class ScrollbarCount : MonoBehaviour
     public GameObject MaxCount;
     private void Update()
     {
-        //임시 임시 임시 임시
-        currentAnimalCount = 10;
-        //
-        //currentAnimalCount = buttonClick.GetComponent<ButtonClick>().currentAnimalCount;
+        currentAnimalCount = buttonClick.GetComponent<ButtonClick>().currentAnimalCount;
         int currentAnimalCountInt = (int)currentAnimalCount;
         MaxCount.GetComponent<Text>().text = currentAnimalCountInt.ToString();//최대값 표시
         float countScrollCount = this.gameObject.GetComponent<Scrollbar>().value;//스크롤바 수치값 입력

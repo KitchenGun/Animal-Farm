@@ -148,8 +148,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 1
-        width: 63
-        height: 47
+        width: 57
+        height: 46
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,29 +157,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 501e82e8b207a0441ac5969e883135d1
+      spriteID: 6deb9113813baff44807ceedf4aad0fa
       internalID: -8674905642299000943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AtryFire_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 2
-        width: 63
-        height: 45
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 502034f7a41be37429f1face448a90d8
-      internalID: 2914264737224991709
       vertices: []
       indices: 
       edges: []
@@ -188,51 +167,9 @@ TextureImporter:
       name: AtryFire_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 2
-        width: 63
-        height: 45
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b54a51d40fa08b4085a627c81da4d8b
-      internalID: -2554087252472547213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AtryFire_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 2
-        width: 63
-        height: 45
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 258b431e9e8c45d47922b2d9bf4bbcac
-      internalID: -5130341588913544262
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AtryFire_4
-      rect:
-        serializedVersion: 2
-        x: 256
+        x: 64
         y: 1
-        width: 63
+        width: 57
         height: 47
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -241,8 +178,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c2c5feebef2ca14d982ed3ab3b3b445
+      spriteID: 0e07741f8215068449012e7e93cad920
+      internalID: -2554087252472547213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtryFire_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1
+        width: 57
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 570f10dfd07c4ce4d8df10eebc2650f4
       internalID: -2670643086155465182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtryFire_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1
+        width: 57
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c768d535de5dde94ebc8cf92dd9fac95
+      internalID: -2742987961485648169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtryFire_8
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 1
+        width: 57
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e323a0c42b872694a8b41620c51bbea6
+      internalID: -1467381860232332434
       vertices: []
       indices: 
       edges: []

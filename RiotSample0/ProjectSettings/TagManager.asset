@@ -22,6 +22,7 @@ TagManager:
   - AirStrikeBird
   - Friendly
   - RetreatPoint
+  - FarmAudio
   layers:
   - Default
   - TransparentFX

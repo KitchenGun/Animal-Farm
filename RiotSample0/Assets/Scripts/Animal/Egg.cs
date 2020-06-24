@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Egg : MonoBehaviour
 {
+    [SerializeField]
+    private Animator EggAni;
 
     private void Start()
     {
@@ -11,14 +13,20 @@ public class Egg : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.transform.gameObject.name=="Plane")
+        {
+            selfDestroy();
+        }
         if (collision.transform.gameObject.tag == "Enemy")
         {
-            Destroy(this.gameObject);
+            collision.transform.gameObject.GetComponent<Enemy>().SendMessage("Hit", 10);
+            selfDestroy();
         }
     }
 
     private void selfDestroy()
     {
-        Destroy(this.gameObject);
+        EggAni.SetTrigger("Hit");
+        Destroy(this.gameObject, 0.5f);
     }
 }

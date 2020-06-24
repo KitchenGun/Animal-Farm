@@ -21,8 +21,15 @@ public class SimpleTextChanger : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            temptext.text = Temptext[tempTextNum];
-            tempTextNum++;
+            try
+            {
+                temptext.text = Temptext[tempTextNum];
+                tempTextNum++;
+            }
+            catch
+            {
+                Debug.Log("배열초과");
+            }
         }
     }
 }
