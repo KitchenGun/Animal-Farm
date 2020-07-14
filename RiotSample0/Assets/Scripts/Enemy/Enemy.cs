@@ -26,18 +26,28 @@ public class Enemy : MonoBehaviour
     protected float ATKDelay;
     protected int ATKRange;
 
-    public virtual void Hit(int AP)
-    {
-        //자식에서 정의
-    }
-
+   
     //이동체크
     protected bool isMove;
     //체력
     protected bool isDie;
+
+    protected SpriteRenderer spriteRenderer;
     //충돌 관련 변수
     protected RaycastHit ATKRay;
     protected GameObject AnimalObj;
 
+
+    #region Hit
+    public virtual void Hit(int AP)
+    {
+        
+        //자식에서 정의
+    }
+    private void ColorRollback()
+    {
+        spriteRenderer.color = Color.white;
+    }
+    #endregion
 }
 

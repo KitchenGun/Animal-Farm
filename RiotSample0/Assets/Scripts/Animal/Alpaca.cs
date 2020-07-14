@@ -23,7 +23,7 @@ public class Alpaca : Animal
         MoveSpeed = PlayerPrefs.GetFloat(AnimalID + "MoveSpeed");
         ATKDelay = PlayerPrefs.GetFloat(AnimalID + "ATKDelay");
         ATKRange = PlayerPrefs.GetInt(AnimalID + "ATKRange");
-        Debug.Log(ATKRange);
+        spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(AlpacaStateCheck());//개의 상태체크 코루틴 실행
     }
     private void OnTriggerStay(Collider other)
@@ -170,8 +170,16 @@ public class Alpaca : Animal
     public void Hit(int EnemyAP)
     {//체력을 깍고 체력을 확인
         HP -= EnemyAP;
+        spriteRenderer.color = Color.red;// 색변경
+        Invoke("ColorRollback",0.3f);//변경 복원
         HPCheck();
     }
+
+    private void ColorRollback()
+    {
+        spriteRenderer.color = Color.white;
+    }
+
     #endregion
 
     #region Retreat
@@ -197,7 +205,6 @@ public class Alpaca : Animal
 
     private void HPCheck()
     {
-        Debug.Log(HP);
         if (HP <= 0)
         {
             thisAnimalState = AnimalState.Die;

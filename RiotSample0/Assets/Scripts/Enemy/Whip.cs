@@ -23,6 +23,7 @@ public class Whip : Enemy
         MoveSpeed = PlayerPrefs.GetFloat(EnemyID + "MoveSpeed");
         ATKDelay = PlayerPrefs.GetFloat(EnemyID + "ATKDelay");
         ATKRange = PlayerPrefs.GetInt(EnemyID + "ATKRange");
+        spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(SpearStateCheck());//개의 상태체크 코루틴 실행
     }
     private void Update()
@@ -133,6 +134,8 @@ public class Whip : Enemy
     public override void Hit(int AnimalAP)
     {//체력을 깍고 체력을 확인
         HP -= AnimalAP;
+        spriteRenderer.color = Color.red;// 색변경
+        Invoke("ColorRollback", 0.3f);//변경 복원
         HPCheck();
     }
     #endregion

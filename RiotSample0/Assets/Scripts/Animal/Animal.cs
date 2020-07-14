@@ -32,7 +32,9 @@ public class Animal : MonoBehaviour
     protected bool isMove;
     //체력
     protected bool isDie;
+    protected SpriteRenderer spriteRenderer;
     //충돌 관련 변수
     protected RaycastHit ATKRay;
     protected GameObject EnemyObj;
+    
 }

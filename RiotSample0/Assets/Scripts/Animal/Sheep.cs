@@ -23,6 +23,7 @@ public class Sheep : Animal
         MoveSpeed = PlayerPrefs.GetFloat(AnimalID + "MoveSpeed");
         ATKDelay = PlayerPrefs.GetFloat(AnimalID + "ATKDelay");
         ATKRange = PlayerPrefs.GetInt(AnimalID + "ATKRange");
+        spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(SheepStateCheck());//개의 상태체크 코루틴 실행
     }
 
@@ -172,8 +173,16 @@ public class Sheep : Animal
     public void Hit(int EnemyAP)
     {//체력을 깍고 체력을 확인
         HP -= EnemyAP;
+        spriteRenderer.color = Color.red;// 색변경
+        Invoke("ColorRollback", 0.3f);//변경 복원
         HPCheck();
     }
+
+    private void ColorRollback()
+    {
+        spriteRenderer.color = Color.white;
+    }
+
     #endregion
 
     #region Retreat
