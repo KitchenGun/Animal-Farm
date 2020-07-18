@@ -31,7 +31,7 @@ public class Egg : Animal
         }
         if (collision.transform.gameObject.tag == "Enemy")
         {
-            this.GetComponent<SphereCollider>().radius = 1.5f;//ATKRange;
+            this.GetComponent<SphereCollider>().radius = 1.3f;//ATKRange;
             hitObj.Add(collision.gameObject);
             this.GetComponent<Rigidbody>().isKinematic = true;
             EggAni.SetTrigger("Hit");//애니메이션
