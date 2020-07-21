@@ -7,7 +7,9 @@ ID,NAME,HP,AP,MoveSpeed,ATKDelay,Count,CombatCount,InjureCount,ATKRange
 6,Duck,1,1,1,1,1,0,0,0
 7,Chicken,1,1,1,1,1,0,0,0
 8,Alpaca,100,10,1,1,20,0,0,4
+9,Rat,10,1,2,1,40,0,0,1
 101,Spear,100,10,1,1,30,0,0,1
 102,Whip,100,15,1,1.1,30,0,0,1
 103,Torch,100,20,0.8,1.5,20,0,0,1
 104,Sniper,10,200,0.5,10,10,0,0,10
+1001,Egg,0,5,0,0,0,0,0,1
