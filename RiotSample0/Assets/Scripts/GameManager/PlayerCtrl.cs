@@ -171,7 +171,7 @@ public class PlayerCtrl : MonoBehaviour
     
     public void positionCheck()
     {//화면 밖으로 나가는지 체크
-
+     // mousePosition.x = Mathf.Clamp(mousePosition.x, limitPoint1.x, limitPoint2.x);
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
         if (pos.x < 0.03f) pos.x = 0.03f;

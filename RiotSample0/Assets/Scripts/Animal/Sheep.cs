@@ -211,6 +211,7 @@ public class Sheep : Animal
         {
             thisAnimalState = AnimalState.Die;
             Die(isDie);
+            GameObject Mouse = Instantiate(Resources.Load<GameObject>("9GameObj"), this.gameObject.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
         }
     }
 

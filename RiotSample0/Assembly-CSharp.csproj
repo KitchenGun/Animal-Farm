@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Animal\Egg.cs" />
     <Compile Include="Assets\Scripts\Animal\Horse.cs" />
     <Compile Include="Assets\Scripts\Animal\Pig.cs" />
+    <Compile Include="Assets\Scripts\Animal\Rat.cs" />
     <Compile Include="Assets\Scripts\Animal\Sheep.cs" />
     <Compile Include="Assets\Scripts\BackGroundAudio.cs" />
     <Compile Include="Assets\Scripts\CameraMove.cs" />
