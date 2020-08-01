@@ -199,6 +199,8 @@ public class Sheep : Animal
         if (isDie == false)
         {
             isDie = true;
+            GameObject Rat =
+                Instantiate(Resources.Load<GameObject>("9GameObj"), transform.position + new Vector3(0, 3, 0), Quaternion.identity);
             SheepAnimator.SetBool("isAtk", false);//애니메이션 제어
             SheepAnimator.SetBool("isDie", true);
             Destroy(this.gameObject, 1.2f);
@@ -211,7 +213,6 @@ public class Sheep : Animal
         {
             thisAnimalState = AnimalState.Die;
             Die(isDie);
-            GameObject Mouse = Instantiate(Resources.Load<GameObject>("9GameObj"), this.gameObject.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
         }
     }
 
