@@ -1,7 +1,34 @@
 fileFormatVersion: 2
 guid: 4de17b6bc9ce62c4182d142bccd9fd38
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -469999470251080874
+    second: AnimalSpawnerDestroy_0
+  - first:
+      213: 1297425544989536179
+    second: AnimalSpawnerDestroy_1
+  - first:
+      213: 7414971329479907225
+    second: AnimalSpawnerDestroy_2
+  - first:
+      213: -4630753567343074571
+    second: AnimalSpawnerDestroy_3
+  - first:
+      213: -1928187972191978559
+    second: AnimalSpawnerDestroy_4
+  - first:
+      213: -6646992507757978776
+    second: AnimalSpawnerDestroy_5
+  - first:
+      213: -5000740492008428106
+    second: AnimalSpawnerDestroy_6
+  - first:
+      213: -5894724769197403169
+    second: AnimalSpawnerDestroy_13
+  - first:
+      213: -3258739968429455154
+    second: AnimalSpawnerDestroy_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -45,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,11 +123,200 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 117
+        height: 108
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fab95f337b7d5247ad2108d9a1536ab
+      internalID: -469999470251080874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_1
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 116
+        height: 107
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e39e6cd27f5fdcd489ca1ca7f5a79adf
+      internalID: 1297425544989536179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_2
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 0
+        width: 113
+        height: 107
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18dd6d6f8b6366f45acac6394dcff9a4
+      internalID: 7414971329479907225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_3
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 0
+        width: 113
+        height: 108
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7d1fdec4329d9648a75f71a385751d1
+      internalID: -4630753567343074571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_4
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 0
+        width: 113
+        height: 107
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1abe8999c20e7bc498a6064dd5260c47
+      internalID: -1928187972191978559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_5
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 0
+        width: 103
+        height: 106
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4bd1c783da547341ae98fd42069232f
+      internalID: -6646992507757978776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_6
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 0
+        width: 113
+        height: 107
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64f6c5bf2fb81ff408db1489a883b190
+      internalID: -5000740492008428106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_13
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 0
+        width: 113
+        height: 107
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 033bbb27c7cdadd4f8307b9f4e5e4126
+      internalID: -5894724769197403169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AnimalSpawnerDestroy_14
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 0
+        width: 113
+        height: 107
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4991509a28480474f94c1bb6e83033c9
+      internalID: -3258739968429455154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9cc207796b7fc67468689752c76b935b
     internalID: 0
     vertices: []
     indices: 
