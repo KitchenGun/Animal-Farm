@@ -53,6 +53,9 @@ public class PlayerCtrl : MonoBehaviour
             case "Barn":
                 buttonClick.BarnButton();
                 break;
+            case "WatchTower":
+                buttonClick.WatchTowerButton();
+                break;
             default:
                 break;
         }

@@ -40,12 +40,26 @@ public class ButtonClick : MonoBehaviour
     //gate-animalcountpanel
     public float currentAnimalCount;//현재 동물의 개체수
     public float combatAnimalCount;//전투에 사용될 개체수
+    //timer
+    private bool timerStart=false;//시작체크
+    private float currentTime;//현재시간
+    private float prepareTime=10f;//준비시간
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
+        }
+        if(timerStart==true)
+        {//타이머가 시작될경우
+            currentTime += Time.deltaTime;
+            Debug.Log(currentTime);
+            if(currentTime >= prepareTime)
+            {//공격 준비 시간이 끝날경우
+                Debug.Log("Done");
+                timerStart = false;
+            }
         }
     }
 
@@ -270,6 +284,16 @@ public class ButtonClick : MonoBehaviour
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기
     }
+    #endregion
+
+    #region WatchTowerUIFuncGroup
+    public void WatchTowerButton()
+    {
+        timerStart = true;
+        currentTime = Time.time;//현재시간
+        prepareTime = currentTime + prepareTime; //준비시간 = 현재시간 + 준비시간(3분)
+    }
+
     #endregion
 
     #region CommonUIGroup
