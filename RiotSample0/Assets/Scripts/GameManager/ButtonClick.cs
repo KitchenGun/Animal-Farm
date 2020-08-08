@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Reflection;
+using System;
+
 public enum SceneName
 {
     Farm,
@@ -41,6 +43,8 @@ public class ButtonClick : MonoBehaviour
     public float currentAnimalCount;//현재 동물의 개체수
     public float combatAnimalCount;//전투에 사용될 개체수
     //timer
+    [SerializeField]
+    private Text Timer;//타이머
     private bool timerStart=false;//시작체크
     private float currentTime;//현재시간
     private float prepareTime=10f;//준비시간
@@ -49,16 +53,29 @@ public class ButtonClick : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(0);
+            if(houseUI.activeSelf!=true)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
+            {
+                SceneManager.LoadScene(0);
+            }
+            if (gateUI.activeSelf != true)
+            {
+                SceneManager.LoadScene(0);
+            }
+            if (barnUI.activeSelf != true)
+            {
+                SceneManager.LoadScene(0);
+            }
         }
         if(timerStart==true)
         {//타이머가 시작될경우
             currentTime += Time.deltaTime;
             Debug.Log(currentTime);
+            Timer.text = Math.Truncate(prepareTime - currentTime).ToString();
             if(currentTime >= prepareTime)
             {//공격 준비 시간이 끝날경우
                 Debug.Log("Done");
                 timerStart = false;
+                SceneManager.LoadScene("BattleField");
             }
         }
     }
@@ -142,11 +159,13 @@ public class ButtonClick : MonoBehaviour
         */
 
         //슬롯 초기화
-        for (int slotNum = 0; slotNum < 6; slotNum++) 
-        {
-            PlayerPrefs.SetInt(("Slot" + slotNum), 0);
-            currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);
-            currentSlotObj.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot");//리소스의 이미지 가져오기
+       for (int slotNum = 0; slotNum < 6; slotNum++) 
+       {
+            if (PlayerPrefs.GetInt("Slot" + slotNum) == 0)
+            {
+                currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);
+                currentSlotObj.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot");//리소스의 이미지 가져오기
+            }
         }
     }
     /*
