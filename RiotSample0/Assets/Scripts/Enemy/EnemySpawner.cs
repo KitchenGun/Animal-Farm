@@ -10,12 +10,14 @@ public class EnemySpawner : EnemySpawnControl
     private bool isDestroy=false;//스포너가 파괴됬는가
     private GameObject EnemyObj;//스폰한 오브젝트
     private int EnemyID;
+    private Animator animator;
 
     private int[] EnemyCount=new int[5];//id//count
 
 
     void Start()
     {
+        animator = this.gameObject.GetComponent<Animator>();//애니메이터연결
         EnemySet();//배치할 객체수 불러오기
         StartCoroutine(Deploy());//배치 실행
     }
@@ -131,7 +133,7 @@ public class EnemySpawner : EnemySpawnControl
     }
     private void HPCheck()
     {
-        Debug.Log(HP);
+        animator.SetFloat("HP",HP);
         if (HP <= 0)
         {
             GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameCombatManager>();

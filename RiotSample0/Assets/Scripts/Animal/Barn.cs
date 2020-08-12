@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Barn : MonoBehaviour
 {
-
+    private float HP = 100;//체력
     private GameCombatManager GM;
     private Animator BarnAnimator;
 
@@ -19,7 +19,7 @@ public class Barn : MonoBehaviour
     {//충돌시 파괴함수 실행 추후에 변경가능
         if (other.transform.gameObject.tag == "Enemy")
         {
-            StartCoroutine(BarnDestroy());
+            HPCheck();
         }
     }
 
@@ -30,5 +30,21 @@ public class Barn : MonoBehaviour
         GM.Lose();
         StopCoroutine(BarnDestroy());
     }
+
+    #region Hit
+    public void Hit(int EnemyAP)
+    {//체력을 깍고 체력을 확인
+        HP -= EnemyAP;
+        HPCheck();
+    }
+    private void HPCheck()
+    {
+        Debug.Log(HP);
+        if (HP <= 0)
+        {
+            StartCoroutine(BarnDestroy());
+        }
+    }
+    #endregion
 
 }

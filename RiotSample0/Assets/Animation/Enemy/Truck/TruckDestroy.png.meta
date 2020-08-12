@@ -1,12 +1,42 @@
 fileFormatVersion: 2
 guid: 95329fe14687ae244842b0909bffeda4
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8066977794281855495
+    second: TruckDestroy_0
+  - first:
+      213: -6256243934732301301
+    second: TruckDestroy_1
+  - first:
+      213: -7628364748317632325
+    second: TruckDestroy_2
+  - first:
+      213: -120336655614300027
+    second: TruckDestroy_3
+  - first:
+      213: 7890351704607188824
+    second: TruckDestroy_4
+  - first:
+      213: -9159341351605724031
+    second: TruckDestroy_5
+  - first:
+      213: 7613896087031155621
+    second: TruckDestroy_6
+  - first:
+      213: -6993917731336910996
+    second: TruckDestroy_7
+  - first:
+      213: -7878335951221282135
+    second: TruckDestroy_8
+  - first:
+      213: 2206750189334725112
+    second: TruckDestroy_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,24 +64,24 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -100
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 6
+  spritePivot: {x: 0, y: 0}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -70,13 +100,247 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: TruckDestroy_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00996b4e06807494da0f066b40d59b99
+      internalID: 8066977794281855495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_1
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a48b6c795e52e44b44bbb8a6b00a7a
+      internalID: -6256243934732301301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_2
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d01c860e1a828344a7aab25efc83299
+      internalID: -7628364748317632325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_3
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d5eeb0aa193994ebf66e400458fa24
+      internalID: -120336655614300027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_4
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b8098d1958bf4546b1a57208f223e6f
+      internalID: 7890351704607188824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_5
+      rect:
+        serializedVersion: 2
+        x: 1464
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bc9253dbc591a54988fba5e485a2029
+      internalID: -9159341351605724031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_6
+      rect:
+        serializedVersion: 2
+        x: 1757
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b17fc7bb9fdc1b74e984ba0ea15d73e6
+      internalID: 7613896087031155621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_7
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1858b9157a14e684aba60d2b408895f6
+      internalID: -6993917731336910996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_8
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2ea9f18869b1f141b3efdf63a760d24
+      internalID: -7878335951221282135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TruckDestroy_9
+      rect:
+        serializedVersion: 2
+        x: 2632
+        y: 0
+        width: 288
+        height: 158
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb62688e79f8ddc42a23673373d49e44
+      internalID: 2206750189334725112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1de99b9ecc5876142958ffb7411d75d6
     internalID: 0
     vertices: []
     indices: 
