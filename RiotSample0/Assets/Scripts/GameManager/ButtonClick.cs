@@ -24,6 +24,7 @@ public class ButtonClick : MonoBehaviour
     private static GameObject houseUI;//정적 변수 SetActive때문에
     private static GameObject gateUI;
     private static GameObject barnUI;
+    private static GameObject WatchTowerUI;
     private static GameObject closePanelButton;
     private static GameObject changePageButton;
     private static GameObject animalCountPanel;
@@ -45,9 +46,9 @@ public class ButtonClick : MonoBehaviour
     //timer
     [SerializeField]
     private Text Timer;//타이머
-    private bool timerStart=false;//시작체크
+    private bool timerRunning=true;//시작체크
     private float currentTime;//현재시간
-    private float prepareTime=10f;//준비시간
+    private float prepareTime=50f;//준비시간
 
     private void Update()
     {
@@ -65,16 +66,19 @@ public class ButtonClick : MonoBehaviour
             {
                 SceneManager.LoadScene(0);
             }
+            if (WatchTowerUI.activeSelf != true)
+            {
+                SceneManager.LoadScene(0);
+            }
         }
-        if(timerStart==true)
+        if(timerRunning == true)
         {//타이머가 시작될경우
             currentTime += Time.deltaTime;
-            Debug.Log(currentTime);
             Timer.text = Math.Truncate(prepareTime - currentTime).ToString();
             if(currentTime >= prepareTime)
             {//공격 준비 시간이 끝날경우
                 Debug.Log("Done");
-                timerStart = false;
+                timerRunning = false;
                 SceneManager.LoadScene("BattleField");
             }
         }
@@ -93,8 +97,13 @@ public class ButtonClick : MonoBehaviour
             gateUI.SetActive(false);
             barnUI = GameObject.FindGameObjectWithTag("BarnUI");
             barnUI.SetActive(false);
-
+            WatchTowerUI = GameObject.FindGameObjectWithTag("WatchTowerUI");
+            WatchTowerUI.SetActive(false);
+            //스프라이트 패커 사용
             SpriteSheetManager.Load("SlotImage");
+            //시간 관련 부분
+            currentTime = Time.time;//현재시간
+            prepareTime = currentTime + prepareTime; //준비시간 = 현재시간 + 준비시간(3분)
         }
     }
 
@@ -306,11 +315,12 @@ public class ButtonClick : MonoBehaviour
     #endregion
 
     #region WatchTowerUIFuncGroup
-    public void WatchTowerButton()
+    public void WatchTowerButton()//감시탑 클릭시
     {
-        timerStart = true;
-        currentTime = Time.time;//현재시간
-        prepareTime = currentTime + prepareTime; //준비시간 = 현재시간 + 준비시간(3분)
+        timerRunning = false;//타이머 
+        WatchTowerUI.SetActive(true);
+
+        Timer.text = Math.Truncate(prepareTime - currentTime).ToString()+"초 뒤에 적이 도착할거 같아요!";
     }
 
     #endregion
@@ -333,6 +343,11 @@ public class ButtonClick : MonoBehaviour
         houseUI.SetActive(false);
         gateUI.SetActive(false);
         barnUI.SetActive(false);
+        if(WatchTowerUI.activeSelf==true)
+        {//시간 확인할때는 시간 진행 정지 
+            timerRunning = true;
+            WatchTowerUI.SetActive(false);
+        }
     }
 
     public int NextPage(int page)

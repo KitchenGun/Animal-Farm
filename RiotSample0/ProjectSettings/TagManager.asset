@@ -23,6 +23,7 @@ TagManager:
   - Friendly
   - RetreatPoint
   - FarmAudio
+  - WatchTowerUI
   layers:
   - Default
   - TransparentFX
