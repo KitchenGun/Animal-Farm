@@ -318,8 +318,9 @@ public class ButtonClick : MonoBehaviour
     public void WatchTowerButton()//감시탑 클릭시
     {
         timerRunning = false;//타이머 
-        WatchTowerUI.SetActive(true);
-
+        WatchTowerUI.SetActive(true);//패널 활성화
+        playerCtrl.PanelUP();//플레이어 스프라이트 삭제
+        closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         Timer.text = Math.Truncate(prepareTime - currentTime).ToString()+"초 뒤에 적이 도착할거 같아요!";
     }
 
