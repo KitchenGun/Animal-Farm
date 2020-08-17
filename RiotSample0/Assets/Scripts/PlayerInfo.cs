@@ -7,8 +7,7 @@ public class PlayerInfo : MonoBehaviour
 {
     private void Start()
     {
-        ResetSlotChar();
-        
+        ResetSlotChar();//슬롯 초기화
     }
 
 
@@ -135,7 +134,17 @@ public class PlayerInfo : MonoBehaviour
     }
     #endregion
 
-
+    //자원관련
+    #region Resource
+    public void SetWheatCount(int Count)
+    {
+        PlayerPrefs.SetInt("Wheat", Count);
+    }
+    public int GetWheatCount()
+    {
+        return PlayerPrefs.GetInt("Wheat");
+    }
+    #endregion
 
     //스테이지 관련
     #region Stage

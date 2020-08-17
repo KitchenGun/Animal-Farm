@@ -49,6 +49,10 @@ public class ButtonClick : MonoBehaviour
     private bool timerRunning=true;//시작체크
     private float currentTime;//현재시간
     private float prepareTime=50f;//준비시간
+    //Wheat
+    [SerializeField]
+    private Text WheatText;//텍스트 오브젝트
+    private int WheatCount;//밀의 수
 
     private void Update()
     {

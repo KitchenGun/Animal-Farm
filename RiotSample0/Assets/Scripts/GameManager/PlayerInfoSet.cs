@@ -12,14 +12,18 @@ public class PlayerInfoSet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        Data = CSVReader.Read("characterCSV");
-        SetHP();
-        SetAP();
-        SetMoveSpeed();
-        SetATKDelay();
-        SetATKRange();
-        SetCount();//개체수 값 불러오기
+        if (PlayerPrefs.GetInt("Start") == 0)
+        {//프로그램 실행 처음에만 실행
+            Data = CSVReader.Read("characterCSV");
+            SetHP();
+            SetAP();
+            SetMoveSpeed();
+            SetATKDelay();
+            SetATKRange();
+            SetCount();//개체수 값 불러오기
+            SetResource();//자원 고정값 불러오기
+            PlayerPrefs.SetInt("Start",1);//숫자를 올려서 다시 실행 안하게 만듬
+        }
     }
 
    
@@ -106,5 +110,10 @@ public class PlayerInfoSet : MonoBehaviour
     }
     #endregion
 
-
+    #region 자원 가져오기
+    private void SetResource()
+    {//정해진 고정 수치값으로 세팅
+        PlayerPrefs.SetInt("Wheat", 100);
+    }
+    #endregion
 }
