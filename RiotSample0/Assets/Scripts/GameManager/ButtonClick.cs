@@ -58,23 +58,24 @@ public class ButtonClick : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(houseUI.activeSelf!=true)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
+            if(!houseUI.activeSelf)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
             {
                 SceneManager.LoadScene(0);
             }
-            if (gateUI.activeSelf != true)
+            else if (!gateUI.activeSelf)
             {
                 SceneManager.LoadScene(0);
             }
-            if (barnUI.activeSelf != true)
+            else if (!barnUI.activeSelf)
             {
                 SceneManager.LoadScene(0);
             }
-            if (WatchTowerUI.activeSelf != true)
+            else if (!WatchTowerUI.activeSelf)
             {
                 SceneManager.LoadScene(0);
             }
         }
+        //시간 관련 업데이트 함수
         if(timerRunning == true)
         {//타이머가 시작될경우
             currentTime += Time.deltaTime;

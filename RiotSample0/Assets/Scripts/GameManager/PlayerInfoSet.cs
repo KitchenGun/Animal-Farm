@@ -7,12 +7,10 @@ public class PlayerInfoSet : MonoBehaviour
     public PlayerInfo playerInfo;//플레이어정보 
     public List<Dictionary<string, object>> Data;
     public int tempint;
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetInt("Start") == 0)
+        PlayerPrefs.GetInt("Start", 0);
+        if (PlayerPrefs.GetInt("Start")!=1)
         {//프로그램 실행 처음에만 실행
             Data = CSVReader.Read("characterCSV");
             SetHP();
@@ -23,6 +21,9 @@ public class PlayerInfoSet : MonoBehaviour
             SetCount();//개체수 값 불러오기
             SetResource();//자원 고정값 불러오기
             PlayerPrefs.SetInt("Start",1);//숫자를 올려서 다시 실행 안하게 만듬
+            PlayerPrefs.Save();
+            Debug.Log(PlayerPrefs.GetInt("Start"));
+            Debug.Log("infoSet");
         }
     }
 
