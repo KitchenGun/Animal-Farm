@@ -27,6 +27,7 @@ public class IntroButtonManager : MonoBehaviour
 
     private void Exit()
     {//게임 종료
+        Camera.main.GetComponent<PlayerInfoSet>().ResetInfo();
         Application.Quit();
     }
 }
