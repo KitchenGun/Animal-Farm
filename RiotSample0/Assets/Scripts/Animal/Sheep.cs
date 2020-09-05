@@ -199,6 +199,7 @@ public class Sheep : Animal
         if (isDie == false)
         {
             isDie = true;
+            CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
             GameObject Rat =
                 Instantiate(Resources.Load<GameObject>("9GameObj"), transform.position + new Vector3(0, 3, 0), Quaternion.identity);
             SheepAnimator.SetBool("isAtk", false);//애니메이션 제어

@@ -194,6 +194,7 @@ public class Horse : Animal
         if (isDie == false)
         {
             isDie = true;
+            CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
             Debug.Log("Die");
             HorseAnimator.SetBool("isAtk", false);
             HorseAnimator.SetBool("isDie", true);//애니메이션 제어

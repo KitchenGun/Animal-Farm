@@ -249,37 +249,6 @@ public class ButtonClick : MonoBehaviour
         PlayerPrefs.SetInt(slotID + "Count", PlayerPrefs.GetInt(slotID + "Count") + PlayerPrefs.GetInt(slotID + "CombatCount"));//현재 동물의 수 = 기존 동물의 수 + 현재 슬롯에 들어있는 동물 수
         PlayerPrefs.SetInt(SlotName, 0);
         EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능//초기 이미지로 변경
-
-        //switch (SlotName)
-        //{//tag를 이용하여서 슬롯찾고 초기화
-        //    case "Slot0":
-        //        int slotID=PlayerPrefs.GetInt(SlotName);
-        //        PlayerPrefs.SetInt(slotID + "Count", PlayerPrefs.GetInt(slotID + "Count") + PlayerPrefs.GetInt(slotID + "CombatCount"));
-        //        PlayerPrefs.SetInt(SlotName, 0);
-        //        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능//초기 이미지로 변경
-        //        break;
-        //    case "Slot1":
-        //        PlayerPrefs.SetInt(("Slot" + 1), 0);
-        //        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;
-        //        break;
-        //    case "Slot2":
-        //        PlayerPrefs.SetInt(("Slot" + 2), 0);
-        //        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;
-        //        break;
-        //    case "Slot3":
-        //        PlayerPrefs.SetInt(("Slot" + 3), 0);
-        //        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;
-        //        break;
-        //    case "Slot4":
-        //        PlayerPrefs.SetInt(("Slot" + 4), 0);
-        //        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;
-        //        break;
-        //    case "Slot5":
-        //        PlayerPrefs.SetInt(("Slot" + 5), 0);
-        //        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;
-        //        break;
-        //}
-
     }
 
     public void GameStartButton()

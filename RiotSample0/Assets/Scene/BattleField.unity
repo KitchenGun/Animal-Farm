@@ -4199,6 +4199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1887094377}
   - component: {fileID: 1887094376}
+  - component: {fileID: 1887094380}
   - component: {fileID: 1887094379}
   - component: {fileID: 1887094378}
   m_Layer: 0
@@ -4268,6 +4269,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CombatCount: 0
+--- !u!114 &1887094380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887094375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47a677070724a04fbcb518ce2b5bc59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInfo: {fileID: 1887094376}
+  tempint: 0
 --- !u!1 &1926660592
 GameObject:
   m_ObjectHideFlags: 0

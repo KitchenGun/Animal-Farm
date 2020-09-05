@@ -58,10 +58,11 @@ public class GameCombatManager : MonoBehaviour
     private int[] slotNumID=new int[6];//슬롯에 저장되어있는 id
     private int selectLine;//돼지가 있는 라인
     private bool isDeployCoroutinRunning = false;//입력 중복을 막기 위한 변수
-    
+
     //후퇴관련
     //private Dictionary<string,int> Animal
-    
+
+   
         
     //현재 입력된 키
     private KeyCode inputValue;
@@ -99,6 +100,11 @@ public class GameCombatManager : MonoBehaviour
     private GameObject PausePanel;
     [SerializeField]
     private Text ResultText;
+
+    //죽은 동물 수 관련 변수
+    private int[] deadAnimalCount=new int[10];
+    private int[] SpawnCount = new int[10];
+
 
     public void Start()
     {
@@ -720,6 +726,7 @@ public class GameCombatManager : MonoBehaviour
                 Instantiate(Resources.Load<GameObject>(charID.ToString() + "GameObj"), randomPos, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
                 //소환하고 적용할 코드
                 combatCount--;//한번 클릭마다 개체 하나식 제거
+                SpawnCount[charID]++;//스폰한 동물 확인용
                 playerInfo.SetCombatCount(charID, combatCount);//제거한 후 전투가능 개체수를 수정
                 gameLoadManager.CombatCount = combatCount;
                 gameLoadManager.SendMessage("SlotCharCountSet", slotNum);
@@ -813,6 +820,17 @@ public class GameCombatManager : MonoBehaviour
 
     #endregion
 
+    #region DeadAnimalCount
+
+    public void DeadAnimalCountAdd(int deadAnimalID)
+    {
+        deadAnimalCount[deadAnimalID]++;
+        Debug.Log("die");
+        Debug.Log("deadAnimalID");
+    }
+    
+    #endregion
+
     #region ResultFuncGroup
 
     public void Win()
@@ -820,7 +838,33 @@ public class GameCombatManager : MonoBehaviour
         isPause = true;
         Cursor.visible = true;//커서 
         Time.timeScale = 0f;//시간
-                            //패널
+                            //전투 결과값 반영
+                            //생산
+
+        //자원
+        float ResourceProductionValue = 10f;
+        int[] ResourceProductionAnimalCount = new int[11];
+        for (int id=0;id<=10;id++)//수정필요
+        {
+            if(ResourceProductionAnimalCount[id]!=0)
+            {
+
+            }
+        }
+        //PlayerPrefs.SetInt("Wheat",PlayerPrefs.GetInt("Wheat")+)
+        //전투결과 동물 수 변경 적용
+        for (int id = 0; id < deadAnimalCount.Length ; id++)
+        {
+            int animalCombatCount = PlayerPrefs.GetInt(id + "CombatCount")+SpawnCount[id];//동물이 전투용으로 데려온 수
+            if (deadAnimalCount[id] != 0)
+            {
+                Debug.LogFormat("{0} {1}마리가 사망했습니다.", id, deadAnimalCount[id]);
+                animalCombatCount = animalCombatCount - deadAnimalCount[id];
+                PlayerPrefs.SetInt(id + "CombatCount", animalCombatCount);//전투용으로 빼놓은 자리-사망한 동물수 
+            }
+            PlayerPrefs.SetInt(id + "Count", PlayerPrefs.GetInt(id + "Count") + animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
+        }
+        //패널
         PausePanel.SetActive(true);
         ResultText.text = "Win";
     }
@@ -830,7 +874,10 @@ public class GameCombatManager : MonoBehaviour
         isPause = true;
         Cursor.visible = true;//커서 
         Time.timeScale = 0f;//시간
-                            //패널
+        //전투 이전 상황으로 속성값 변경
+        //초기화
+        this.gameObject.GetComponent<PlayerInfoSet>().ResetInfo();
+         //패널
         PausePanel.SetActive(true);
         ResultText.text = "Lose";
     }

@@ -236,6 +236,7 @@ public class Cow : Animal
         if (isDie == false)
         {
             isDie = true;
+            CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
             CowAnimator.SetBool("isAtk", false);
             CowAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1.2f);

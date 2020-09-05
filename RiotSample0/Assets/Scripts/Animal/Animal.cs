@@ -36,5 +36,11 @@ public class Animal : MonoBehaviour
     //충돌 관련 변수
     protected RaycastHit ATKRay;
     protected GameObject EnemyObj;
+
+    protected void CallDeadToGM(int ID)
+    {// 동물이 죽었을 경우 동물의 id를 보내기 위해서
+        GM.DeadAnimalCountAdd(ID);
+        Debug.Log(ID + "죽음");
+    }
     
 }

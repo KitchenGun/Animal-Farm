@@ -208,6 +208,7 @@ public class Dog : Animal
         if (isDie == false)
         {
             isDie = true;
+            CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
             DogAnimator.SetBool("isAtk", false);
             DogAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1.2f);
