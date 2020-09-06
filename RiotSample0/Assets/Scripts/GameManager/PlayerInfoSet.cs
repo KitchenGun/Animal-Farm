@@ -6,6 +6,7 @@ public class PlayerInfoSet : MonoBehaviour
 {
     public PlayerInfo playerInfo;//플레이어정보 
     public List<Dictionary<string, object>> Data;
+    public List<Dictionary<string, object>> ProductionData;
     public int tempint;
     void Start()
     {
@@ -19,6 +20,7 @@ public class PlayerInfoSet : MonoBehaviour
     public void ResetInfo()
     {
         Data = CSVReader.Read("characterCSV");
+        ProductionData = CSVReader.Read("ProductionCSV");
         SetHP();
         SetAP();
         SetMoveSpeed();
@@ -113,10 +115,39 @@ public class PlayerInfoSet : MonoBehaviour
     }
     #endregion
 
-    #region 자원 가져오기
+    #region 자원 관련 가져오기
     private void SetResource()
     {//정해진 고정 수치값으로 세팅
         PlayerPrefs.SetInt("Wheat", 100);
+    }
+
+    private void AnimalProductionValue()
+    {
+        for (var i = 0; i < Data.Count; i++)
+        {//cout
+            int tempID = (int)Data[i]["ID"];//id  불러오기
+            int tempValue = (int)Data[i]["AnimalProductionValue"];//동물 생산값
+            PlayerPrefs.SetInt(tempID + "AnimalProductionValue", tempValue);
+        }
+    }
+
+    private void ResourceProductionValue()
+    {
+        for (var i = 0; i < Data.Count; i++)
+        {//cout
+            int tempID = (int)Data[i]["ID"];//id  불러오기
+            int tempValue = (int)Data[i]["ResourceProductionValue"];//자원 생산값
+            PlayerPrefs.SetInt(tempID + "ResourceProductionValue", tempValue);
+        }
+    }
+    private void AnimalProductionRequireResource()
+    {
+        for (var i = 0; i < Data.Count; i++)
+        {//cout
+            int tempID = (int)Data[i]["ID"];//id  불러오기
+            int tempValue = (int)Data[i]["AnimalProductionRequireResource"];//동물 2마리당  생산 필요 자원
+            PlayerPrefs.SetInt(tempID + "AnimalProductionRequireResource", tempValue);
+        }
     }
     #endregion
 }
