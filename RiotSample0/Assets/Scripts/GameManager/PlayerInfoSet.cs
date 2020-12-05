@@ -28,6 +28,7 @@ public class PlayerInfoSet : MonoBehaviour
         SetATKRange();
         SetCount();//개체수 값 불러오기
         SetResource();//자원 고정값 불러오기
+
         PlayerPrefs.SetInt("Start", 1);//숫자를 올려서 다시 실행 안하게 만듬
         Debug.Log(PlayerPrefs.GetInt("Start"));
         Debug.Log("infoSet");
@@ -121,7 +122,7 @@ public class PlayerInfoSet : MonoBehaviour
         PlayerPrefs.SetInt("Wheat", 100);
     }
 
-    private void AnimalProductionValue()
+    private void SetAnimalProductionValue()
     {
         for (var i = 0; i < Data.Count; i++)
         {//cout
@@ -131,7 +132,7 @@ public class PlayerInfoSet : MonoBehaviour
         }
     }
 
-    private void ResourceProductionValue()
+    private void SetResourceProductionValue()
     {
         for (var i = 0; i < Data.Count; i++)
         {//cout
@@ -140,7 +141,7 @@ public class PlayerInfoSet : MonoBehaviour
             PlayerPrefs.SetInt(tempID + "ResourceProductionValue", tempValue);
         }
     }
-    private void AnimalProductionRequireResource()
+    private void SetAnimalProductionRequireResource()
     {
         for (var i = 0; i < Data.Count; i++)
         {//cout

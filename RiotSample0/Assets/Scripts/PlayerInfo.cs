@@ -144,6 +144,23 @@ public class PlayerInfo : MonoBehaviour
     {
         return PlayerPrefs.GetInt("Wheat");
     }
+
+    public void GetAnimalProductionValue(int ID)
+    {
+        PlayerPrefs.GetInt(ID + "AnimalProductionValue");
+    }
+
+    public void GetResourceProductionValue(int ID)
+    {
+        PlayerPrefs.GetInt(ID + "ResourceProductionValue");
+    }
+
+    public void GetAnimalProductionRequireResource(int ID)
+    {
+        PlayerPrefs.GetInt(ID + "AnimalProductionRequireResource");
+    }
+
+
     #endregion
 
     //스테이지 관련
