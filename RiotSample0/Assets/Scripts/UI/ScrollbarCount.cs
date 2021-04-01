@@ -12,6 +12,9 @@ public class ScrollbarCount : MonoBehaviour
 
     public GameObject CurrentCount;
     public GameObject MaxCount;
+
+   
+
     private void Update()
     {
         currentAnimalCount = buttonClick.GetComponent<ButtonClick>().currentAnimalCount;

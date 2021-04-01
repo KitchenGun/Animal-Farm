@@ -7,27 +7,31 @@ public class PlayerInfoSet : MonoBehaviour
     public PlayerInfo playerInfo;//플레이어정보 
     public List<Dictionary<string, object>> Data;
     public List<Dictionary<string, object>> ProductionData;
-    public int tempint;
+
     void Start()
     {
-        PlayerPrefs.GetInt("Start", 0);
+        PlayerPrefs.SetInt("Start", 0);
         if (PlayerPrefs.GetInt("Start")!=1)
         {//프로그램 실행 처음에만 실행
             ResetInfo();
+        }
+        else
+        {
+            Debug.Log(PlayerPrefs.GetInt("Start"));
         }
     }
 
     public void ResetInfo()
     {
         Data = CSVReader.Read("characterCSV");
-        ProductionData = CSVReader.Read("ProductionCSV");
+        //ProductionData = CSVReader.Read("ProductionCSV");
         SetHP();
         SetAP();
         SetMoveSpeed();
         SetATKDelay();
         SetATKRange();
         SetCount();//개체수 값 불러오기
-        SetResource();//자원 고정값 불러오기
+        //SetResource();//자원 고정값 불러오기
 
         PlayerPrefs.SetInt("Start", 1);//숫자를 올려서 다시 실행 안하게 만듬
         Debug.Log(PlayerPrefs.GetInt("Start"));
