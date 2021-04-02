@@ -6,10 +6,11 @@ public class PlayerInfoSet : MonoBehaviour
 {
     public PlayerInfo playerInfo;//플레이어정보 
     public List<Dictionary<string, object>> Data;
-    public List<Dictionary<string, object>> ProductionData;
-
+    public List<Dictionary<string, object>> GameScript;
+    private ScriptManager scriptManager;
     void Start()
     {
+        scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         PlayerPrefs.SetInt("Start", 0);
         if (PlayerPrefs.GetInt("Start")!=1)
         {//프로그램 실행 처음에만 실행
@@ -24,6 +25,7 @@ public class PlayerInfoSet : MonoBehaviour
     public void ResetInfo()
     {
         Data = CSVReader.Read("characterCSV");
+        GameScript = CSVReader.Read("textlist");
         //ProductionData = CSVReader.Read("ProductionCSV");
         SetHP();
         SetAP();
@@ -32,7 +34,7 @@ public class PlayerInfoSet : MonoBehaviour
         SetATKRange();
         SetCount();//개체수 값 불러오기
         //SetResource();//자원 고정값 불러오기
-
+        GetScript();//스크립트 가져오기
         PlayerPrefs.SetInt("Start", 1);//숫자를 올려서 다시 실행 안하게 만듬
         Debug.Log(PlayerPrefs.GetInt("Start"));
         Debug.Log("infoSet");
@@ -153,6 +155,28 @@ public class PlayerInfoSet : MonoBehaviour
             int tempValue = (int)Data[i]["AnimalProductionRequireResource"];//동물 2마리당  생산 필요 자원
             PlayerPrefs.SetInt(tempID + "AnimalProductionRequireResource", tempValue);
         }
+    }
+    #endregion
+
+    #region 스크립트 가져오기
+    private void GetScript()
+    {//개체수 세팅
+        for (var i = 0; i < GameScript.Count; i++)
+        {//cout
+
+            Script tempGameScript = new Script();
+
+            tempGameScript.CharID = GameScript[i]["CharID"].ToString();//id  불러오기
+            tempGameScript.Phase = (int)GameScript[i]["Phase"];
+            tempGameScript.Branch = (int)GameScript[i]["Branch"];
+            tempGameScript.Count = (int)GameScript[i]["Count"];
+            tempGameScript.Face = (int)GameScript[i]["Face"];
+            tempGameScript.Content = GameScript[i]["Content"].ToString();
+
+
+            scriptManager.SetGameScript(tempGameScript);
+        }
+        scriptManager.Print();
     }
     #endregion
 }

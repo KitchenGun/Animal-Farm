@@ -103,8 +103,10 @@
     <Compile Include="Assets\Scripts\GameManager\IntroButtonManager.cs" />
     <Compile Include="Assets\Scripts\GameManager\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\GameManager\PlayerInfoSet.cs" />
+    <Compile Include="Assets\Scripts\GameManager\ScriptManager.cs" />
     <Compile Include="Assets\Scripts\Moveright.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
+    <Compile Include="Assets\Scripts\UI\Script.cs" />
     <Compile Include="Assets\Scripts\UI\ScrollbarCount.cs" />
     <Compile Include="Assets\Scripts\UI\ShopItemData.cs" />
     <Compile Include="Assets\Scripts\UI\ShopItemTableViewCell.cs" />
