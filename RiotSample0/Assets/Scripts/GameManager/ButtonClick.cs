@@ -19,6 +19,7 @@ public class ButtonClick : MonoBehaviour
     private PlayerInfo playerInfo;
     [SerializeField]
     private PlayerCtrl playerCtrl;
+    [HideInInspector]
     public SceneName sceneName;
 
     private static GameObject houseUI;//정적 변수 SetActive때문에
@@ -41,7 +42,9 @@ public class ButtonClick : MonoBehaviour
     private GameObject currentSlotObj;//현재 슬롯의 오브젝트
     private int currentSlotID;//현재 슬롯의 id
     //gate-animalcountpanel
+    [HideInInspector]
     public float currentAnimalCount;//현재 동물의 개체수
+    [HideInInspector]
     public float combatAnimalCount;//전투에 사용될 개체수
     //timer
     [SerializeField]
@@ -50,9 +53,15 @@ public class ButtonClick : MonoBehaviour
     private float currentTime;//현재시간
     private float prepareTime=50f;//준비시간
     //Wheat
-    [SerializeField]
-    private Text WheatText;//텍스트 오브젝트
+    //[SerializeField]
+    //private Text WheatText;//텍스트 오브젝트
     private int WheatCount;//밀의 수
+    //Script
+    private int Phase;
+    private int Branch;
+    private int Count;
+    private ScriptManager sm;
+
 
     private void Update()
     {
@@ -93,7 +102,10 @@ public class ButtonClick : MonoBehaviour
     {
         SceneCheck();//현재 씬 확인
         if (sceneName==SceneName.Farm)
-        {//농장씬일 경우
+        {
+            //농장씬일 경우
+            sm = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
+            
             houseUI = GameObject.FindGameObjectWithTag("HouseUI");
             houseUI.SetActive(false);
             animalCountPanel = GameObject.Find("AnimalCountPanel");
@@ -267,6 +279,13 @@ public class ButtonClick : MonoBehaviour
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기
+
+        //현재 스크립트의 정보를 불러옴
+        Phase = PlayerPrefs.GetInt("Phase");
+        Branch = PlayerPrefs.GetInt("Branch");
+        Count = PlayerPrefs.GetInt("Count");
+
+        Debug.Log("check");
     }
     #endregion
 
