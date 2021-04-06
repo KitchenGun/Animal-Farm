@@ -176,7 +176,6 @@ public class PlayerInfoSet : MonoBehaviour
 
             scriptManager.SetGameScript(tempGameScript);
         }
-        scriptManager.Print();
     }
     #endregion
 }

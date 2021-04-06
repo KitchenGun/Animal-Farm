@@ -61,6 +61,7 @@ public class ButtonClick : MonoBehaviour
     private int Branch;
     private int Count;
     private ScriptManager sm;
+    private CharacterImage charImage;
 
 
     private void Update()
@@ -82,6 +83,14 @@ public class ButtonClick : MonoBehaviour
             else if (!WatchTowerUI.activeSelf)
             {
                 SceneManager.LoadScene(0);
+            }
+        }
+
+        if(barnUI.activeSelf)
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                NextScript();
             }
         }
         //시간 관련 업데이트 함수
@@ -275,17 +284,50 @@ public class ButtonClick : MonoBehaviour
     #region BarnUIFuncGroup
     public void BarnButton()
     {//헛간 버튼을 클릭할 경우 사용할 함수
+        timerRunning = false;//타이머 
         barnUI.SetActive(true);//패널 활성화
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기
-
+        charImage = barnUI.transform.Find("CharacterImage").GetComponent<CharacterImage>();
         //현재 스크립트의 정보를 불러옴
+        ScriptCheck();
+        Script tempScript = sm.Find(Phase, Branch, Count);
+        //텍스트 출력
+        barnUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
+        barnUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;
+        //이미지 선택
+        charImage.FaceChange(tempScript.CharID, tempScript.Face);
+    }
+
+    private void ScriptCheck()
+    {
         Phase = PlayerPrefs.GetInt("Phase");
         Branch = PlayerPrefs.GetInt("Branch");
         Count = PlayerPrefs.GetInt("Count");
+    }
 
-        Debug.Log("check");
+    public void NextScript()
+    {
+        PlayerPrefs.SetInt("Count", ++Count);//다음 대사로 변경
+        //갱신
+        ScriptCheck();
+        Script tempScript = sm.Find(Phase, Branch, Count);
+        try
+        {
+            //텍스트 출력
+            barnUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
+            barnUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;
+            //이미지 선택                                                                
+            charImage.FaceChange(tempScript.CharID, tempScript.Face);
+        }
+        catch
+        {
+            GameObject button = GameObject.Find("Canvas").transform.Find("Barn").gameObject;
+            button.GetComponent<BoxCollider>().enabled = false;
+            button.GetComponentInChildren<Button>().enabled = false;
+            ClosePanelButton();
+        }
     }
     #endregion
 
@@ -319,7 +361,7 @@ public class ButtonClick : MonoBehaviour
         houseUI.SetActive(false);
         gateUI.SetActive(false);
         barnUI.SetActive(false);
-        if(WatchTowerUI.activeSelf==true)
+        if(WatchTowerUI.activeSelf==true || barnUI.activeSelf==true)
         {//시간 확인할때는 시간 진행 정지 
             timerRunning = true;
             WatchTowerUI.SetActive(false);

@@ -17,6 +17,9 @@ public class IntroButtonManager : MonoBehaviour
 
     private void StartGame()
     {
+        PlayerPrefs.SetInt("Phase", 0);
+        PlayerPrefs.SetInt("Branch", 0);
+        PlayerPrefs.SetInt("Count", 1);
         SceneManager.LoadScene(1);
     }
 

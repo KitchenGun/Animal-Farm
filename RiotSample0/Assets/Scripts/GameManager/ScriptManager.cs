@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScriptManager : MonoBehaviour
 {
     private static ScriptManager instance = null;
     private List<Script> GameScript = new List<Script>();
 
-
     void Awake()
     {
+       
         if (null == instance)
         {
             //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.
@@ -19,7 +20,7 @@ public class ScriptManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             PlayerPrefs.SetInt("Phase", 0);
             PlayerPrefs.SetInt("Branch", 0);
-            PlayerPrefs.SetInt("Count", 0);
+            PlayerPrefs.SetInt("Count", 1);
         }
         else
         {
@@ -39,6 +40,7 @@ public class ScriptManager : MonoBehaviour
         }
     }
 
+ 
     public void SetGameScript(Script gameScript)
     {
         GameScript.Add(gameScript);
@@ -55,5 +57,24 @@ public class ScriptManager : MonoBehaviour
             Debug.Log(script.Face);
             Debug.Log(script.Content);
         }
+    }
+
+    //스크립트 검색
+    public Script Find(int Phase,int Branch,int Count)
+    { 
+        foreach (Script script in GameScript)
+        {
+           if(script.Phase== Phase)
+           {
+                if(script.Branch==Branch)
+                {
+                    if(script.Count==Count)
+                    {
+                        return script;
+                    }
+                }
+           }
+        }
+        return null;
     }
 }

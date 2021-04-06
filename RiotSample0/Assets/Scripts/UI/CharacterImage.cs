@@ -1,31 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterImage : MonoBehaviour
 {
-    private int Phase;
-    private int Branch;
-    private int Count;
+    public Sprite major;
+    public Sprite mouse;
 
-    private ScriptManager sm;
 
-    // Start is called before the first frame update
-    void Start()
+    public void FaceChange(string name,int face)
     {
-        //현재 스크립트의 정보를 불러옴
-        Phase = PlayerPrefs.GetInt("Phase");
-        Branch = PlayerPrefs.GetInt("Branch");
-        Count = PlayerPrefs.GetInt("Count");
+        switch (name)
+        {
+            case "Narration"://나레이션
+                this.gameObject.GetComponent<Image>().color = new Vector4(0, 0, 0, 0);
+                break;
+            case "Major"://메이어
+                this.gameObject.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
+                this.gameObject.GetComponent<Image>().sprite = major;
+                break;
+            case "Mouse"://생쥐
+                this.gameObject.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
+                this.gameObject.GetComponent<Image>().sprite = mouse;
+                break;
+        }
 
-        Debug.Log("check");
-    }
-
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
