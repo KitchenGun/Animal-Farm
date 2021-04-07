@@ -29,7 +29,7 @@ public class ButtonClick : MonoBehaviour
     private static GameObject closePanelButton;
     private static GameObject changePageButton;
     private static GameObject animalCountPanel;
-
+    private bool PanelOn=false;
     
     private string buttonName;//현재 버튼이름 저장 
     //gate
@@ -68,19 +68,7 @@ public class ButtonClick : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!houseUI.activeSelf)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
-            {
-                SceneManager.LoadScene(0);
-            }
-            else if (!gateUI.activeSelf)
-            {
-                SceneManager.LoadScene(0);
-            }
-            else if (!barnUI.activeSelf)
-            {
-                SceneManager.LoadScene(0);
-            }
-            else if (!WatchTowerUI.activeSelf)
+            if(PanelOn==false)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
             {
                 SceneManager.LoadScene(0);
             }
@@ -156,6 +144,7 @@ public class ButtonClick : MonoBehaviour
     #region HouseUIFuncGroup
     public void HouseButton()
     {//집 버튼을 클릭할 경우 사용할 함수 
+        PanelOn = true;
         houseUI.SetActive(true);//패널 활성화
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
@@ -165,6 +154,7 @@ public class ButtonClick : MonoBehaviour
     #region GateFuncGroup
     public void GateButton()
     {//게이트 버튼을 클릭할 경우 사용할 함수
+        PanelOn = true;
         gateUI.SetActive(true);//패널 활성화
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
@@ -284,6 +274,7 @@ public class ButtonClick : MonoBehaviour
     #region BarnUIFuncGroup
     public void BarnButton()
     {//헛간 버튼을 클릭할 경우 사용할 함수
+        PanelOn = true;
         timerRunning = false;//타이머 
         barnUI.SetActive(true);//패널 활성화
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
@@ -334,6 +325,7 @@ public class ButtonClick : MonoBehaviour
     #region WatchTowerUIFuncGroup
     public void WatchTowerButton()//감시탑 클릭시
     {
+        PanelOn = true;
         timerRunning = false;//타이머 
         WatchTowerUI.SetActive(true);//패널 활성화
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
@@ -357,6 +349,7 @@ public class ButtonClick : MonoBehaviour
 
     public void ClosePanelButton()
     {//모든 패널 비활성화
+        PanelOn = false;
         playerCtrl.PanelDown();
         houseUI.SetActive(false);
         gateUI.SetActive(false);
