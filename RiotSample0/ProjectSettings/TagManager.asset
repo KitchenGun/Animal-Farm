@@ -24,6 +24,7 @@ TagManager:
   - RetreatPoint
   - FarmAudio
   - WatchTowerUI
+  - ESCUI
   layers:
   - Default
   - TransparentFX
