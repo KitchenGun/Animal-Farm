@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 4}
-  m_MinSize: {x: 950, y: 494}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -96,7 +96,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 494}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &5
 MonoBehaviour:
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.005999924, y: 0.014092765, z: 0.00006675453, w: -0.9999188}
     speed: 2
-    m_Value: {x: 0.005999924, y: 0.014092765, z: 0.00006675453, w: -0.9999188}
+    m_Value: {x: 0.0059997076, y: 0.014092255, z: 0.00006675212, w: -0.9998827}
   m_Size:
     m_Target: 22
     speed: 2
@@ -931,7 +931,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6afbffff
+      m_ExpandedIDs: d6edffff1ceeffff1eefffff42efffff46efffff6afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1019,8 +1019,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets/Resources
+    m_Folders: []
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -1057,7 +1056,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 357}
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: ffffffff000000008a2d0000d42d0000fa2d00008c2e0000982e0000462f0000c02f00001e3000003e30000054300000a430000090310000be310000463200005c3400001435000090350000b4350000bc350000c635000036360000283900002a3900002c3900002e39000030390000323900003439000036390000
