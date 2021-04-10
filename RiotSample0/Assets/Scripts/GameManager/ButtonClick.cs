@@ -29,6 +29,7 @@ public class ButtonClick : MonoBehaviour
     private static GameObject closePanelButton;
     private static GameObject changePageButton;
     private static GameObject animalCountPanel;
+    private static GameObject escUI;
     private bool PanelOn=false;
     
     private string buttonName;//현재 버튼이름 저장 
@@ -70,7 +71,11 @@ public class ButtonClick : MonoBehaviour
         {
             if(PanelOn==false)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
             {
-                SceneManager.LoadScene(0);
+                ESCUI();
+            }
+            else
+            {
+                ClosePanelButton();
             }
         }
 
@@ -113,6 +118,8 @@ public class ButtonClick : MonoBehaviour
             barnUI.SetActive(false);
             WatchTowerUI = GameObject.FindGameObjectWithTag("WatchTowerUI");
             WatchTowerUI.SetActive(false);
+            escUI = GameObject.FindGameObjectWithTag("ESCUI");
+            escUI.SetActive(false);
             //스프라이트 패커 사용
             SpriteSheetManager.Load("SlotImage");
             //시간 관련 부분
@@ -335,6 +342,27 @@ public class ButtonClick : MonoBehaviour
 
     #endregion
 
+    #region ESCUIFuncGroup
+    public void ESCUI()//esc 키 입력시 
+    {
+        PanelOn = true;
+        timerRunning = false;//타이머 
+        escUI.SetActive(true);
+        playerCtrl.PanelUP();//플레이어 스프라이트 삭제
+    }
+
+    public void Confirm()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Cancel()
+    {
+        ClosePanelButton();
+    }
+    
+    #endregion
+
     #region CommonUIGroup
     //animalpanel의 변환 방법 버튼문제해결필요
     public int ListGameObjectSort(GameObject compareMainObj, GameObject compareSubObject)
@@ -354,6 +382,7 @@ public class ButtonClick : MonoBehaviour
         houseUI.SetActive(false);
         gateUI.SetActive(false);
         barnUI.SetActive(false);
+        escUI.SetActive(false);
         if(WatchTowerUI.activeSelf==true || barnUI.activeSelf==true)
         {//시간 확인할때는 시간 진행 정지 
             timerRunning = true;
