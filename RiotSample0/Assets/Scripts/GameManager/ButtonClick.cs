@@ -69,9 +69,12 @@ public class ButtonClick : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(PanelOn==false)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
-            {
-                ESCUI();
+            if (PanelOn == false)//패널이 꺼져있을 경우에 메인씬으로 돌아가기가능
+            {/////게이트 예외처리 필요
+                if (gateUI.activeSelf != true)
+                {
+                    ESCUI();
+                }
             }
             else
             {
