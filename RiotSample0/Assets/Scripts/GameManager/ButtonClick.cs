@@ -243,7 +243,7 @@ public class ButtonClick : MonoBehaviour
             PlayerPrefs.SetInt(imageNum + "CombatCount", (int)combatAnimalCount);//전투에 사용하는 개체 숫자에 입력
             int currentAnimalCombatCount = PlayerPrefs.GetInt(imageNum + "CombatCount");
             PlayerPrefs.SetInt(imageNum + "Count", PlayerPrefs.GetInt(imageNum + "Count") - currentAnimalCombatCount);
-            AnimalSlotSetting(imageNum);//슬롯에 집어 넣기
+            AnimalSlotSetting(imageNum, (int)combatAnimalCount);//슬롯에 집어 넣기
         }
         animalCountPanel.GetComponentInChildren<Scrollbar>().value = 0;
         animalCountPanel.SetActive(false);
@@ -257,7 +257,7 @@ public class ButtonClick : MonoBehaviour
 
     #endregion
 
-    public void AnimalSlotSetting(int charID)
+    public void AnimalSlotSetting(int charID,int count)
     {//id를 받아서 슬롯에 빈공간에 넣는 코드
         //슬롯 빈 공간 확인
         for (int slotNum = 0; slotNum <= 5; slotNum++)
@@ -269,6 +269,7 @@ public class ButtonClick : MonoBehaviour
                 currentSlotObj = GameObject.FindGameObjectWithTag("Slot" + slotNum);//여분의 슬롯에 이미지
                 currentSlotObj.GetComponent<Image>().sprite = 
                     SpriteSheetManager.GetSpriteByName("SlotImage", charID.ToString());//리소스의 이미지 가져오기
+                currentSlotObj.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = count.ToString();
                 isSlotset = true;
                 break;
             }
@@ -295,6 +296,7 @@ public class ButtonClick : MonoBehaviour
         PlayerPrefs.SetInt(slotID + "Count", PlayerPrefs.GetInt(slotID + "Count") + PlayerPrefs.GetInt(slotID + "CombatCount"));//현재 동물의 수 = 기존 동물의 수 + 현재 슬롯에 들어있는 동물 수
         PlayerPrefs.SetInt(SlotName, 0);
         EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = SpriteSheetManager.GetSpriteByName("SlotImage", "EmptySlot"); ;//리소스의 이미지 가져오기//추후에 +"" 로 이름을 수정가능//초기 이미지로 변경
+        EventSystem.current.currentSelectedGameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "0";
     }
 
     public void GameStartButton()
@@ -347,6 +349,11 @@ public class ButtonClick : MonoBehaviour
         }
         catch
         {
+            //게임오브젝트 접근&해제    대사마다 다르게 해야할듯 
+            GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+            GameObjectEnable(waterTower);
+            GameObjectEnable(gate);
+
             GameObject button = GameObject.Find("Canvas").transform.Find("Barn").gameObject;
             button.GetComponent<BoxCollider>().enabled = false;
             button.GetComponentInChildren<Button>().enabled = false;
@@ -425,7 +432,20 @@ public class ButtonClick : MonoBehaviour
     {//이전 페이지
         return --page;
     }
+    
+    private void GameObjectDisable(GameObject Target)
+    {
+        Target.GetComponent<BoxCollider>().enabled=false;
+        Target.transform.GetChild(0).GetComponent<Button>().enabled = false;
+    }
+    private void GameObjectEnable(GameObject Target)
+    {
+        Target.GetComponent<BoxCollider>().enabled = true;
+        Target.transform.GetChild(0).GetComponent<Button>().enabled = true;
+    }
     #endregion
+
+
 
     #region StoryProgress
 
@@ -441,6 +461,9 @@ public class ButtonClick : MonoBehaviour
         if (Phase == 0) 
         {
             house.GetComponent<Image>().sprite = HouseImg[0];
+            GameObjectDisable(gate);
+            GameObjectDisable(house);
+            GameObjectDisable(waterTower);
             BarnButton();
         }
         else if (Phase == 1) 
