@@ -22,6 +22,14 @@ public class ButtonClick : MonoBehaviour
     [HideInInspector]
     public SceneName sceneName;
 
+    #region MainButton
+    private GameObject house;
+    private GameObject barn;
+    private GameObject gate;
+    private GameObject waterTower;
+    #endregion
+
+    #region Panel
     private static GameObject houseUI;//정적 변수 SetActive때문에
     private static GameObject gateUI;
     private static GameObject barnUI;
@@ -31,39 +39,48 @@ public class ButtonClick : MonoBehaviour
     private static GameObject animalCountPanel;
     private static GameObject escUI;
     private bool PanelOn=false;
-    
+    #endregion
+
     private string buttonName;//현재 버튼이름 저장 
-    //gate
+
+    #region house
+    public Sprite[] HouseImg;
+    #endregion
+    #region gate
     private string imageName;//현재 이미지 이름
     private int imageNum=0;//현재 이미지의 숫자
     private GameObject[] animalPanel;//패널들의 배열
     private int animalPanelPage = 0;//동물 선택 페이지  
-    //gate-slot
+    #endregion
+    #region gate-slot
     private bool isSlotset = false;//슬롯에 들어갔는지 확인을 위한 bool값
     private GameObject currentSlotObj;//현재 슬롯의 오브젝트
     private int currentSlotID;//현재 슬롯의 id
-    //gate-animalcountpanel
+    #endregion
+    #region gate-animalcountpanel
     [HideInInspector]
     public float currentAnimalCount;//현재 동물의 개체수
     [HideInInspector]
     public float combatAnimalCount;//전투에 사용될 개체수
-    //timer
+    #endregion
+    #region timer
     [SerializeField]
     private Text Timer;//타이머
     private bool timerRunning=true;//시작체크
     private float currentTime;//현재시간
     private float prepareTime=50f;//준비시간
+    #endregion
     //Wheat
     //[SerializeField]
     //private Text WheatText;//텍스트 오브젝트
     private int WheatCount;//밀의 수
-    //Script
+    #region Script
     private int Phase;
     private int Branch;
     private int Count;
     private ScriptManager sm;
     private CharacterImage charImage;
-
+    #endregion
 
     private void Update()
     {
@@ -106,6 +123,9 @@ public class ButtonClick : MonoBehaviour
     private void Awake()
     {
         SceneCheck();//현재 씬 확인
+        ScriptCheck();//현재 스크립트 단계 확인
+
+       
         if (sceneName==SceneName.Farm)
         {
             //농장씬일 경우
@@ -130,7 +150,10 @@ public class ButtonClick : MonoBehaviour
             prepareTime = currentTime + prepareTime; //준비시간 = 현재시간 + 준비시간(3분)
         }
     }
-
+    private void Start()
+    {
+        Invoke("StoryProgress", 0.1f);//스토리 진행
+    }
     private void SceneCheck()
     {//switch를 이용하여 씬을 확인
         switch(SceneManager.GetActiveScene().name)
@@ -384,6 +407,7 @@ public class ButtonClick : MonoBehaviour
         playerCtrl.PanelDown();
         houseUI.SetActive(false);
         gateUI.SetActive(false);
+        CombatCountCancel();
         barnUI.SetActive(false);
         escUI.SetActive(false);
         if(WatchTowerUI.activeSelf==true || barnUI.activeSelf==true)
@@ -401,5 +425,33 @@ public class ButtonClick : MonoBehaviour
     {//이전 페이지
         return --page;
     }
+    #endregion
+
+    #region StoryProgress
+
+    void StoryProgress()
+    {
+        //버튼에 접근 하고 싶으면 하위오브젝트에 접근 필요 
+        gate = this.gameObject.transform.Find("Gate").gameObject;
+        house = this.gameObject.transform.Find("House").gameObject;
+        barn = this.gameObject.transform.Find("Barn").gameObject;
+        waterTower = this.gameObject.transform.Find("WatchTower").gameObject;
+
+
+        if (Phase == 0) 
+        {
+            house.GetComponent<Image>().sprite = HouseImg[0];
+            BarnButton();
+        }
+        else if (Phase == 1) 
+        {
+
+        }
+        else if (Phase == 2) 
+        {
+
+        }
+    }
+
     #endregion
 }
