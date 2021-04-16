@@ -417,11 +417,8 @@ public class ButtonClick : MonoBehaviour
         CombatCountCancel();
         barnUI.SetActive(false);
         escUI.SetActive(false);
-        if(WatchTowerUI.activeSelf==true || barnUI.activeSelf==true)
-        {//시간 확인할때는 시간 진행 정지 
-            timerRunning = true;
-            WatchTowerUI.SetActive(false);
-        }
+        timerRunning = true;
+        WatchTowerUI.SetActive(false);
     }
 
     public int NextPage(int page)
