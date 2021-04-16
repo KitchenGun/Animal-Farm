@@ -45,6 +45,11 @@ public class Barn : MonoBehaviour
             StartCoroutine(BarnDestroy());
         }
     }
+
+    private void Retreat()
+    {
+        //do nothing
+    }
     #endregion
 
 }

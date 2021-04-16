@@ -66,10 +66,21 @@ public class Cow : Animal
 
     private void Update()
     {
-        Debug.Log(isDash);
-        if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
+        if (thisAnimalState == AnimalState.Retreat)
+        {
+            if (isRunCo)
+            {
+                isRunCo = false;
+                EnemyObj = null;
+                StopCoroutine(CowStateCheck());
+            }
+            isMove = false;
+            //이동 스크립트
+            this.gameObject.transform.position -= new Vector3(MoveSpeed * 2, 0, 0) * Time.deltaTime;
+        }
+        else if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
         {//레이케스트
-            if (ATKRay.transform.gameObject.tag == "Enemy")
+            if(ATKRay.transform.gameObject.tag == "Enemy")
             {
                 if (ATKRay.collider.GetComponent<BoxCollider>())
                 {
@@ -81,11 +92,16 @@ public class Cow : Animal
                     MoveContact();
                 }
             }
+            else
+            {
+                thisAnimalState = AnimalState.Move;
+            }
         }
     }
 
     private IEnumerator CowStateCheck()
     {//소 상태의 코루틴
+        isRunCo = true;
         while (thisAnimalState != AnimalState.Die)
         {//죽을때 까지 계속 
             HPCheck();//체력체크

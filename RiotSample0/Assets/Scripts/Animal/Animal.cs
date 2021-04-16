@@ -20,6 +20,7 @@ public class Animal : MonoBehaviour
     }
     //상태
     protected AnimalState thisAnimalState;
+    protected bool isRunCo;
     //동물이름
     protected int AnimalID;
     protected float HP;
@@ -41,6 +42,11 @@ public class Animal : MonoBehaviour
     {// 동물이 죽었을 경우 동물의 id를 보내기 위해서
         GM.DeadAnimalCountAdd(ID);
         Debug.Log(ID + "죽음");
+    }
+
+    public AnimalState GetAnimalState()
+    {
+        return this.thisAnimalState;
     }
     
 }

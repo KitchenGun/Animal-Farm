@@ -818,6 +818,11 @@ public class GameCombatManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    private void GameExitCancel()
+    {
+        Time.timeScale = 1f;
+        PausePanel.SetActive(false);
+    }
     #endregion
 
     #region DeadAnimalCount
@@ -842,15 +847,15 @@ public class GameCombatManager : MonoBehaviour
                             //생산
 
         //자원
-        float ResourceProductionValue = 10f;
-        int[] ResourceProductionAnimalCount = new int[11];
-        for (int id=0;id<=10;id++)//수정필요
-        {
-            if(ResourceProductionAnimalCount[id]!=0)
-            {
-
-            }
-        }
+        //float ResourceProductionValue = 10f;
+        //int[] ResourceProductionAnimalCount = new int[11];
+        //for (int id=0;id<=10;id++)//수정필요
+        //{
+        //    if(ResourceProductionAnimalCount[id]!=0)
+        //    {
+        //
+        //    }
+        //}
         //PlayerPrefs.SetInt("Wheat",PlayerPrefs.GetInt("Wheat")+)
         //전투결과 동물 수 변경 적용
         for (int id = 0; id < deadAnimalCount.Length ; id++)

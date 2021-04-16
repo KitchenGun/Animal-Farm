@@ -29,9 +29,23 @@ public class Dog : Animal
 
     private void Update()
     {
+        Debug.Log(thisAnimalState);
+        
         if (Physics.Raycast(this.transform.position, new Vector3(ATKRange,0,0), out ATKRay, ATKRange))
         {//레이케스트
-            if (ATKRay.transform.gameObject.tag == "Enemy")
+            if (thisAnimalState == AnimalState.Retreat)
+            {
+                if (isRunCo)
+                {
+                    EnemyObj = null;
+                    isRunCo = false;
+                    StopCoroutine(DogStateCheck());
+                }
+                isMove = false;
+                //이동 스크립트
+                this.gameObject.transform.position -= new Vector3(MoveSpeed * 2, 0, 0) * Time.deltaTime;
+            }
+            else if (ATKRay.transform.gameObject.tag == "Enemy")
             {
                 if (ATKRay.collider.GetComponent<BoxCollider>())
                 {
@@ -83,6 +97,7 @@ public class Dog : Animal
 
     private IEnumerator DogStateCheck()
     {//소 상태의 코루틴
+        isRunCo = true;
         while (thisAnimalState != AnimalState.Die)
         {//죽을때 까지 계속 
             HPCheck();//체력체크
@@ -108,7 +123,7 @@ public class Dog : Animal
                 case AnimalState.Retreat://후퇴
                     isMove = false;
                     //이동 스크립트
-                    this.gameObject.transform.position += new Vector3(-MoveSpeed * 2, 0, 0) * Time.deltaTime;
+                    this.gameObject.transform.position -= new Vector3(MoveSpeed * 2, 0, 0) * Time.deltaTime;
                     break;
                 case AnimalState.Die://사망
                     Die(isDie);

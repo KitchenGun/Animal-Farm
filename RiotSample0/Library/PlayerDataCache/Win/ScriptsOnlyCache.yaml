@@ -51,7 +51,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -249,8 +248,6 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    - Class: 687078895
       Script: {instanceID: 0}
     Assets/Scene/Intro.unity:
     - Class: 1
@@ -884,7 +881,7 @@ ScriptsOnlyBuild:
     className: MaterialSwitcher
   - hash:
       serializedVersion: 2
-      Hash: 633e146f498e915fad9b60b48c3fbc0b
+      Hash: 94c16b27e824330464dd00a4fa35f461
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ButtonClick
