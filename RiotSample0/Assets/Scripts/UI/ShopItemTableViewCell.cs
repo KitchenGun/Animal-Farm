@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopItemTableViewCell : TableViewCell<ShopItemData>
 {
-    private static int num=1;
     [SerializeField]
     private Image AnimalImage;//동물 idle image 표시할 이미지
 

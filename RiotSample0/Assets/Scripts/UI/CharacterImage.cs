@@ -20,7 +20,7 @@ public class CharacterImage : MonoBehaviour
                 this.gameObject.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
                 this.gameObject.GetComponent<Image>().sprite = major;
                 break;
-            case "Mouse"://생쥐
+            case "Rat"://생쥐
                 this.gameObject.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
                 this.gameObject.GetComponent<Image>().sprite = mouse;
                 break;

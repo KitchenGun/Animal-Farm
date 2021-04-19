@@ -50,7 +50,6 @@ public class ButtonClick : MonoBehaviour
     private string imageName;//현재 이미지 이름
     private int imageNum=0;//현재 이미지의 숫자
     private GameObject[] animalPanel;//패널들의 배열
-    private int animalPanelPage = 0;//동물 선택 페이지  
     #endregion
     #region gate-slot
     private bool isSlotset = false;//슬롯에 들어갔는지 확인을 위한 bool값

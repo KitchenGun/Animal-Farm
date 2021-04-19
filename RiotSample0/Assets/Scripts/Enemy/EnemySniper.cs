@@ -74,7 +74,7 @@ public class EnemySniper : MonoBehaviour
 
     private void sniperRePosition()
     {//위치 선정
-        int tempNestNum = Random.RandomRange(0,2);
+        int tempNestNum = Random.Range(0,2);
         sniperNestNum = tempNestNum;
         Debug.Log(sniperNestNum);
         currentSniperNest = SniperNest[sniperNestNum];

@@ -90,9 +90,7 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             float tempValue;
             float.TryParse(Data[i]["ATKDelay"].ToString(),out tempValue);//개체수 값 불러오기
-            Debug.Log(tempValue);
             playerInfo.SetCharATKDelay(tempID, tempValue);
-            Debug.Log(Data[i]["ID"] + " " + tempValue);
         }
     }
     #endregion

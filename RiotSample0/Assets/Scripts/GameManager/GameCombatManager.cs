@@ -843,9 +843,11 @@ public class GameCombatManager : MonoBehaviour
         isPause = true;
         Cursor.visible = true;//커서 
         Time.timeScale = 0f;//시간
-                            //전투 결과값 반영
-                            //생산
-
+        Debug.Log(PlayerPrefs.GetInt("Phase"));
+        PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
+        Debug.Log("전환후" + PlayerPrefs.GetInt("Phase"));
+        //전투 결과값 반영
+        /*//생산
         //자원
         //float ResourceProductionValue = 10f;
         //int[] ResourceProductionAnimalCount = new int[11];
@@ -858,6 +860,8 @@ public class GameCombatManager : MonoBehaviour
         //}
         //PlayerPrefs.SetInt("Wheat",PlayerPrefs.GetInt("Wheat")+)
         //전투결과 동물 수 변경 적용
+        */
+
         for (int id = 0; id < deadAnimalCount.Length ; id++)
         {
             int animalCombatCount = PlayerPrefs.GetInt(id + "CombatCount")+SpawnCount[id];//동물이 전투용으로 데려온 수

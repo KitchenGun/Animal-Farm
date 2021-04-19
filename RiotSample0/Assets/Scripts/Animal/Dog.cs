@@ -29,8 +29,6 @@ public class Dog : Animal
 
     private void Update()
     {
-        Debug.Log(thisAnimalState);
-        
         if (Physics.Raycast(this.transform.position, new Vector3(ATKRange,0,0), out ATKRay, ATKRange))
         {//레이케스트
             if (thisAnimalState == AnimalState.Retreat)
@@ -149,7 +147,6 @@ public class Dog : Animal
     {
         //이동 
         isMove = true;
-        Debug.Log(MoveSpeed);
         //이동 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed, 0, 0) * Time.deltaTime;
     }

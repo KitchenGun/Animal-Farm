@@ -10,7 +10,6 @@ public class ScriptManager : MonoBehaviour
 
     void Awake()
     {
-       
         if (null == instance)
         {
             //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.

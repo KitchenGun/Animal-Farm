@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BackGroundAudio : MonoBehaviour
 {
-
+    public AudioClip[] BGM;
     public static BackGroundAudio instance;
 
     // Start is called before the first frame update
@@ -23,10 +23,22 @@ public class BackGroundAudio : MonoBehaviour
         DontDestroyOnLoad(this);        
     }
 
-    private void OnLevelWasLoaded(int level)
+   
+    void OnEnable()
     {
-        if(level==2)
-        Destroy(this.gameObject);
+        // 델리게이트 체인 추가
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        this.gameObject.GetComponent<AudioSource>().clip = BGM[scene.buildIndex];
+        this.gameObject.GetComponent<AudioSource>().Play();
+    }
+
+    void OnDisable()
+    {
+        // 델리게이트 체인 제거
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 }
