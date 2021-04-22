@@ -216,7 +216,6 @@ public class Horse : Animal
 
     private void HPCheck()
     {
-        Debug.Log(HP);
         if (HP <= 0)
         {
             thisAnimalState = AnimalState.Die;

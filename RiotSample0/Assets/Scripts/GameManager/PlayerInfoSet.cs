@@ -15,6 +15,7 @@ public class PlayerInfoSet : MonoBehaviour
         if (PlayerPrefs.GetInt("Start")!=1)
         {//프로그램 실행 처음에만 실행
             ResetInfo();
+            Debug.Log("초기화 실행");
         }
         else
         {
@@ -36,8 +37,6 @@ public class PlayerInfoSet : MonoBehaviour
         //SetResource();//자원 고정값 불러오기
         GetScript();//스크립트 가져오기
         PlayerPrefs.SetInt("Start", 1);//숫자를 올려서 다시 실행 안하게 만듬
-        Debug.Log(PlayerPrefs.GetInt("Start"));
-        Debug.Log("infoSet");
     }
 
     #region 체력 가져오기

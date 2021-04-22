@@ -118,7 +118,7 @@ public class Whip : Enemy
             thisEnemyState = EnemyState.Move;
             return;
         }
-        else
+        else if (AnimalObj != null)
         {
             if (AnimalObj.GetComponent<Animal>().GetAnimalState() == Animal.AnimalState.Retreat)
             {

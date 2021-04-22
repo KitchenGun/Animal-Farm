@@ -242,6 +242,7 @@ public class ButtonClick : MonoBehaviour
             PlayerPrefs.SetInt(imageNum + "CombatCount", (int)combatAnimalCount);//전투에 사용하는 개체 숫자에 입력
             int currentAnimalCombatCount = PlayerPrefs.GetInt(imageNum + "CombatCount");
             PlayerPrefs.SetInt(imageNum + "Count", PlayerPrefs.GetInt(imageNum + "Count") - currentAnimalCombatCount);
+            Debug.Log(PlayerPrefs.GetInt(imageNum + "Count"));
             AnimalSlotSetting(imageNum, (int)combatAnimalCount);//슬롯에 집어 넣기
         }
         animalCountPanel.GetComponentInChildren<Scrollbar>().value = 0;

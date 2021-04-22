@@ -36,11 +36,16 @@ public class EnemySpawner : EnemySpawnControl
                     if (EnemyCount[EnemyID] > 0)
                     {//소환가능 객체수 확인
                         //소환하니 적 객체 수 감소
-                        EnemyCount[EnemyID]--;
+                        EnemyCount[EnemyID] = EnemyCount[EnemyID] - 1;
                         //소환
-                        EnemyObj = Instantiate////id 값 선정에 버그가 있음
+                        EnemyObj = Instantiate
                           (Resources.Load<GameObject>((EnemyID+100) + "GameObj"), RandomPos(), Quaternion.identity) as GameObject;
+                        Debug.Log(EnemyObj.name + "가 몇번 소환 가능" + EnemyCount[EnemyID]);
                         yield return new WaitForSeconds(DeployTime);
+                    }
+                    else
+                    {
+                        Debug.Log(EnemyCount[EnemyID]+"소환 가능 횟수");
                     }
                 }
             }
@@ -55,32 +60,32 @@ public class EnemySpawner : EnemySpawnControl
 
     protected void EnemySet()//스포너 맴버  변수 셋팅
     {
-        Stage = PlayerPrefs.GetInt("Stage");
+        Stage = PlayerPrefs.GetInt("Phase");
         switch (Stage)
         {
-            case 1:
-                EnemyCount[1] = 4;
-                EnemyCount[2] = 3;
+            case 0:
+                EnemyCount[1] = 5;
+                EnemyCount[2] = 1;
                 EnemyCount[3] = 2;
                 EnemyCount[4] = 0;
                 DeployTime = 3f;
-                DeployChance = 1f;
+                DeployChance = 0.5f;
                 break;
-            case 2:
-                EnemyCount[1] = 7;
-                EnemyCount[2] = 5;
+            case 1:
+                EnemyCount[1] = 4;
+                EnemyCount[2] = 4;
                 EnemyCount[3] = 4;
                 EnemyCount[4] = 2;
                 DeployTime = 3f;
-                DeployChance = 1.5f;
+                DeployChance = 0.75f;
                 break;
-            case 3:
-                EnemyCount[1] = 7;
+            case 2:
+                EnemyCount[1] = 5;
                 EnemyCount[2] = 5;
-                EnemyCount[3] = 4;
-                EnemyCount[4] = 4;
+                EnemyCount[3] = 5;
+                EnemyCount[4] = 3;
                 DeployTime = 3f;
-                DeployChance = 2.0f;
+                DeployChance = 1.0f;
                 break;
         }
     }
@@ -103,6 +108,7 @@ public class EnemySpawner : EnemySpawnControl
         int randomInt = UnityEngine.Random.Range(1,5);
         if (EnemyCount[randomInt] <= 0)
         {//없음
+            Debug.Log(randomInt + " " + EnemyCount[randomInt]);
             return 0;
         }
         else

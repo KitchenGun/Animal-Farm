@@ -12,4 +12,4 @@ ID,NAME,HP,AP,MoveSpeed,ATKDelay,Count,CombatCount,InjureCount,ATKRange
 102,Whip,100,15,1,1.1,30,0,0,1
 103,Torch,100,20,0.8,1.5,20,0,0,1
 104,Sniper,10,200,0.5,10,10,0,0,10
-1001,Egg,0,5,0,0,0,0,0,1
+1001,Egg,0,50,0,0,0,0,0,1

@@ -174,7 +174,6 @@ public class GameCombatManager : MonoBehaviour
         #endregion
         #region MoveInput
         VerticalInput = Input.GetAxisRaw("Vertical");//위 아래키 입력값
-        Debug.Log(VerticalInput);
         if (VerticalInput >= 1 && isMove==false)
         {
             pigMoveUp();
@@ -331,7 +330,6 @@ public class GameCombatManager : MonoBehaviour
                 ArtyPos[2].SetActive(false);
                 if (Input.GetKeyUp(KeyCode.Space))
                 {//탄두 발사
-                    Debug.Log(pressSpaceBar);
                     ArtillerySpawn(charID, 0);
                     pressSpaceBar = 0;//게이지 초기화
                 }
@@ -342,7 +340,6 @@ public class GameCombatManager : MonoBehaviour
                 ArtyPos[2].SetActive(false);
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
-                    Debug.Log(pressSpaceBar);
                     ArtillerySpawn(charID, 1);
                     pressSpaceBar = 0;//게이지 초기화
                 }
@@ -353,7 +350,6 @@ public class GameCombatManager : MonoBehaviour
                 ArtyPos[1].SetActive(false);
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
-                    Debug.Log(pressSpaceBar);
                     ArtillerySpawn(charID, 2);
                     pressSpaceBar = 0;//게이지 초기화
                 }
@@ -706,7 +702,7 @@ public class GameCombatManager : MonoBehaviour
     {//동물 스폰
         if (charID != 0)
         {//캐릭터id가 존재할경우
-            int combatCount = playerInfo.GetCombatCount(charID);
+            int combatCount = PlayerPrefs.GetInt(charID + "CombatCount");
             #region Random
             //랜덤위치용 숫자 받아오기
             int randomPosValue = RandomNum()/3;
@@ -727,7 +723,7 @@ public class GameCombatManager : MonoBehaviour
                 //소환하고 적용할 코드
                 combatCount--;//한번 클릭마다 개체 하나식 제거
                 SpawnCount[charID]++;//스폰한 동물 확인용
-                playerInfo.SetCombatCount(charID, combatCount);//제거한 후 전투가능 개체수를 수정
+                PlayerPrefs.SetInt(charID + "CombatCount", combatCount);//제거한 후 전투가능 개체수를 수정
                 gameLoadManager.CombatCount = combatCount;
                 gameLoadManager.SendMessage("SlotCharCountSet", slotNum);
             }
@@ -845,7 +841,6 @@ public class GameCombatManager : MonoBehaviour
         Time.timeScale = 0f;//시간
         Debug.Log(PlayerPrefs.GetInt("Phase"));
         PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
-        Debug.Log("전환후" + PlayerPrefs.GetInt("Phase"));
         //전투 결과값 반영
         /*//생산
         //자원
@@ -862,16 +857,19 @@ public class GameCombatManager : MonoBehaviour
         //전투결과 동물 수 변경 적용
         */
 
-        for (int id = 0; id < deadAnimalCount.Length ; id++)
+        for (int id = 2; id < deadAnimalCount.Length ; id++)
         {
             int animalCombatCount = PlayerPrefs.GetInt(id + "CombatCount")+SpawnCount[id];//동물이 전투용으로 데려온 수
             if (deadAnimalCount[id] != 0)
             {
-                Debug.LogFormat("{0} {1}마리가 사망했습니다.", id, deadAnimalCount[id]);
+                /////animalCombatCount 값 이상함 수정 필요
                 animalCombatCount = animalCombatCount - deadAnimalCount[id];
-                PlayerPrefs.SetInt(id + "CombatCount", animalCombatCount);//전투용으로 빼놓은 자리-사망한 동물수 
+                PlayerPrefs.SetInt(id + "CombatCount", 0);//전투용으로 빼놓은 자리-사망한 동물수 
             }
-            PlayerPrefs.SetInt(id + "Count", PlayerPrefs.GetInt(id + "Count") + animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
+            animalCombatCount = animalCombatCount + PlayerPrefs.GetInt(id + "Count");
+            PlayerPrefs.SetInt(id + "Count", 0);
+            PlayerPrefs.SetInt(id + "Count",animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
+            Debug.LogFormat("{0} {1}마리가 남았습니다.", id, PlayerPrefs.GetInt(id + "Count"));
         }
         //패널
         PausePanel.SetActive(true);
