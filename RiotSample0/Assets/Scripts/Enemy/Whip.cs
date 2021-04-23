@@ -120,9 +120,12 @@ public class Whip : Enemy
         }
         else if (AnimalObj != null)
         {
-            if (AnimalObj.GetComponent<Animal>().GetAnimalState() == Animal.AnimalState.Retreat)
+            if (AnimalObj.GetComponent<Animal>() != null)
             {
-                AnimalObj = null;
+                if (AnimalObj.GetComponent<Animal>().GetAnimalState() == Animal.AnimalState.Retreat)
+                {
+                    AnimalObj = null;
+                }
             }
             else
             {

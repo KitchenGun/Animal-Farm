@@ -120,15 +120,21 @@ public class Sniper : Enemy
         }
         else
         {
-            //if (AnimalObj.GetComponent<Animal>().GetAnimalState() == Animal.AnimalState.Retreat)
-            //{스나이퍼는 총쏨 
-            //    AnimalObj = null;
-            //}
-            
+            if (AnimalObj.GetComponent<Animal>() != null)
+            {
+                if (AnimalObj.GetComponent<Animal>().GetAnimalState() == Animal.AnimalState.Retreat)
+                { 
+                    AnimalObj = null;
+                } 
+            }
+            else
+            {
                 //적 오브젝트 접근
                 AnimalObj.SendMessage("Hit", AP);
                 thisEnemyState = EnemyState.Attack;
                 SniperAnimator.SetBool("isAtk", true);
+            }
+               
             
         }
 

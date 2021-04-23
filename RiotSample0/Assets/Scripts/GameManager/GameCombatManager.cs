@@ -98,8 +98,12 @@ public class GameCombatManager : MonoBehaviour
     private bool isPause;
     [SerializeField]
     private GameObject PausePanel;
+
+    //승리 패배 패널
     [SerializeField]
-    private Text ResultText;
+    private GameObject WinPanel;
+    [SerializeField]
+    private GameObject LosePanel;
 
     //죽은 동물 수 관련 변수
     private int[] deadAnimalCount=new int[10];
@@ -113,6 +117,8 @@ public class GameCombatManager : MonoBehaviour
         StartCoroutine(GameTimeSet());//게임 타임 설정
         GM = this.gameObject.GetComponent<GameCombatManager>();
         PausePanel.SetActive(false);//게임 정지 패널
+        WinPanel.SetActive(false);//게임 승리 패널
+        LosePanel.SetActive(false);//게임 패배 패널
         #region lineFindCode
         Line = new List<GameObject> (GameObject.FindGameObjectsWithTag("Line"));
         foreach (GameObject LineGameObj in Line)
@@ -838,7 +844,7 @@ public class GameCombatManager : MonoBehaviour
     {
         isPause = true;
         Cursor.visible = true;//커서 
-        Time.timeScale = 0f;//시간
+        //Time.timeScale = 0f;//시간
         Debug.Log(PlayerPrefs.GetInt("Phase"));
         PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
         //전투 결과값 반영
@@ -872,22 +878,29 @@ public class GameCombatManager : MonoBehaviour
             Debug.LogFormat("{0} {1}마리가 남았습니다.", id, PlayerPrefs.GetInt(id + "Count"));
         }
         //패널
-        PausePanel.SetActive(true);
-        ResultText.text = "Win";
+        WinPanel.SetActive(true);
+        Invoke("LoadScene1", 3f);
     }
 
     public void Lose()
     {
         isPause = true;
         Cursor.visible = true;//커서 
-        Time.timeScale = 0f;//시간
+        //Time.timeScale = 0f;//시간
         //전투 이전 상황으로 속성값 변경
-        //초기화
-        this.gameObject.GetComponent<PlayerInfoSet>().ResetInfo();
-         //패널
-        PausePanel.SetActive(true);
-        ResultText.text = "Lose";
+        //패널
+        LosePanel.SetActive(true);
+        Invoke("LoadScene0", 3);
     }
 
+
+    void LoadScene1()
+    {
+        SceneManager.LoadScene(1);
+    }
+    void LoadScene0()
+    {
+        SceneManager.LoadScene(0);
+    }
     #endregion
 }

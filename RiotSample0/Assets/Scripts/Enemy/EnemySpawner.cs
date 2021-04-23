@@ -40,7 +40,6 @@ public class EnemySpawner : EnemySpawnControl
                         //소환
                         EnemyObj = Instantiate
                           (Resources.Load<GameObject>((EnemyID+100) + "GameObj"), RandomPos(), Quaternion.identity) as GameObject;
-                        Debug.Log(EnemyObj.name + "가 몇번 소환 가능" + EnemyCount[EnemyID]);
                         yield return new WaitForSeconds(DeployTime);
                     }
                     else
@@ -64,26 +63,26 @@ public class EnemySpawner : EnemySpawnControl
         switch (Stage)
         {
             case 0:
-                EnemyCount[1] = 5;
-                EnemyCount[2] = 1;
+                EnemyCount[1] = 2;
+                EnemyCount[2] = 2;
                 EnemyCount[3] = 2;
                 EnemyCount[4] = 0;
                 DeployTime = 3f;
                 DeployChance = 0.5f;
                 break;
             case 1:
-                EnemyCount[1] = 4;
-                EnemyCount[2] = 4;
-                EnemyCount[3] = 4;
-                EnemyCount[4] = 2;
+                EnemyCount[1] = 3;
+                EnemyCount[2] = 3;
+                EnemyCount[3] = 3;
+                EnemyCount[4] = 1;
                 DeployTime = 3f;
                 DeployChance = 0.75f;
                 break;
             case 2:
-                EnemyCount[1] = 5;
-                EnemyCount[2] = 5;
-                EnemyCount[3] = 5;
-                EnemyCount[4] = 3;
+                EnemyCount[1] = 4;
+                EnemyCount[2] = 4;
+                EnemyCount[3] = 4;
+                EnemyCount[4] = 2;
                 DeployTime = 3f;
                 DeployChance = 1.0f;
                 break;
