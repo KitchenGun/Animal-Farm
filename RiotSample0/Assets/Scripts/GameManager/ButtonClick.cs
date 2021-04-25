@@ -349,15 +349,47 @@ public class ButtonClick : MonoBehaviour
         }
         catch
         {
-            //게임오브젝트 접근&해제    대사마다 다르게 해야할듯 
-            GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
-            GameObjectEnable(waterTower);
-            GameObjectEnable(gate);
+            if (Phase == 0)
+            {
+                //게임오브젝트 접근&해제    대사마다 다르게 해야할듯 
+                GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+                GameObjectEnable(waterTower);
+                GameObjectEnable(gate);
 
-            GameObject button = GameObject.Find("Canvas").transform.Find("Barn").gameObject;
-            button.GetComponent<BoxCollider>().enabled = false;
-            button.GetComponentInChildren<Button>().enabled = false;
-            ClosePanelButton();
+                GameObject button = GameObject.Find("Canvas").transform.Find("Barn").gameObject;
+                button.GetComponent<BoxCollider>().enabled = false;
+                button.GetComponentInChildren<Button>().enabled = false;
+                ClosePanelButton();
+            }
+            else if(Phase == 1)
+            {
+                if (Branch == 0)
+                {
+                    //게임오브젝트 접근&해제    
+                    GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+                    GameObjectEnable(house);
+                    GameObjectEnable(waterTower);
+                    GameObjectEnable(gate);
+                    Branch = 2; 
+                    Count = 9;
+                }
+                else if (Branch == 2)
+                {
+                    //게임오브젝트 접근&해제    
+                    GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+                    GameObjectDisable(house);
+                    GameObjectEnable(waterTower);
+                    GameObjectEnable(gate);
+                }
+                GameObject button = GameObject.Find("Canvas").transform.Find("Barn").gameObject;
+                button.GetComponent<BoxCollider>().enabled = false;
+                button.GetComponentInChildren<Button>().enabled = false;
+                ClosePanelButton();
+            }
+            else if(Phase == 2)
+            {
+
+            }
         }
     }
     #endregion
@@ -448,6 +480,7 @@ public class ButtonClick : MonoBehaviour
 
     void StoryProgress()
     {
+        ScriptCheck();
         //버튼에 접근 하고 싶으면 하위오브젝트에 접근 필요 
         gate = this.gameObject.transform.Find("Gate").gameObject;
         house = this.gameObject.transform.Find("House").gameObject;
@@ -463,13 +496,17 @@ public class ButtonClick : MonoBehaviour
             GameObjectDisable(waterTower);
             BarnButton();
         }
-        else if (Phase == 1) 
+        else if (Phase == 1)
         {
-
+            house.GetComponent<Image>().sprite = HouseImg[1];
+            GameObjectDisable(gate);
+            GameObjectDisable(house);
+            GameObjectDisable(waterTower);
+            BarnButton();
         }
         else if (Phase == 2) 
         {
-
+            house.GetComponent<Image>().sprite = HouseImg[2];
         }
     }
 

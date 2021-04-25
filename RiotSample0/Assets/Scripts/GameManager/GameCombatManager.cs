@@ -847,6 +847,8 @@ public class GameCombatManager : MonoBehaviour
         //Time.timeScale = 0f;//시간
         Debug.Log(PlayerPrefs.GetInt("Phase"));
         PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
+        PlayerPrefs.SetInt("Branch", 0);
+        PlayerPrefs.SetInt("Count", 1);
         //전투 결과값 반영
         /*//생산
         //자원
@@ -879,7 +881,8 @@ public class GameCombatManager : MonoBehaviour
         }
         //패널
         WinPanel.SetActive(true);
-        Invoke("LoadScene1", 3f);
+        GameObject.Find("Audio").GetComponent<AudioSource>().Stop();
+        Invoke("LoadScene1", 5);
     }
 
     public void Lose()
@@ -890,7 +893,8 @@ public class GameCombatManager : MonoBehaviour
         //전투 이전 상황으로 속성값 변경
         //패널
         LosePanel.SetActive(true);
-        Invoke("LoadScene0", 3);
+        GameObject.Find("Audio").GetComponent<AudioSource>().Stop();
+        Invoke("LoadScene0", 5);
     }
 
 

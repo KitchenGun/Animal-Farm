@@ -921,7 +921,8 @@ MonoBehaviour:
   CurrentClickTrans: {fileID: 0}
   isMove: 0
   PausePanel: {fileID: 0}
-  ResultText: {fileID: 0}
+  WinPanel: {fileID: 0}
+  LosePanel: {fileID: 0}
 --- !u!4 &475526169
 Transform:
   m_ObjectHideFlags: 0
@@ -3780,7 +3781,7 @@ PrefabInstance:
     - target: {fileID: 5461126973593972895, guid: 54e9abfecd10fad48a6e16e3be18f694,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.22
+      value: 6.2
       objectReference: {fileID: 0}
     - target: {fileID: 5461126973593972895, guid: 54e9abfecd10fad48a6e16e3be18f694,
         type: 3}
