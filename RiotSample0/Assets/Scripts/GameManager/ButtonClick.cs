@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 using System.Reflection;
-using System;
 
 public enum SceneName
 {
@@ -74,11 +75,17 @@ public class ButtonClick : MonoBehaviour
     //private Text WheatText;//텍스트 오브젝트
     private int WheatCount;//밀의 수
     #region Script
+    //씬 이미지 
+    public Sprite[] Phase0;
+    public Sprite[] Phase1;
+    public Sprite[] Phase2;
+    //텍스트 클래스 정보
     private int Phase;
     private int Branch;
     private int Count;
     private ScriptManager sm;
     private CharacterImage charImage;
+    private GameObject SceneImage;
     #endregion
 
     private void Update()
@@ -110,6 +117,12 @@ public class ButtonClick : MonoBehaviour
         {//타이머가 시작될경우
             currentTime += Time.deltaTime;
             Timer.text = Math.Truncate(prepareTime - currentTime).ToString();
+            if(waterTower!=null)
+            {
+                Debug.Log(waterTower.transform.GetChild(1).transform.GetChild(0).gameObject.name);
+                waterTower.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
+                    Math.Truncate(prepareTime - currentTime).ToString()+"Sec";
+            }
             if(currentTime >= prepareTime)
             {//공격 준비 시간이 끝날경우
                 Debug.Log("Done");
@@ -129,7 +142,6 @@ public class ButtonClick : MonoBehaviour
         {
             //농장씬일 경우
             sm = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
-            
             houseUI = GameObject.FindGameObjectWithTag("HouseUI");
             houseUI.SetActive(false);
             animalCountPanel = GameObject.Find("AnimalCountPanel");
@@ -316,6 +328,8 @@ public class ButtonClick : MonoBehaviour
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
         //캐릭터 패널 확인하기
         charImage = barnUI.transform.Find("CharacterImage").GetComponent<CharacterImage>();
+        SceneImage = barnUI.transform.Find("Image").gameObject;
+        SceneImage.SetActive(false);
         //현재 스크립트의 정보를 불러옴
         ScriptCheck();
         Script tempScript = sm.Find(Phase, Branch, Count);
@@ -333,6 +347,38 @@ public class ButtonClick : MonoBehaviour
         Count = PlayerPrefs.GetInt("Count");
     }
 
+    private void ImageSearch()
+    {
+        string TargetImgName = Phase.ToString() + Branch.ToString() + Count.ToString();
+        Sprite[] Temp=null;
+        switch(Phase)
+        {
+            case 0:
+                {
+                    Temp = Phase0;
+                    break;
+                }
+            case 1:
+                {
+                    Temp = Phase1;
+                    break;
+                }
+            case 2:
+                {
+                    Temp = Phase2;
+                    break;
+                }
+        }
+
+        foreach (Sprite Target in Temp)
+        {
+            if (Target.name == TargetImgName)
+            {
+                SceneImage.GetComponent<Image>().sprite = Target;
+            }
+        }
+    }
+
     public void NextScript()
     {
         PlayerPrefs.SetInt("Count", ++Count);//다음 대사로 변경
@@ -341,6 +387,15 @@ public class ButtonClick : MonoBehaviour
         Script tempScript = sm.Find(Phase, Branch, Count);
         try
         {
+            if(tempScript.CharID== "scene")
+            {
+                SceneImage.SetActive(true);
+                ImageSearch();   
+            }
+            else
+            {
+                SceneImage.SetActive(false);
+            }
             //텍스트 출력
             barnUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
             barnUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;
