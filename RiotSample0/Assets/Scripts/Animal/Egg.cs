@@ -11,8 +11,8 @@ public class Egg : Animal
 
     private void Start()
     {
-        //AnimalID=
-        AP=PlayerPrefs.GetInt(AnimalID + "AP");
+        AnimalID = 1001;
+        AP =PlayerPrefs.GetInt(AnimalID + "AP");
         ATKRange = PlayerPrefs.GetInt(AnimalID + "ATKRange");
         Invoke("selfDestroy", 3f);
     }

@@ -619,9 +619,9 @@ public class GameCombatManager : MonoBehaviour
     public void AnimalRelocation(int charID)
     {
         //슬롯에 재배치
-        int combatCount = playerInfo.GetCombatCount(charID);
+        int combatCount = PlayerPrefs.GetInt(charID + "CombatCount");
         combatCount++;
-        playerInfo.SetCombatCount(charID, combatCount);//객체수 수정
+        PlayerPrefs.SetInt(charID + "CombatCount", combatCount);//객체수 수정
         gameLoadManager.CombatCount = combatCount;
         gameLoadManager.SendMessage("RelocationCharCountSet", charID);//아이디 보내서 슬롯 메뉴에서 숫자 늘리기
     }

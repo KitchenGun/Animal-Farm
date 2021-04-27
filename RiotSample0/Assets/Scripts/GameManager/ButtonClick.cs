@@ -372,6 +372,7 @@ public class ButtonClick : MonoBehaviour
                     GameObjectEnable(gate);
                     Branch = 2; 
                     Count = 9;
+                    ClosePanelButton();
                 }
                 else if (Branch == 2)
                 {
