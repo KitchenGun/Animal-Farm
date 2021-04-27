@@ -7,6 +7,15 @@ public class IntroButtonManager : MonoBehaviour
 {
 
     private string buttonName;
+
+    [SerializeField]
+    private GameObject ExamplePanel;
+
+    private void Start()
+    {
+        ExamplePanel.SetActive(false);
+    }
+
     public void UIButtonClick()
     {//버튼 클릭시 실행함수
         buttonName = EventSystem.current.currentSelectedGameObject.name;//현재 클릭한 오브젝트 이름
@@ -23,9 +32,14 @@ public class IntroButtonManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    private void Credit()
+    private void Manual()
     {
+        ExamplePanel.SetActive(true);
+    }
 
+    private void ClosePanel()
+    {
+        ExamplePanel.SetActive(false);
     }
 
     private void Exit()
