@@ -104,22 +104,29 @@ public class ButtonClick : MonoBehaviour
                 ClosePanelButton();
             }
         }
-
-        if(barnUI.activeSelf)
+       
+        if (barnUI.activeSelf)
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 NextScript();
             }
         }
+        if (houseUI.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                HNextScript();
+            }
+        }
+
         //시간 관련 업데이트 함수
-        if(timerRunning == true)
+        if (timerRunning == true)
         {//타이머가 시작될경우
             currentTime += Time.deltaTime;
             Timer.text = Math.Truncate(prepareTime - currentTime).ToString();
             if(waterTower!=null)
             {
-                Debug.Log(waterTower.transform.GetChild(1).transform.GetChild(0).gameObject.name);
                 waterTower.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =
                     Math.Truncate(prepareTime - currentTime).ToString()+"Sec";
             }
@@ -189,9 +196,70 @@ public class ButtonClick : MonoBehaviour
     public void HouseButton()
     {//집 버튼을 클릭할 경우 사용할 함수 
         PanelOn = true;
+        timerRunning = false;//타이머 
         houseUI.SetActive(true);//패널 활성화
         playerCtrl.PanelUP();//플레이어 스프라이트 삭제
         closePanelButton = GameObject.FindGameObjectWithTag("ClosePanelButton");//패널 생성시 확인
+
+        //캐릭터 패널 확인하기
+        charImage = houseUI.transform.Find("CharacterImage").GetComponent<CharacterImage>();
+        SceneImage = houseUI.transform.Find("Image").gameObject;
+        SceneImage.SetActive(false);
+
+        //현재 스크립트의 정보를 불러옴
+        ScriptCheck();
+        Script tempScript = sm.Find(Phase, Branch, Count);
+        //텍스트 출력
+        houseUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
+        houseUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;
+        //이미지 선택
+        charImage.FaceChange(tempScript.CharID, tempScript.Face);
+    }
+    public void HNextScript()
+    {
+        PlayerPrefs.SetInt("Count", ++Count);//다음 대사로 변경
+        //갱신
+        ScriptCheck();
+        Script tempScript = sm.Find(Phase, Branch, Count);
+        try
+        {
+            if (tempScript.CharID == "scene")
+            {
+                SceneImage.SetActive(true);
+                ImageSearch();
+            }
+            else
+            {
+                SceneImage.SetActive(false);
+            }
+            //텍스트 출력
+            houseUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
+            houseUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;
+            //이미지 선택                                                                
+            charImage.FaceChange(tempScript.CharID, tempScript.Face);
+        }
+        catch
+        {
+           if (Phase == 1)
+           {
+                if (Branch == 2)
+                {
+                    //게임오브젝트 접근&해제    
+                    GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+                    GameObjectDisable(house);
+                    GameObjectEnable(waterTower);
+                    GameObjectEnable(gate);
+                }
+                GameObject button = GameObject.Find("Canvas").transform.Find("House").gameObject;
+                button.GetComponent<BoxCollider>().enabled = false;
+                button.GetComponentInChildren<Button>().enabled = false;
+                ClosePanelButton();
+           }
+           else if (Phase == 2)
+           {
+
+           }
+        }
     }
     #endregion
 
@@ -346,6 +414,7 @@ public class ButtonClick : MonoBehaviour
         Phase = PlayerPrefs.GetInt("Phase");
         Branch = PlayerPrefs.GetInt("Branch");
         Count = PlayerPrefs.GetInt("Count");
+        Debug.LogFormat("{0} {1} {2}", Phase, Branch, Count);
     }
 
     private void ImageSearch()
@@ -425,9 +494,9 @@ public class ButtonClick : MonoBehaviour
                     GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
                     GameObjectEnable(house);
                     GameObjectEnable(waterTower);
-                    GameObjectEnable(gate);
-                    Branch = 2; 
-                    Count = 9;
+                    GameObjectEnable(gate); 
+                    PlayerPrefs.SetInt("Branch",2);
+                    PlayerPrefs.SetInt("Count",12);
                     ClosePanelButton();
                 }
                 else if (Branch == 2)
