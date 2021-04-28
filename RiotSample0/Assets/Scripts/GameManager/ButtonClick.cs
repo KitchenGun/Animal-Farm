@@ -258,6 +258,7 @@ public class ButtonClick : MonoBehaviour
             AnimalSlotSetting(imageNum, (int)combatAnimalCount);//슬롯에 집어 넣기
         }
         animalCountPanel.GetComponentInChildren<Scrollbar>().value = 0;
+        countScrollCount = 0;
         animalCountPanel.SetActive(false);
     }
     public void CombatCountCancel()

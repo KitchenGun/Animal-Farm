@@ -102,7 +102,9 @@ public class PlayerInfoSet : MonoBehaviour
             int tempID = (int)Data[i]["ID"];//id  불러오기
             int tempValue = (int)Data[i]["Count"];//개체수 값 불러오기
             playerInfo.SetCharCount(tempID, tempValue);
-
+            tempID = (int)Data[i]["ID"];//id  불러오기
+            tempValue = (int)Data[i]["CombatCount"];//개체수 값 불러오기
+            playerInfo.SetCombatCount(tempID, tempValue);
         }
     }
     #endregion

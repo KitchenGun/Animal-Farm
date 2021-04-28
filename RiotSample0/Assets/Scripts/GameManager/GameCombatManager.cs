@@ -112,6 +112,14 @@ public class GameCombatManager : MonoBehaviour
 
     public void Start()
     {
+        for(int i=0; i<deadAnimalCount.Length; i++)
+        {
+            deadAnimalCount[i] = 0;
+        }
+        for (int i = 0; i < deadAnimalCount.Length; i++)
+        {
+            SpawnCount[i] = 0;
+        }
         Cursor.visible = false;
         playerState = PlayerState.Play;/////////////////////임시 나중에 Hold로 교체가 필요함
         StartCoroutine(GameTimeSet());//게임 타임 설정
@@ -845,7 +853,6 @@ public class GameCombatManager : MonoBehaviour
         isPause = true;
         Cursor.visible = true;//커서 
         //Time.timeScale = 0f;//시간
-        Debug.Log(PlayerPrefs.GetInt("Phase"));
         PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
         PlayerPrefs.SetInt("Branch", 0);
         PlayerPrefs.SetInt("Count", 1);
@@ -876,8 +883,10 @@ public class GameCombatManager : MonoBehaviour
             }
             animalCombatCount = animalCombatCount + PlayerPrefs.GetInt(id + "Count");
             PlayerPrefs.SetInt(id + "Count", 0);
+            Debug.Log("ID"+id+" "+ PlayerPrefs.GetInt(id + "Count"));
+            Debug.Log(deadAnimalCount[id]);
+            Debug.Log(animalCombatCount);
             PlayerPrefs.SetInt(id + "Count",animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
-            Debug.LogFormat("{0} {1}마리가 남았습니다.", id, PlayerPrefs.GetInt(id + "Count"));
         }
         //패널
         WinPanel.SetActive(true);

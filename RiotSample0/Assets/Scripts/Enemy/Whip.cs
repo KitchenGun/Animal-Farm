@@ -126,14 +126,15 @@ public class Whip : Enemy
                 {
                     AnimalObj = null;
                 }
+                else
+                {
+                    //적 오브젝트 접근
+                    AnimalObj.SendMessage("Hit", AP);
+                    thisEnemyState = EnemyState.Attack;
+                    WhipAnimator.SetBool("isAtk", true);
+                }
             }
-            else
-            {
-                //적 오브젝트 접근
-                AnimalObj.SendMessage("Hit", AP);
-                thisEnemyState = EnemyState.Attack;
-                WhipAnimator.SetBool("isAtk", true);
-            }
+           
         }
 
     }
