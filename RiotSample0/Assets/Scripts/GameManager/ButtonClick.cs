@@ -30,6 +30,13 @@ public class ButtonClick : MonoBehaviour
     private GameObject waterTower;
     #endregion
 
+    #region
+    private GameObject houseMarker;
+    private GameObject barnMarker;
+    private GameObject gateMarker;
+    public RuntimeAnimatorController DogAniCtrl;
+    #endregion
+
     #region Panel
     private static GameObject houseUI;//정적 변수 SetActive때문에
     private static GameObject gateUI;
@@ -249,6 +256,8 @@ public class ButtonClick : MonoBehaviour
                     GameObjectDisable(house);
                     GameObjectEnable(waterTower);
                     GameObjectEnable(gate);
+                    MarkerOff();
+                    MarkerOn(gateMarker);
                 }
                 GameObject button = GameObject.Find("Canvas").transform.Find("House").gameObject;
                 button.GetComponent<BoxCollider>().enabled = false;
@@ -257,7 +266,7 @@ public class ButtonClick : MonoBehaviour
            }
            else if (Phase == 2)
            {
-
+                SceneManager.LoadScene(0);
            }
         }
     }
@@ -485,6 +494,8 @@ public class ButtonClick : MonoBehaviour
                 button.GetComponent<BoxCollider>().enabled = false;
                 button.GetComponentInChildren<Button>().enabled = false;
                 ClosePanelButton();
+                MarkerOff();
+                MarkerOn(gateMarker);
             }
             else if(Phase == 1)
             {
@@ -498,6 +509,8 @@ public class ButtonClick : MonoBehaviour
                     PlayerPrefs.SetInt("Branch",2);
                     PlayerPrefs.SetInt("Count",12);
                     ClosePanelButton();
+                    MarkerOff();
+                    MarkerOn(houseMarker);
                 }
                 else if (Branch == 2)
                 {
@@ -506,6 +519,8 @@ public class ButtonClick : MonoBehaviour
                     GameObjectDisable(house);
                     GameObjectEnable(waterTower);
                     GameObjectEnable(gate);
+                    MarkerOff();
+                    MarkerOn(gateMarker);
                 }
                 GameObject button = GameObject.Find("Canvas").transform.Find("Barn").gameObject;
                 button.GetComponent<BoxCollider>().enabled = false;
@@ -514,7 +529,19 @@ public class ButtonClick : MonoBehaviour
             }
             else if(Phase == 2)
             {
-
+                if (Branch == 0)
+                {
+                    //게임오브젝트 접근&해제    
+                    GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+                    GameObjectEnable(house);
+                    GameObjectEnable(waterTower);
+                    GameObjectEnable(gate);
+                    PlayerPrefs.SetInt("Branch", 2);
+                    PlayerPrefs.SetInt("Count", 12);
+                    ClosePanelButton();
+                    MarkerOff();
+                    MarkerOn(houseMarker);
+                }
             }
         }
     }
@@ -579,6 +606,18 @@ public class ButtonClick : MonoBehaviour
         WatchTowerUI.SetActive(false);
     }
 
+    private void MarkerOff()
+    {
+        barnMarker.SetActive(false);
+        houseMarker.SetActive(false);
+        gateMarker.SetActive(false);
+    }
+
+    private void MarkerOn(GameObject Marker)
+    {
+        Marker.SetActive(true);
+    }
+
     public int NextPage(int page)
     {//다음 페이지
         return ++page;
@@ -613,6 +652,11 @@ public class ButtonClick : MonoBehaviour
         barn = this.gameObject.transform.Find("Barn").gameObject;
         waterTower = this.gameObject.transform.Find("WatchTower").gameObject;
 
+        houseMarker = house.transform.GetChild(1).gameObject;
+        gateMarker = gate.transform.GetChild(1).gameObject;
+        barnMarker = barn.transform.GetChild(1).gameObject;
+
+        MarkerOff();
 
         if (Phase == 0) 
         {
@@ -621,6 +665,8 @@ public class ButtonClick : MonoBehaviour
             GameObjectDisable(house);
             GameObjectDisable(waterTower);
             BarnButton();
+            MarkerOn(barnMarker);
+
         }
         else if (Phase == 1)
         {
@@ -629,10 +675,17 @@ public class ButtonClick : MonoBehaviour
             GameObjectDisable(house);
             GameObjectDisable(waterTower);
             BarnButton();
+            MarkerOn(barnMarker);
         }
         else if (Phase == 2) 
         {
+            this.transform.Find("Player").gameObject.GetComponent<Animator>().runtimeAnimatorController = DogAniCtrl;
             house.GetComponent<Image>().sprite = HouseImg[2];
+            GameObjectDisable(gate);
+            GameObjectDisable(house);
+            GameObjectDisable(waterTower);
+            BarnButton();
+            MarkerOn(barnMarker);
         }
     }
 

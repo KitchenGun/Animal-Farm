@@ -100,6 +100,7 @@ public class GameCombatManager : MonoBehaviour
     private GameObject PausePanel;
 
     //승리 패배 패널
+    private int WinCount=0;
     [SerializeField]
     private GameObject WinPanel;
     [SerializeField]
@@ -843,55 +844,59 @@ public class GameCombatManager : MonoBehaviour
         Debug.Log("die");
         Debug.Log("deadAnimalID");
     }
-    
+
     #endregion
 
     #region ResultFuncGroup
 
     public void Win()
     {
-        isPause = true;
-        Cursor.visible = true;//커서 
-        //Time.timeScale = 0f;//시간
-        PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
-        PlayerPrefs.SetInt("Branch", 0);
-        PlayerPrefs.SetInt("Count", 1);
-        //전투 결과값 반영
-        /*//생산
-        //자원
-        //float ResourceProductionValue = 10f;
-        //int[] ResourceProductionAnimalCount = new int[11];
-        //for (int id=0;id<=10;id++)//수정필요
-        //{
-        //    if(ResourceProductionAnimalCount[id]!=0)
-        //    {
-        //
-        //    }
-        //}
-        //PlayerPrefs.SetInt("Wheat",PlayerPrefs.GetInt("Wheat")+)
-        //전투결과 동물 수 변경 적용
-        */
-
-        for (int id = 2; id < deadAnimalCount.Length ; id++)
+        if (WinCount == 0)
         {
-            int animalCombatCount = PlayerPrefs.GetInt(id + "CombatCount")+SpawnCount[id];//동물이 전투용으로 데려온 수
-            if (deadAnimalCount[id] != 0)
+            WinCount++;
+            isPause = true;
+            Cursor.visible = true;//커서 
+                                  //Time.timeScale = 0f;//시간
+            PlayerPrefs.SetInt("Phase", PlayerPrefs.GetInt("Phase") + 1);
+            PlayerPrefs.SetInt("Branch", 0);
+            PlayerPrefs.SetInt("Count", 1);
+            //전투 결과값 반영
+            /*//생산
+            //자원
+            //float ResourceProductionValue = 10f;
+            //int[] ResourceProductionAnimalCount = new int[11];
+            //for (int id=0;id<=10;id++)//수정필요
+            //{
+            //    if(ResourceProductionAnimalCount[id]!=0)
+            //    {
+            //
+            //    }
+            //}
+            //PlayerPrefs.SetInt("Wheat",PlayerPrefs.GetInt("Wheat")+)
+            //전투결과 동물 수 변경 적용
+            */
+
+            for (int id = 2; id < deadAnimalCount.Length; id++)
             {
-                /////animalCombatCount 값 이상함 수정 필요
-                animalCombatCount = animalCombatCount - deadAnimalCount[id];
-                PlayerPrefs.SetInt(id + "CombatCount", 0);//전투용으로 빼놓은 자리-사망한 동물수 
+                int animalCombatCount = PlayerPrefs.GetInt(id + "CombatCount") + SpawnCount[id];//동물이 전투용으로 데려온 수
+                if (deadAnimalCount[id] != 0)
+                {
+                    /////animalCombatCount 값 이상함 수정 필요
+                    animalCombatCount = animalCombatCount - deadAnimalCount[id];
+                    PlayerPrefs.SetInt(id + "CombatCount", 0);//전투용으로 빼놓은 자리-사망한 동물수 
+                }
+                animalCombatCount = animalCombatCount + PlayerPrefs.GetInt(id + "Count");
+                PlayerPrefs.SetInt(id + "Count", 0);
+                Debug.Log("ID" + id + " " + PlayerPrefs.GetInt(id + "Count"));
+                Debug.Log(deadAnimalCount[id]);
+                Debug.Log(animalCombatCount);
+                PlayerPrefs.SetInt(id + "Count", animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
             }
-            animalCombatCount = animalCombatCount + PlayerPrefs.GetInt(id + "Count");
-            PlayerPrefs.SetInt(id + "Count", 0);
-            Debug.Log("ID"+id+" "+ PlayerPrefs.GetInt(id + "Count"));
-            Debug.Log(deadAnimalCount[id]);
-            Debug.Log(animalCombatCount);
-            PlayerPrefs.SetInt(id + "Count",animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
+            //패널
+            WinPanel.SetActive(true);
+            GameObject.Find("Audio").GetComponent<AudioSource>().Stop();
+            Invoke("LoadScene1", 5);
         }
-        //패널
-        WinPanel.SetActive(true);
-        GameObject.Find("Audio").GetComponent<AudioSource>().Stop();
-        Invoke("LoadScene1", 5);
     }
 
     public void Lose()
