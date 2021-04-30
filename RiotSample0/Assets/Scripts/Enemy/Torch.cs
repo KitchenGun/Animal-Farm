@@ -134,6 +134,13 @@ public class Torch : Enemy
                     TorchAnimator.SetBool("isAtk", true);
                 }
             }
+            else if (AnimalObj.GetComponent<Barn>() != null)
+            {
+                //적 오브젝트 접근
+                AnimalObj.SendMessage("Hit", AP);
+                thisEnemyState = EnemyState.Attack;
+                TorchAnimator.SetBool("isAtk", true);
+            }
         }
 
     }

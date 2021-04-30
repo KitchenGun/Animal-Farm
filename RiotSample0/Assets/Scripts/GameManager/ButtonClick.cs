@@ -32,7 +32,9 @@ public class ButtonClick : MonoBehaviour
 
     #region
     private GameObject houseMarker;
+    private GameObject houseEndMarker;
     private GameObject barnMarker;
+    private GameObject barnEndMarker;
     private GameObject gateMarker;
     public RuntimeAnimatorController DogAniCtrl;
     #endregion
@@ -93,6 +95,7 @@ public class ButtonClick : MonoBehaviour
     private ScriptManager sm;
     private CharacterImage charImage;
     private GameObject SceneImage;
+    private bool LastChoice=false;
     #endregion
 
     private void Update()
@@ -173,6 +176,7 @@ public class ButtonClick : MonoBehaviour
             //시간 관련 부분
             currentTime = Time.time;//현재시간
             prepareTime = currentTime + prepareTime; //준비시간 = 현재시간 + 준비시간(3분)
+           
         }
     }
     private void Start()
@@ -202,6 +206,11 @@ public class ButtonClick : MonoBehaviour
     #region HouseUIFuncGroup
     public void HouseButton()
     {//집 버튼을 클릭할 경우 사용할 함수 
+        if (LastChoice == true)
+        {
+            PlayerPrefs.SetInt("Branch", 2);
+            PlayerPrefs.SetInt("Count", 89);
+        }
         PanelOn = true;
         timerRunning = false;//타이머 
         houseUI.SetActive(true);//패널 활성화
@@ -216,6 +225,15 @@ public class ButtonClick : MonoBehaviour
         //현재 스크립트의 정보를 불러옴
         ScriptCheck();
         Script tempScript = sm.Find(Phase, Branch, Count);
+        if (tempScript.CharID == "scene")
+        {
+            SceneImage.SetActive(true);
+            ImageSearch();
+        }
+        else
+        {
+            SceneImage.SetActive(false);
+        }
         //텍스트 출력
         houseUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
         houseUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;
@@ -266,7 +284,23 @@ public class ButtonClick : MonoBehaviour
            }
            else if (Phase == 2)
            {
-                SceneManager.LoadScene(0);
+                if (Branch == 2)
+                {
+                    if (Count == 78)
+                    {
+                        GameObjectEnable(house);
+                        GameObjectEnable(barn);
+                        ClosePanelButton();
+                        MarkerOff();
+                        MarkerOn(houseMarker);
+                        MarkerOn(barnMarker);
+                        LastChoice = true;
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(0);
+                    }
+                }
            }
         }
     }
@@ -399,6 +433,11 @@ public class ButtonClick : MonoBehaviour
     #region BarnUIFuncGroup
     public void BarnButton()
     {//헛간 버튼을 클릭할 경우 사용할 함수
+        if(LastChoice==true)
+        {
+            PlayerPrefs.SetInt("Branch", 0);
+            PlayerPrefs.SetInt("Count", 78);
+        }
         PanelOn = true;
         timerRunning = false;//타이머 
         barnUI.SetActive(true);//패널 활성화
@@ -460,6 +499,13 @@ public class ButtonClick : MonoBehaviour
 
     public void NextScript()
     {
+        if (Phase == 0)
+        {
+            if(Count==15)
+            {
+                GameObject.Find("Audio").GetComponent<BackGroundAudio>().RevolutionTime();
+            }
+        }
         PlayerPrefs.SetInt("Count", ++Count);//다음 대사로 변경
         //갱신
         ScriptCheck();
@@ -531,16 +577,23 @@ public class ButtonClick : MonoBehaviour
             {
                 if (Branch == 0)
                 {
-                    //게임오브젝트 접근&해제    
-                    GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
-                    GameObjectEnable(house);
-                    GameObjectEnable(waterTower);
-                    GameObjectEnable(gate);
-                    PlayerPrefs.SetInt("Branch", 2);
-                    PlayerPrefs.SetInt("Count", 12);
-                    ClosePanelButton();
-                    MarkerOff();
-                    MarkerOn(houseMarker);
+                    if (Count == 74)
+                    {
+                        //게임오브젝트 접근&해제    
+                        GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
+                        GameObjectEnable(house);
+                        GameObjectDisable(waterTower);
+                        GameObjectDisable(gate);
+                        PlayerPrefs.SetInt("Branch", 2);
+                        PlayerPrefs.SetInt("Count", 74);
+                        ClosePanelButton();
+                        MarkerOff();
+                        MarkerOn(houseMarker);
+                    }
+                    else 
+                    {
+                        SceneManager.LoadScene(0);
+                    }
                 }
             }
         }
@@ -611,11 +664,21 @@ public class ButtonClick : MonoBehaviour
         barnMarker.SetActive(false);
         houseMarker.SetActive(false);
         gateMarker.SetActive(false);
+        barnEndMarker.SetActive(false);
+        houseEndMarker.SetActive(false);
     }
 
     private void MarkerOn(GameObject Marker)
     {
         Marker.SetActive(true);
+        if(Phase==2)
+        {
+            if(Count==78)
+            {
+                barnEndMarker.SetActive(true);
+                houseEndMarker.SetActive(true);
+            }
+        }
     }
 
     public int NextPage(int page)
@@ -655,6 +718,9 @@ public class ButtonClick : MonoBehaviour
         houseMarker = house.transform.GetChild(1).gameObject;
         gateMarker = gate.transform.GetChild(1).gameObject;
         barnMarker = barn.transform.GetChild(1).gameObject;
+
+        barnEndMarker = barnMarker.transform.GetChild(0).gameObject;
+        houseEndMarker = houseMarker.transform.GetChild(0).gameObject;
 
         MarkerOff();
 

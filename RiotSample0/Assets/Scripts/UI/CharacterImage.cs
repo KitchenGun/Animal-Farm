@@ -13,7 +13,7 @@ public class CharacterImage : MonoBehaviour
     public Sprite[] benjamin;
     public Sprite[] snowball;
     public Sprite squaler;
-    public Sprite dogs;
+    public Sprite[] dogs;
     public Sprite animals;
 
     public void FaceChange(string name,int face)
@@ -53,7 +53,7 @@ public class CharacterImage : MonoBehaviour
                 break;
             case "Dogs"://개
                 this.gameObject.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
-                this.gameObject.GetComponent<Image>().sprite = dogs;
+                this.gameObject.GetComponent<Image>().sprite = dogs[face];
                 break;
             case "Animals"://동물들
                 this.gameObject.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);

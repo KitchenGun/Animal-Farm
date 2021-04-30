@@ -29,7 +29,6 @@ ScriptsOnlyBuild:
     - Sheep
     - ShopItemTableViewCell
     - ShopItemTableViewController
-    - SimpleTextChanger
     - Sniper
     - Spear
     - SpriteOutline
@@ -46,11 +45,14 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -107,8 +109,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9710}
     - Class: 114
-      Script: {instanceID: 9760}
-    - Class: 114
       Script: {instanceID: 9880}
     - Class: 114
       Script: {instanceID: 9924}
@@ -125,11 +125,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10700}
     - Class: 114
+      Script: {instanceID: 10838}
+    - Class: 114
+      Script: {instanceID: 10918}
+    - Class: 114
+      Script: {instanceID: 11112}
+    - Class: 114
       Script: {instanceID: 11172}
     - Class: 114
       Script: {instanceID: 11222}
-    - Class: 114
-      Script: {instanceID: 11370}
     - Class: 114
       Script: {instanceID: 11382}
     - Class: 114
@@ -211,8 +215,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10330}
     - Class: 114
       Script: {instanceID: 10414}
-    - Class: 114
-      Script: {instanceID: 10480}
     - Class: 114
       Script: {instanceID: 10512}
     - Class: 114
@@ -569,7 +571,7 @@ ScriptsOnlyBuild:
     className: Sniper
   - hash:
       serializedVersion: 2
-      Hash: f968f22da42ae4fe31743646fd63dabe
+      Hash: efdba7a5e8faed4bdaf41a3175ec7275
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameCombatManager
@@ -629,7 +631,7 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 01d87e5e6187e51923ad2d651b168570
+      Hash: 73bd5e382d72258227ef9136a0c0ec1b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterImage
@@ -809,7 +811,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 6967895a8537f71b3801ab2b1c958625
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BackGroundAudio
@@ -857,7 +859,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: a5f70432893a713a80582698da3e2f11
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: IntroButtonManager
@@ -881,7 +883,7 @@ ScriptsOnlyBuild:
     className: MaterialSwitcher
   - hash:
       serializedVersion: 2
-      Hash: 94c16b27e824330464dd00a4fa35f461
+      Hash: c9c0b625040dd32b51e9d3240fd78bb0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ButtonClick

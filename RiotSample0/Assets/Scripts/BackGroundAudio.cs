@@ -23,6 +23,13 @@ public class BackGroundAudio : MonoBehaviour
         DontDestroyOnLoad(this);        
     }
 
+
+    public void RevolutionTime()
+    {
+        this.gameObject.GetComponent<AudioSource>().clip = BGM[0];
+        this.gameObject.GetComponent<AudioSource>().Play();
+    }
+
    
     void OnEnable()
     {
@@ -32,6 +39,10 @@ public class BackGroundAudio : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(scene.buildIndex==1)
+        {
+            this.gameObject.GetComponent<AudioSource>().volume = 0.1f;
+        }
         this.gameObject.GetComponent<AudioSource>().clip = BGM[scene.buildIndex];
         this.gameObject.GetComponent<AudioSource>().Play();
     }
