@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\Moveright.cs" />
     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterImage.cs" />
+    <Compile Include="Assets\Scripts\UI\ImageChange.cs" />
     <Compile Include="Assets\Scripts\UI\Script.cs" />
     <Compile Include="Assets\Scripts\UI\ScrollbarCount.cs" />
     <Compile Include="Assets\Scripts\UI\ShopItemData.cs" />

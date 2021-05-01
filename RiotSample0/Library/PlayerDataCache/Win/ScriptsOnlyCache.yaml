@@ -17,6 +17,7 @@ ScriptsOnlyBuild:
     - GameCombatManager
     - GameLoadManager
     - Horse
+    - ImageChange
     - IntroButtonManager
     - Moveright
     - Pig
@@ -45,10 +46,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -135,13 +134,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11222}
     - Class: 114
-      Script: {instanceID: 11382}
+      Script: {instanceID: 11384}
     - Class: 114
-      Script: {instanceID: 11468}
+      Script: {instanceID: 11470}
     - Class: 114
-      Script: {instanceID: 11544}
+      Script: {instanceID: 11546}
     - Class: 114
-      Script: {instanceID: 11580}
+      Script: {instanceID: 11582}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -232,9 +231,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11172}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11372}
     - Class: 114
-      Script: {instanceID: 11544}
+      Script: {instanceID: 11546}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -345,17 +344,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11288}
     - Class: 114
-      Script: {instanceID: 11340}
+      Script: {instanceID: 11324}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11342}
     - Class: 114
-      Script: {instanceID: 11378}
+      Script: {instanceID: 11372}
     - Class: 114
-      Script: {instanceID: 11468}
+      Script: {instanceID: 11380}
     - Class: 114
-      Script: {instanceID: 11536}
+      Script: {instanceID: 11470}
     - Class: 114
-      Script: {instanceID: 11544}
+      Script: {instanceID: 11538}
+    - Class: 114
+      Script: {instanceID: 11546}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -947,6 +948,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: MarkerTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 8b3cb1a608a1627f6b7a3e1f1f262164
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ImageChange
   - hash:
       serializedVersion: 2
       Hash: d791aa6007fa3640be1164ea75bb087d

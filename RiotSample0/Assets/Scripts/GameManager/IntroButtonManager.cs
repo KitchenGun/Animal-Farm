@@ -23,6 +23,14 @@ public class IntroButtonManager : MonoBehaviour
         SendMessage(buttonName);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClosePanel();
+        }
+    }
+
 
     private void StartGame()
     {

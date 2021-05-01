@@ -209,7 +209,7 @@ public class ButtonClick : MonoBehaviour
         if (LastChoice == true)
         {
             PlayerPrefs.SetInt("Branch", 2);
-            PlayerPrefs.SetInt("Count", 89);
+            PlayerPrefs.SetInt("Count", 90);
         }
         PanelOn = true;
         timerRunning = false;//타이머 
@@ -450,6 +450,15 @@ public class ButtonClick : MonoBehaviour
         //현재 스크립트의 정보를 불러옴
         ScriptCheck();
         Script tempScript = sm.Find(Phase, Branch, Count);
+        if (tempScript.CharID == "scene")
+        {
+            SceneImage.SetActive(true);
+            ImageSearch();
+        }
+        else
+        {
+            SceneImage.SetActive(false);
+        }
         //텍스트 출력
         barnUI.transform.GetChild(2).GetChild(1).GetComponent<Text>().text = tempScript.Content;
         barnUI.transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>().text = tempScript.CharID;

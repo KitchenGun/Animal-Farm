@@ -826,7 +826,7 @@ public class GameCombatManager : MonoBehaviour
         panelColor += new Vector4(0, 0, 0, 20);
         PausePanel.GetComponent<Image>().color = panelColor;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     private void GameExitCancel()
@@ -901,14 +901,18 @@ public class GameCombatManager : MonoBehaviour
 
     public void Lose()
     {
-        isPause = true;
-        Cursor.visible = true;//커서 
-        //Time.timeScale = 0f;//시간
-        //전투 이전 상황으로 속성값 변경
-        //패널
-        LosePanel.SetActive(true);
-        GameObject.Find("Audio").GetComponent<AudioSource>().Stop();
-        Invoke("LoadScene0", 5);
+        if (WinCount == 0)
+        {
+            WinCount = -1;
+            isPause = true;
+            Cursor.visible = true;//커서 
+                                  //Time.timeScale = 0f;//시간
+                                  //전투 이전 상황으로 속성값 변경
+                                  //패널
+            LosePanel.SetActive(true);
+            GameObject.Find("Audio").GetComponent<AudioSource>().Stop();
+            Invoke("LoadScene0", 5);
+        }
     }
 
 
