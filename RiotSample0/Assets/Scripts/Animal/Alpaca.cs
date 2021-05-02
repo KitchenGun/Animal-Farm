@@ -205,24 +205,25 @@ public class Alpaca : Animal
     #region Die
     private void Die(bool isDie)
     {//사망시 적용
-        if (isDie == false)
-        {
-            isDie = true;
+       
             CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
-            Debug.Log("Die");
             AlpacaAnimator.SetBool("isAtk", false);
             AlpacaAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1f);
-        }
+       
     }
 
     private void HPCheck()
     {
-        if (HP <= 0)
+        if (isDie == false)
         {
-            thisAnimalState = AnimalState.Die;
-            Die(isDie);
-        }
+            if (HP <= 0)
+            {
+                isDie = true;
+                thisAnimalState = AnimalState.Die;
+                Die(isDie);
+            }
+        }        
     }
 
     #endregion

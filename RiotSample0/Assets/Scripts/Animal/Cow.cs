@@ -219,7 +219,6 @@ public class Cow : Animal
         //돌진 
         isDash = true;
         CowAnimator.SetBool("isDash", isDash);
-        Debug.Log(MoveSpeed * 1.8f);
         //돌진 스크립트
         this.gameObject.transform.position += new Vector3(MoveSpeed * 1.8f,0,0) * Time.deltaTime;//이동 
     }
@@ -249,23 +248,23 @@ public class Cow : Animal
     #region Die
     private void Die(bool isDie)
     {//사망시 적용
-        if (isDie == false)
-        {
-            isDie = true;
+         
             CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
             CowAnimator.SetBool("isAtk", false);
             CowAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1.2f);
-        }
     }
 
     private void HPCheck()
     {
-        Debug.Log(HP);
-        if (HP <= 0)
+        if (isDie == false)
         {
-            thisAnimalState = AnimalState.Die;
-            Die(isDie);
+            if (HP <= 0)
+            {
+                isDie = true;
+                thisAnimalState = AnimalState.Die;
+                Die(isDie);
+            }
         }
     }
 

@@ -76,7 +76,6 @@ public class Sheep : Animal
         }
         else if (Physics.Raycast(this.transform.position, new Vector3(ATKRange, 0, 0), out ATKRay, ATKRange))
         {//레이케스트
-            Debug.Log(ATKRange);
            if(ATKRay.transform.gameObject.tag == "Enemy")
             {
                 if (ATKRay.collider.GetComponent<BoxCollider>())
@@ -209,24 +208,25 @@ public class Sheep : Animal
     #region Die
     private void Die(bool isDie)
     {//사망시 적용
-        if (isDie == false)
-        {
-            isDie = true;
+       
             CallDeadToGM(AnimalID);//죽을경우 게임 매니져 호출
-            GameObject Rat =
-                Instantiate(Resources.Load<GameObject>("9GameObj"), transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+            //GameObject Rat =
+            //    Instantiate(Resources.Load<GameObject>("9GameObj"), transform.position + new Vector3(0, 3, 0), Quaternion.identity);
             SheepAnimator.SetBool("isAtk", false);//애니메이션 제어
             SheepAnimator.SetBool("isDie", true);
             Destroy(this.gameObject, 1.2f);
-        }
     }
 
     private void HPCheck()
     {
-        if (HP <= 0)
+        if (isDie == false)
         {
-            thisAnimalState = AnimalState.Die;
-            Die(isDie);
+            if (HP <= 0)
+            {
+                isDie = true;
+                thisAnimalState = AnimalState.Die;
+                Die(isDie);
+            }
         }
     }
 

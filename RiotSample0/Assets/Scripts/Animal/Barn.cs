@@ -39,7 +39,6 @@ public class Barn : MonoBehaviour
     }
     private void HPCheck()
     {
-        Debug.Log(HP);
         if (HP <= 0)
         {
             StartCoroutine(BarnDestroy());

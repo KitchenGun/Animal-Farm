@@ -41,7 +41,6 @@ public class Animal : MonoBehaviour
     protected void CallDeadToGM(int ID)
     {// 동물이 죽었을 경우 동물의 id를 보내기 위해서
         GM.DeadAnimalCountAdd(ID);
-        Debug.Log(ID + "죽음");
     }
 
     public AnimalState GetAnimalState()

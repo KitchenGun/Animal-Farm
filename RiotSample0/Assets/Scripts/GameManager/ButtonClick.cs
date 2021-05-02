@@ -96,6 +96,8 @@ public class ButtonClick : MonoBehaviour
     private CharacterImage charImage;
     private GameObject SceneImage;
     private bool LastChoice=false;
+
+    public GameObject NoMoreSendImg;
     #endregion
 
     private void Update()
@@ -164,6 +166,7 @@ public class ButtonClick : MonoBehaviour
             animalCountPanel = GameObject.Find("AnimalCountPanel");
             animalCountPanel.SetActive(false);
             gateUI = GameObject.FindGameObjectWithTag("GateUI");
+            NoMoreSendImg.GetComponent<RectTransform>().transform.position = new Vector3(0, 5000f, 0); 
             gateUI.SetActive(false);
             barnUI = GameObject.FindGameObjectWithTag("BarnUI");
             barnUI.SetActive(false);
@@ -176,7 +179,6 @@ public class ButtonClick : MonoBehaviour
             //시간 관련 부분
             currentTime = Time.time;//현재시간
             prepareTime = currentTime + prepareTime; //준비시간 = 현재시간 + 준비시간(3분)
-           
         }
     }
     private void Start()
@@ -350,7 +352,14 @@ public class ButtonClick : MonoBehaviour
         if (sameID == false)
         {//같은 아이디가 없을 경우
             currentAnimalCount = PlayerPrefs.GetInt(imageNum + "Count");//클릭한 동물의 개체수 호출
-            animalCountPanel.SetActive(true);//패널 활성화//animalcount패널로 이동
+            if (currentAnimalCount > 0)
+            {
+                animalCountPanel.SetActive(true);//패널 활성화//animalcount패널로 이동
+            }
+            else
+            {
+                NoMoreSendImg.GetComponent<RectTransform>().transform.position = new Vector3(0, 0, 0);
+            }
         }
     }
     #region AnimalCountFuncGroup
@@ -365,7 +374,6 @@ public class ButtonClick : MonoBehaviour
             PlayerPrefs.SetInt(imageNum + "CombatCount", (int)combatAnimalCount);//전투에 사용하는 개체 숫자에 입력
             int currentAnimalCombatCount = PlayerPrefs.GetInt(imageNum + "CombatCount");
             PlayerPrefs.SetInt(imageNum + "Count", PlayerPrefs.GetInt(imageNum + "Count") - currentAnimalCombatCount);
-            Debug.Log(PlayerPrefs.GetInt(imageNum + "Count"));
             AnimalSlotSetting(imageNum, (int)combatAnimalCount);//슬롯에 집어 넣기
         }
         animalCountPanel.GetComponentInChildren<Scrollbar>().value = 0;
@@ -471,7 +479,6 @@ public class ButtonClick : MonoBehaviour
         Phase = PlayerPrefs.GetInt("Phase");
         Branch = PlayerPrefs.GetInt("Branch");
         Count = PlayerPrefs.GetInt("Count");
-        Debug.LogFormat("{0} {1} {2}", Phase, Branch, Count);
     }
 
     private void ImageSearch()
@@ -710,8 +717,6 @@ public class ButtonClick : MonoBehaviour
         Target.transform.GetChild(0).GetComponent<Button>().enabled = true;
     }
     #endregion
-
-
 
     #region StoryProgress
 

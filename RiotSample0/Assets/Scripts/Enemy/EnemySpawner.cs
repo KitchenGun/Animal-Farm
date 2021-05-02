@@ -63,17 +63,17 @@ public class EnemySpawner : EnemySpawnControl
         switch (Stage)
         {
             case 0:
-                EnemyCount[1] = 4;
-                EnemyCount[2] = 4;
-                EnemyCount[3] = 4;
+                EnemyCount[1] = 3;
+                EnemyCount[2] = 3;
+                EnemyCount[3] = 3;
                 EnemyCount[4] = 0;
                 DeployTime = 3f;
                 DeployChance = 2f;
                 break;
             case 1:
-                EnemyCount[1] = 4;
-                EnemyCount[2] = 4;
-                EnemyCount[3] = 4;
+                EnemyCount[1] = 3;
+                EnemyCount[2] = 3;
+                EnemyCount[3] = 3;
                 EnemyCount[4] = 2;
                 DeployTime = 3f;
                 DeployChance = 2.5f;
@@ -107,12 +107,10 @@ public class EnemySpawner : EnemySpawnControl
         int randomInt = UnityEngine.Random.Range(1,5);
         if (EnemyCount[randomInt] <= 0)
         {//없음
-            Debug.Log(randomInt + " " + EnemyCount[randomInt]);
             return 0;
         }
         else
         {//있음
-            Debug.Log(randomInt + " " + EnemyCount[randomInt]);
             return randomInt;
         }
     }

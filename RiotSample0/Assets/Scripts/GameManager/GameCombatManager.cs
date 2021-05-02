@@ -633,6 +633,7 @@ public class GameCombatManager : MonoBehaviour
         PlayerPrefs.SetInt(charID + "CombatCount", combatCount);//객체수 수정
         gameLoadManager.CombatCount = combatCount;
         gameLoadManager.SendMessage("RelocationCharCountSet", charID);//아이디 보내서 슬롯 메뉴에서 숫자 늘리기
+        SpawnCount[charID]--;
     }
     
     
@@ -732,7 +733,6 @@ public class GameCombatManager : MonoBehaviour
             #endregion
             if (combatCount != 0)
             {//개체수가 존재할 경우
-                Debug.LogFormat("spawn{0}", charID);
                 PigObj.GetComponent<Animator>().SetTrigger("isOrder");
                 Instantiate(Resources.Load<GameObject>(charID.ToString() + "GameObj"), randomPos, Quaternion.identity);//id+GameObj를 리소스 안에 넣어둬야함//인스턴스를 이용해서 필드에 배치
                 //소환하고 적용할 코드
@@ -841,8 +841,8 @@ public class GameCombatManager : MonoBehaviour
     public void DeadAnimalCountAdd(int deadAnimalID)
     {
         deadAnimalCount[deadAnimalID]++;
-        Debug.Log("die");
-        Debug.Log("deadAnimalID");
+        SpawnCount[deadAnimalID]--;
+        Debug.Log(deadAnimalID+"die");
     }
 
     #endregion
@@ -885,11 +885,13 @@ public class GameCombatManager : MonoBehaviour
                     animalCombatCount = animalCombatCount - deadAnimalCount[id];
                     PlayerPrefs.SetInt(id + "CombatCount", 0);//전투용으로 빼놓은 자리-사망한 동물수 
                 }
-                animalCombatCount = animalCombatCount + PlayerPrefs.GetInt(id + "Count");
+                if (PlayerPrefs.GetInt(id + "Count") != 0)
+                {
+                    animalCombatCount = animalCombatCount + PlayerPrefs.GetInt(id + "Count");
+                    Debug.Log("ID" + id + " " + PlayerPrefs.GetInt(id + "Count"));
+                }
                 PlayerPrefs.SetInt(id + "Count", 0);
-                Debug.Log("ID" + id + " " + PlayerPrefs.GetInt(id + "Count"));
-                Debug.Log(deadAnimalCount[id]);
-                Debug.Log(animalCombatCount);
+                Debug.Log(deadAnimalCount[id]+" "+ id + " "+ animalCombatCount);
                 PlayerPrefs.SetInt(id + "Count", animalCombatCount);//해당하는 동물의 숫자+동물의 전투용으로 빼놓은 자리=동물 숫자
             }
             //패널

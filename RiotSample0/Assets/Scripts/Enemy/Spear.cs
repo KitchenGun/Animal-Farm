@@ -163,7 +163,6 @@ public class Spear : Enemy
         if (isDie == false)
         {
             isDie = true;
-            Debug.Log("Die");
             SpearAnimator.SetBool("isAtk", false);
             SpearAnimator.SetBool("isDie", true);//애니메이션 제어
             Destroy(this.gameObject, 1f);
