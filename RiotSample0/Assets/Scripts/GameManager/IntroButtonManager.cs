@@ -14,6 +14,10 @@ public class IntroButtonManager : MonoBehaviour
     private void Start()
     {
         ExamplePanel.SetActive(false);
+        PlayerPrefs.SetInt("Screenmanager Resolution Width", 1920);
+        PlayerPrefs.SetInt("Screenmanager Resolution Height", 1080);
+        PlayerPrefs.Save();
+
     }
 
     public void UIButtonClick()

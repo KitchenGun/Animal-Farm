@@ -298,7 +298,7 @@ public class ButtonClick : MonoBehaviour
                         MarkerOn(barnMarker);
                         LastChoice = true;
                     }
-                    else
+                    else if (Count == 101)
                     {
                         SceneManager.LoadScene(0);
                     }
@@ -567,7 +567,7 @@ public class ButtonClick : MonoBehaviour
                     GameObjectDisable(barn);//헛간 더이상 접근 못하게 비활성화
                     GameObjectEnable(house);
                     GameObjectEnable(waterTower);
-                    GameObjectEnable(gate); 
+                    GameObjectDisable(gate); 
                     PlayerPrefs.SetInt("Branch",2);
                     PlayerPrefs.SetInt("Count",12);
                     ClosePanelButton();
